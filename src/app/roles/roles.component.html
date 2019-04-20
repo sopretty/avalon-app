@@ -1,0 +1,21 @@
+<div>
+  Qui voulez-vous ajouter ?
+</div>
+<div>
+  Nombre de rouge autorisé: {{allowed.red}}
+</div>
+<div>
+  Nombre de bleu autorisé: {{allowed.blue}}
+</div>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div formArrayName="roles" *ngFor="let order of form.controls.roles.controls; let i = index">
+    <label>
+      <input type="checkbox" [formControlName]="i">
+      {{roles[i].description}}
+    </label>
+  </div>
+  <div *ngIf="!form.valid">Vous avez dépassé le nombre limite de joueur rouge ou bleu</div>
+  <div>
+    <button [disabled]="form.invalid">Commencer la partie !</button>
+  </div>
+</form>

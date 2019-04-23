@@ -1,0 +1,17 @@
+Chacun ferme les yeux et tend son poing fermé devant lui.
+<break time="1s"/>
+Les Serviteurs de Mordraid sauf oberon ouvrent les yeux et regardent autour d’eux afin de reconnaître les agents du Mal.
+<break time="4s"/>
+Les Serviteurs de Mordraid ferment les yeux.
+<break time="2s"/>
+Les serviteurs de Mordraid sauf Mordraid lui-même lèvent le pouce afin que Merlin puisse les identifier.
+<break time="1s"/>
+Merlin, ouvre les yeux et contemple les agents du Mal.
+<break time="4s"/>
+Les serviteurs de Mordraid, baissent le pouce.
+<break time="1s"/>
+Merlin, ferme les yeux.
+<break time="2s"/>
+Tout le monde a les yeux fermés et a les pouces baissés.
+<break time="1s"/>
+Tout le monde peut ouvrir les yeux.

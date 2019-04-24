@@ -48,12 +48,12 @@ class AvalonWebService(object):
         return jsonify({"lala": "lolo"})
 
     def __new_game(self):
-        
+
         game = GameAvalon()
         pickle.dump(game, open('./current_game/game.pkl', 'wb'), -1)
-    
+
         return jsonify({"lala": "lolo"})
- 
+
     def __add_nb_player(self):
 
         game = pickle.load(open('./current_game/game.pkl', 'rb'))

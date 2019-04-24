@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # authors : romain.121@hotmail.fr
 
+import os
 import pickle
 
 from random import shuffle
@@ -19,7 +20,7 @@ def check_roles(dict_roles, red_rules, blue_rules):
     # case break rule 1
     if "Morgan" in dict_roles.keys() and "Perceval" not in dict_roles.keys():
         print "ERROR 1 -> Morgan is in the game but Perceval is not"
-    
+
     # case break rule 2
     if "Perceval" in dict_roles.keys() and "Morgan" not in dict_roles.keys():
         print "ERROR 2 -> Perceval is in the game but Morgan is not"
@@ -43,6 +44,8 @@ def check_roles(dict_roles, red_rules, blue_rules):
     # case break rule 4
     else:
         print "ERROR 4 -> too many red or blue"
+
+    shuffle(list_roles)
 
     return list_roles
 
@@ -91,13 +94,13 @@ class GameAvalon(object):
                       {"nb_player": 9, "BLUE": 6, "RED": 3, "quete_1": 3, "quete_2": 4, "quete_3": 4, "quete_4": 5, "quete_5": 5},
                       {"nb_player": 10, "BLUE": 6, "RED": 4, "quete_1": 3, "quete_2": 4, "quete_3": 4, "quete_4": 5, "quete_5": 5}]
         self.player_rules = None
-
+        self.list_roles = None
 
     def __strGame__(self):
         """Print attributs of a game"""
         print "\n\nplayers:"
         for player in self.players.values():
-            print player.__strPlayer__()            
+            print player.__strPlayer__()
         print "\n\nplayers_rules:", self.player_rules
 
 
@@ -123,13 +126,38 @@ class GameAvalon(object):
 
     def add_roles_to_player(self, dict_roles):
         """Add roles randomly to each player"""
-        list_roles = check_roles(dict_roles, self.player_rules["RED"], self.player_rules["BLUE"])
-        if len(self.players.keys()) != len(list_roles): 
-            print "ERROR -> the number of players ("+str(len(self.players.keys()))+") and roles ("+str(len(list_roles))+") are different"
+        self.list_roles = check_roles(dict_roles, self.player_rules["RED"], self.player_rules["BLUE"])
+        if len(self.players.keys()) != len(self.list_roles):
+            print "ERROR -> the number of players ("+str(len(self.players.keys()))+") and roles ("+str(len(self.list_roles))+") are different"
 
-        shuffle(list_roles)
         for player in self.players.keys():
-            self.players[player].add_role(list_roles[player])
+            self.players[player].add_role(self.list_roles[player])
+
+    def create_mp3(self):
+        """Create mp3 file depending on roles in the game"""
+        list_to_merge = ["init.mp3", "serv_mord.mp3"]
+        if "Oberon" in self.list_roles:
+            list_to_merge.append("oberon.mp3")
+        list_to_merge.append("red_identi.mp3")
+
+        if "Morgan" in self.list_roles and "Perceval" in self.list_roles:
+            list_to_merge.append("add_per_mor.mp3")
+
+        list_to_merge.append("serv_mord.mp3")
+        if "Mordred" in self.list_roles:
+            list_to_merge.append("mordred.mp3")
+        list_to_merge.extend(["merlin_identi.mp3", "end.mp3"])
+
+        str_command = "cat "
+        for i in range(len(list_to_merge)):
+            str_command += "data/"+list_to_merge[i]+" "
+        str_command += " > data/roles.mp3"
+        os.system(str_command)
+
+        # Forgiving players like mplayer can handle the resulting files without any issue.
+        # Still, it’s recommended to fix the file header e.g. using avconv.
+        # avconv -i combined_files.mp3 -acodec copy combined_files_fixed.mp3
+
 
 #######################################################################################################################
 #######################################################################################################################
@@ -137,9 +165,10 @@ class GameAvalon(object):
 if __name__ == '__main__':
 
     newGame = GameAvalon()
-    newGame.add_nb_player(6)
-    newGame.add_names_to_player(["Chacha", "Romain", "Elsa", "Mathieu", "Flo", "Eglantine"])
-    newGame.add_roles_to_player({"Mordred": True})
+    newGame.add_nb_player(8)
+    newGame.add_names_to_player(["Chacha", "Romain", "Elsa", "Mathieu", "Flo", "Eglantine", "Richard", "Quentin"])
+    newGame.add_roles_to_player({"Mordred": True, "Oberon": True})
+    newGame.create_mp3()
 
     for player in newGame.players.values():
         player.__strPlayer__()
@@ -150,9 +179,7 @@ if __name__ == '__main__':
     #                                                            - un fichier pickle qui permet d'utiliser une classe
     # comment on fait les votes pour les missions ? à main levé ou on passe le téléphone à chacun
     # comment on fait pour les succés/échecs -> on passe le téléphone aux personnes concernées
-    # comment on prend en compte le fait des missions qui ne partent pas (limite à 5..) 
+    # comment on prend en compte le fait des missions qui ne partent pas (limite à 5..)
     # on rajoute une diplomatie ? équivalent de la dame blanche
     # why not un fichier a actualisé avec le pourcentage de win en fonction de chaque prénom
-    # générer les binaires à écouter pour mathieu 
-
-
+    # générer les binaires à écouter pour mathieu

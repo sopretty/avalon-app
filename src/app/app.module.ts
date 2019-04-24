@@ -7,8 +7,8 @@ import {LandingComponent} from './landing/landing.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {RolesComponent} from './roles/roles.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import { GameComponent } from './game/game.component';
-import { AudioComponent } from './audio/audio.component';
+import {GameComponent} from './game/game.component';
+import {AudioComponent} from './audio/audio.component';
 
 @NgModule({
   declarations: [

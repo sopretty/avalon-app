@@ -31,13 +31,13 @@ export class RolesComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private _router: Router,
-    private _rolesService: RolesService,
-    private _configService: ConfigService) {
+    private router: Router,
+    private rolesService: RolesService,
+    private configService: ConfigService) {
   }
 
   ngOnInit() {
-    this.allowed = this._rolesService.rules.find(config => config.nbPlayer === this._configService.nbPlayer);
+    this.allowed = this.rolesService.rules.find(config => config.nbPlayer === this.configService.players.length);
     this.selected = {red: 0, blue: 0};
     this.form = this.formBuilder.group({
       roles: new FormArray([], this.redBlueValidator()),
@@ -62,8 +62,8 @@ export class RolesComponent implements OnInit {
   }
 
   addCheckRoles(): void {
-    this.roles.map(() => {
-      (this.form.controls.roles as FormArray).push(new FormControl(false));
+    this.roles.forEach(() => {
+      this.rolesForm.push(new FormControl(false));
     });
   }
 
@@ -79,13 +79,18 @@ export class RolesComponent implements OnInit {
       }, {blue: 0, red: 0});
   }
 
-  submit() {
-    this._configService.roles = (this.form.controls.roles as FormArray).controls.reduce(
+  submit(): void {
+    this.configService.roles = this.rolesForm.controls.reduce(
       (acc, curr, index) => {
         console.log(acc, curr.value);
         return acc.concat((!!curr.value ? this.roles[index].characters : []));
       }
       , []);
-    this._router.navigate(['audio']);
+    this.router.navigate(['audio']);
   }
+
+  get rolesForm(): FormArray {
+    return this.form.get('roles') as FormArray;
+  }
+
 }

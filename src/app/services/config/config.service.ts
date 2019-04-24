@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigService {
 
-  public nbPlayer: number;
+  public players: { name: string }[];
   public roles: {name: string, team: string}[];
 
   constructor() {
-    this.nbPlayer = 5;
+    this.players = [];
     this.roles = [];
   }
 

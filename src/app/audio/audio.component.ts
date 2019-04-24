@@ -20,10 +20,10 @@ export class AudioComponent implements OnInit {
 
   ngOnInit() {
     this.audio = new Audio();
-    this.audio.src = `../../assets/audio/avalon${
-      this.cleanRoles(this.configService.roles).length > 0 ?
-        `_${this.cleanRoles(this.configService.roles).join('_')}` : ''}.mp3`;
-//    this.audio.src = '../../assets/audio/test.mp3';
+    // this.audio.src = `../../assets/audio/avalon${
+    //  this.cleanRoles(this.configService.roles).length > 0 ?
+    //    `_${this.cleanRoles(this.configService.roles).join('_')}` : ''}.mp3`;
+    this.audio.src = '../../assets/audio/test.mp3';
     this.audio.load();
     this.audio.play();
     this.audio.onended = () => this.endOfAudio();

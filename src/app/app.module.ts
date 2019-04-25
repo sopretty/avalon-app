@@ -9,6 +9,8 @@ import {RolesComponent} from './roles/roles.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {GameComponent} from './game/game.component';
 import {AudioComponent} from './audio/audio.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import {AudioComponent} from './audio/audio.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot(reducers, { metaReducers })
   ],
   providers: [],
   bootstrap: [AppComponent]

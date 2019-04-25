@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'roles', component: RolesComponent},
   {path: 'audio', component: AudioComponent},
+  {path: 'game', component: GameComponent},
 ];
 
 @NgModule({

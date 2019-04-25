@@ -81,12 +81,11 @@ export class RolesComponent implements OnInit {
 
   submit(): void {
     this.configService.roles = this.rolesForm.controls.reduce(
-      (acc, curr, index) => {
-        console.log(acc, curr.value);
-        return acc.concat((!!curr.value ? this.roles[index].characters : []));
-      }
+      (acc, curr, index) =>
+        acc.concat((!!curr.value ? this.roles[index].characters : []))
       , []);
-    this.router.navigate(['audio']);
+
+    this.router.navigate(['game']);
   }
 
   get rolesForm(): FormArray {

@@ -5,7 +5,7 @@
 
 import os
 import pandas as pd
-from flask import Flask, jsonify, make_response, request, abort
+from flask import Flask, jsonify, make_response, request, abort, send_file, Response
 
 import avalon_pylib
 
@@ -83,15 +83,30 @@ def create_mp3(list_roles):
     return mp3_file
 
 
+####################################################        mp3
+####################################################
+@app.route("/mp3")
+def streamwav():
+    def generate():
+        with open("data/roles.mp3", "rb") as fwav:
+            data = fwav.read(1024)
+            while data:
+                yield data
+                data = fwav.read(1024)
+    return Response(generate(), mimetype="audio/mpeg") # mimetype="audio/x-mp3", mimetype="audio/mp3"
+
 @app.route('/game/mp3', methods=['POST'])
 def post_mp3():
     mp3_file = create_mp3(request.json["roles"])
     print mp3_file
-    response = make_response(mp3_file)
-    print "lala"
-    response.headers.set('Content-Type', 'audio/mpeg')
+    # response = make_response(mp3_file)
+    # print "lala"
+    # response.headers.set('Content-Type', 'audio/mpeg')
     # response.headers.set('Content-Disposition', 'attachment', filename='%s.jpg' % pid)
-    return response
+
+    return send_file("./data/roles.mp3", attachment_filename='roles.mp3', mimetype='audio/mpeg')
+####################################################
+####################################################
 
 
 # GET rules
@@ -155,6 +170,7 @@ def get_roles_color(name):
 #     return jsonify({'task': task}), 201
 
 if __name__ == '__main__':
+
 
     RULES = [{"nb_player": 5, "BLUE": 3, "RED": 2, "quete_1": 2, "quete_2": 3, "quete_3": 2, "quete_4": 3, "quete_5": 3},
              {"nb_player": 6, "BLUE": 4, "RED": 2, "quete_1": 2, "quete_2": 3, "quete_3": 4, "quete_4": 3, "quete_5": 4},

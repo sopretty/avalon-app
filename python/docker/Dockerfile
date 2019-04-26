@@ -18,9 +18,3 @@ RUN /root/miniconda2/bin/conda install pip && \
 	/root/miniconda2/bin/pip install Flask==0.12.2
 
 COPY /web_service/ /root/
-
-# docker run -it -d -p 8080:8080 -p 28015:28015 -p 29015:29015 rethinkdb
-
-# from /avalon-app/python :
-# docker build -t avalon-app -f docker/Dockerfile .
-# docker run -it avalon-app

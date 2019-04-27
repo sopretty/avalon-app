@@ -3,11 +3,22 @@ services:
   rethinkdb:
     image: rethinkdb
     ports:
-    - "8081:8080"
+    - "8080:8080"
     - "28015:28015"
     - "29015:29015"
     volumes:
     - AVALON-RETHINKDB-DATA:/data
+  api:
+    image: avalon-pkg
+    ports:
+      - "80:5000"
+    environment:
+      - WEBSERVICEHOST="0.0.0.0"
+      - WEBSERVICEPORT="5000"
+      - DBHOST="rethinkdb"
+      - DBPORT="28015"
+    links:
+      - rethinkdb
 
 volumes:
   AVALON-RETHINKDB-DATA:

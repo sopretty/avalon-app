@@ -9,6 +9,7 @@ from random import shuffle
 from flask import Flask, jsonify, make_response, request, abort, send_file, Response
 import rethinkdb
 
+
 app = Flask(__name__)
 
 
@@ -20,10 +21,11 @@ def not_found(error):
 @app.route('/restart_bdd', methods=['POST'])
 def restart_bdd():
     """This function deletes all tables in the post request and initializes them"""
-    with rethinkdb.RethinkDB().connect() as conn:
+    with rethinkdb.RethinkDB().connect(host='rethinkdb', port=28015) as conn:
         for key in request.json.values():
-            rethinkdb.RethinkDB().table_drop(key).run(conn)
-
+            if key in rethinkdb.RethinkDB().db('test').table_list().run(conn):
+                rethinkdb.RethinkDB().table_drop(key).run(conn)
+            
             if key == "rules":
                 # initialize table rules
                 rethinkdb.RethinkDB().table_create("rules").run(conn)
@@ -60,7 +62,7 @@ def restart_bdd():
 def view_(name):
     """This function gives a table depending on the name"""
     response = {name: []}
-    with rethinkdb.RethinkDB().connect() as conn:
+    with rethinkdb.RethinkDB().connect(host='rethinkdb', port=28015) as conn:
         cursor = rethinkdb.RethinkDB().table(name).run(conn)
         for document in cursor:
             response[name].append(document)
@@ -71,11 +73,11 @@ def view_(name):
 @app.route('/new_game', methods=['PUT'])
 def new_game():
     """This functions inserts a new game in the database and returns the id created"""
-    with rethinkdb.RethinkDB().connect() as conn:
+    with rethinkdb.RethinkDB().connect(host='rethinkdb', port=28015) as conn:
         insert = rethinkdb.RethinkDB().table("games").insert([
                     {"players": [],
                      "rules": {}}]).run(conn)
-    return jsonify({"id": insert["generated_keys"]})
+    return jsonify({"id": insert["generated_keys"][0]})
 
 
 #######################################################################################################################
@@ -128,7 +130,7 @@ def roles_and_players(dict_names_roles, max_red, max_blue):
 @app.route('/<ident>/add_roles', methods=['POST'])
 def add_roles(ident):
     """This functions adds rules and roles to players randomly"""
-    with rethinkdb.RethinkDB().connect() as conn:
+    with rethinkdb.RethinkDB().connect(host='rethinkdb', port=28015) as conn:
         # add rules
         rules = list(rethinkdb.RethinkDB().table("rules").filter({"nb_player": len(request.json["names"])}).run(conn))[0]
         del rules["id"]

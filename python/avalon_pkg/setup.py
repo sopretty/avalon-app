@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     print "\n-----------------------------------------------------"
     print "--- Install package avalon"
-    print "-----------------------------------------------------\n\n"
+    print "-----------------------------------------------------\n"
 
     setup(name="avalon",
           version=find_version("avalon", "__init__.py"),
@@ -49,4 +49,4 @@ if __name__ == '__main__':
           license='LICENSE.txt',
           description='Python package used in Avalon',
           long_description=open('README.md').read(),
-          install_requires=['rethinkdb','Flask'])  # modules that are not installed by default
+          install_requires=['Flask', 'rethinkdb'])  # modules that are not installed by default

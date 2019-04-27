@@ -22,8 +22,9 @@ def restart_bdd():
     """This function deletes all tables in the post request and initializes them"""
     with rethinkdb.RethinkDB().connect() as conn:
         for key in request.json.values():
-            rethinkdb.RethinkDB().table_drop(key).run(conn)
-
+            if key in rethinkdb.RethinkDB().db('test').table_list().run(conn):
+                rethinkdb.RethinkDB().table_drop(key).run(conn)
+            
             if key == "rules":
                 # initialize table rules
                 rethinkdb.RethinkDB().table_create("rules").run(conn)
@@ -75,7 +76,7 @@ def new_game():
         insert = rethinkdb.RethinkDB().table("games").insert([
                     {"players": [],
                      "rules": {}}]).run(conn)
-    return jsonify({"id": insert["generated_keys"]})
+    return jsonify({"id": insert["generated_keys"][0]})
 
 
 #######################################################################################################################

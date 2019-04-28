@@ -1,3 +1,6 @@
+
+Avoir docker-compose d'installer...
+
 ***********************************
 *** Pour lancer l'app et la bdd ***
 
@@ -6,6 +9,8 @@
 3. Lancer les containers: docker-compose up
 
 ---> http://localhost/
+
+
 
 ****************************
 *** Exemples de requêtes ***

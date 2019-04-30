@@ -4,7 +4,7 @@
 """This functions are used is the RESTful web service of Avalon"""
 
 import os
-from random import shuffle
+from random import shuffle, choice
 
 from flask import Flask, jsonify, make_response, request, abort, send_file, Response
 import rethinkdb
@@ -21,6 +21,7 @@ def not_found(error):
 @app.route('/restart_bdd', methods=['POST'])
 def restart_bdd():
     """This function deletes all tables in the post request and initializes them"""
+    
     with rethinkdb.RethinkDB().connect(host='rethinkdb', port=28015) as conn:
         for key in request.json.values():
             if key in rethinkdb.RethinkDB().db('test').table_list().run(conn):
@@ -41,14 +42,17 @@ def restart_bdd():
                 # initialize table games
                 rethinkdb.RethinkDB().table_create("games").run(conn)
                 rethinkdb.RethinkDB().table("games").insert([
-                    {'players': [{'name': 'Chacha', 'role': 'Oberon', 'color': 'RED'},
-                                 {'name': 'Romain', 'role': 'Blue', 'color': 'BLUE'},
-                                 {'name': 'Elsa', 'role': 'Mordred', 'color': 'RED'},
-                                 {'name': 'Mathieu', 'role': 'Assassin', 'color': 'RED'},
-                                 {'name': 'Flo', 'role': 'Merlin', 'color': 'BLUE'},
-                                 {'name': 'Eglantine', 'role': 'Blue', 'color': 'BLUE'},
-                                 {'name': 'Richard', 'role': 'Blue', 'color': 'BLUE'},
-                                 {'name': 'Quentin', 'role': 'Blue', 'color': 'BLUE'}],
+                    {'players': [{'ind_player': 0, 'name': 'Chacha', 'role': 'Oberon', 'color': 'RED'},
+                                 {'ind_player': 1, 'name': 'Romain', 'role': 'Blue', 'color': 'BLUE'},
+                                 {'ind_player': 2, 'name': 'Elsa', 'role': 'Mordred', 'color': 'RED'},
+                                 {'ind_player': 3, 'name': 'Mathieu', 'role': 'Assassin', 'color': 'RED'},
+                                 {'ind_player': 4, 'name': 'Flo', 'role': 'Merlin', 'color': 'BLUE'},
+                                 {'ind_player': 5, 'name': 'Eglantine', 'role': 'Blue', 'color': 'BLUE'},
+                                 {'ind_player': 6, 'name': 'Richard', 'role': 'Blue', 'color': 'BLUE'},
+                                 {'ind_player': 7, 'name': 'Quentin', 'role': 'Blue', 'color': 'BLUE'}],
+                     'current_player': 3,
+                     'current_turn': 1,
+                     'current_echec': 0,
                      'rules': {"BLUE": 5, "RED": 3, "q1": 3, "q2": 4,
                                "q3": 4, "q4": 5, "q5": 5}}]).run(conn)
             else:
@@ -79,9 +83,6 @@ def new_game():
                      "rules": {}}]).run(conn)
     return jsonify({"id": insert["generated_keys"][0]})
 
-
-#######################################################################################################################
-#######################################################################################################################
 
 def roles_and_players(dict_names_roles, max_red, max_blue):
     """Check the validity of proposed roles
@@ -120,9 +121,9 @@ def roles_and_players(dict_names_roles, max_red, max_blue):
     list_players = []
     for ind, role in enumerate(list_roles):
         if role in ["Merlin", "Perceval", "Blue"]:
-            list_players.append({"name": dict_names_roles["names"][ind], "color": "BLUE", "role": role})
+            list_players.append({"ind_player": ind, "name": dict_names_roles["names"][ind], "color": "BLUE", "role": role})
         else:
-            list_players.append({"name": dict_names_roles["names"][ind], "color": "RED", "role": role})
+            list_players.append({"ind_player": ind, "name": dict_names_roles["names"][ind], "color": "RED", "role": role})
 
     return list_players
 
@@ -130,7 +131,9 @@ def roles_and_players(dict_names_roles, max_red, max_blue):
 @app.route('/<ident>/add_roles', methods=['POST'])
 def add_roles(ident):
     """This functions adds rules and roles to players randomly"""
+
     with rethinkdb.RethinkDB().connect(host='rethinkdb', port=28015) as conn:
+        
         # add rules
         rules = list(rethinkdb.RethinkDB().table("rules").filter({"nb_player": len(request.json["names"])}).run(conn))[0]
         del rules["id"]
@@ -140,11 +143,62 @@ def add_roles(ident):
         # add players
         players = roles_and_players(request.json, rules["RED"], rules["BLUE"])
         rethinkdb.RethinkDB().table("games").get(ident).update({"players": players}).run(conn)
+        rethinkdb.RethinkDB().table("games").get(ident).update({"current_player": choice(range(len(request.json["names"])))}).run(conn)
+        rethinkdb.RethinkDB().table("games").get(ident).update({"current_turn": 1}).run(conn)
+        rethinkdb.RethinkDB().table("games").get(ident).update({"current_echec": 0}).run(conn)
 
         # get response
         response = rethinkdb.RethinkDB().table("games").get(ident).run(conn)
 
     return jsonify({"players": response["players"]})
+
+
+#######################################################################################################################
+#######################################################################################################################
+
+@app.route('/<ident>/new_turn', methods=['GET'])
+def new_turn(ident):
+    """This function updates the bdd with a new turn"""
+
+    with rethinkdb.RethinkDB().connect(host='rethinkdb', port=28015) as conn:
+        
+        # update player
+        current_player = rethinkdb.RethinkDB().table("games").get(ident)['current_player'].run(conn)  
+        new_player = current_player+1
+        if current_player == len(rethinkdb.RethinkDB().table("games").get(ident)['players'].run(conn))-1:
+            new_player = 0
+        rethinkdb.RethinkDB().table("games").get(ident).update({"current_player": new_player}).run(conn)
+
+        # find name of current player
+        player = rethinkdb.RethinkDB().table("games").get(ident)['players'].filter({"ind_player": current_player}).run(conn)[0]
+        name_player = player['name']
+
+        # update turn
+        current_turn = rethinkdb.RethinkDB().table("games").get(ident)['current_turn'].run(conn)  
+        rethinkdb.RethinkDB().table("games").get(ident).update({"current_turn": current_turn+1}).run(conn)
+
+        # update number of echec
+        rethinkdb.RethinkDB().table("games").get(ident).update({"current_echec": 0}).run(conn)
+
+        # update number of red
+        nb_red = 2
+        if current_turn == 4 and len(rethinkdb.RethinkDB().table("games").get(ident)['players'].run(conn)) >= 7:
+            nb_red = 3
+
+        # update number of vote
+        nb_vote = rethinkdb.RethinkDB().table("games").get(ident)['rules']['q'+str(current_turn)].run(conn)  
+
+    return jsonify({"player": name_player, "turn": current_turn, "nb_red": nb_red, "nb_echec": 0, "nb_vote": nb_vote})
+
+
+@app.route('/<ident>/new_vote', methods=['GET'])
+def new_vote(ident):
+    """This function updates the bdd with a new vote"""
+
+    with rethinkdb.RethinkDB().connect(host='rethinkdb', port=28015) as conn:
+        print "lala"
+
+    return jsonify({"player": "lala", "nb_echec": 0, "nb_vote":2})
 
 
 #######################################################################################################################

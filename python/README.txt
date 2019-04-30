@@ -39,7 +39,7 @@ PUT: http://localhost/new_game
 POST: http://localhost/1b8ad78c-da1d-41c1-8552-d2456ae13823/add_roles
 Body: {"names": ["Chacha", "Romain", "Elsa", "Mathieu", "Flo", "Eglantine", "Richard", "Quentin", "Thomas"], "roles": ["Oberon", "Perceval", "Morgan"]}
 
----> 
+--->
 {
     "players": [
         {
@@ -88,4 +88,103 @@ Body: {"names": ["Chacha", "Romain", "Elsa", "Mathieu", "Flo", "Eglantine", "Ric
             "role": "Blue"
         }
     ]
+}
+
+
+5. Nouveau tour:
+GET: http://localhost/1b8ad78c-da1d-41c1-8552-d2456ae13823/new_turn
+---> {"name_player": "Elsa, "turn": 1, "nb_echec": 2, "nb_mission": 0, "nb_in_mission": 3}
+("name_player" --> nom de la personne qui envoie les gens,
+ "turn" --> numéro du tour dans la partie compris entre 1 et 5,
+ "nb_echec" --> nombre d'échecs pour que la mission échoue,
+ "nb_mission" --> nombre de missions échouées (0 car nouveau tour),
+ "nb_in_mission" --> nombre de personnes à envoyer en mission)
+
+
+6. Vote:
+POST: http://localhost/1b8ad78c-da1d-41c1-8552-d2456ae13823/vote
+Body: {"vote": "refused"}
+---> {"request": "succeeded"}
+
+Body: {"vote": "osef"}
+--->
+{
+    "players": [
+        {
+            "color": "BLUE",
+            "ind_player": 0,
+            "name": "Chacha",
+            "role": "Blue"
+        },
+        {
+            "color": "BLUE",
+            "ind_player": 1,
+            "name": "Romain",
+            "role": "Blue"
+        },
+        {
+            "color": "BLUE",
+            "ind_player": 2,
+            "name": "Elsa",
+            "role": "Perceval"
+        },
+        {
+            "color": "RED",
+            "ind_player": 3,
+            "name": "Mathieu",
+            "role": "Morgan"
+        },
+        {
+            "color": "BLUE",
+            "ind_player": 4,
+            "name": "Flo",
+            "role": "Blue"
+        },
+        {
+            "color": "RED",
+            "ind_player": 5,
+            "name": "Eglantine",
+            "role": "Assassin"
+        },
+        {
+            "color": "BLUE",
+            "ind_player": 6,
+            "name": "Richard",
+            "role": "Blue"
+        },
+        {
+            "color": "RED",
+            "ind_player": 7,
+            "name": "Quentin",
+            "role": "Oberon"
+        },
+        {
+            "color": "BLUE",
+            "ind_player": 8,
+            "name": "Thomas",
+            "role": "Merlin"
+        }
+    ]
+}
+
+
+7. Nouvelle mission:
+GET: http://localhost/1b8ad78c-da1d-41c1-8552-d2456ae13823/new_mission
+---> {"name_player": "Elsa, "turn": 1, "nb_echec": 2, "nb_mission": nb_mission, "nb_in_mission": 3}
+("name_player" --> nom de la personne qui envoie les gens,
+ "turn" --> numéro du tour dans la partie compris entre 1 et 5,
+ "nb_echec" --> nombre d'échecs pour que la mission échoue,
+ "nb_mission" --> nombre de missions échouées,
+ "nb_in_mission" --> nombre de personnes à envoyer en mission)
+
+
+8. Mélange des votes:
+POST: http://localhost/088b2e91-d711-4add-9995-0a4e3ae59275/shuffle_vote
+Body: {"Chacha": "FAIL", "Romain":"SUCCESS", "Elsa": "SUCCESS"}
+--->
+{
+    "result": "FAIL",
+    "vote1": "FAIL",
+    "vote2": "SUCCESS",
+    "vote3": "SUCCESS"
 }

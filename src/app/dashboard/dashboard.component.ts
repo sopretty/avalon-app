@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   }
 
   submit(): void {
-    this.configService.players = this.players.map(player => ({name: player}));
+    this.configService.players = this.players.map(player => ({name: player, team: null}));
     this.router.navigate(['roles']);
   }
 

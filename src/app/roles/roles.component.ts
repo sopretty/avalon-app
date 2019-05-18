@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {RolesService} from '../services/roles/roles.service';
 import {ConfigService} from '../services/config/config.service';
 import {FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import {AddEvents} from '../store/actions/actions';
+import {RoleTurnComponent} from '../dynamicTurns/role-turn/role-turn.component';
 
 @Component({
   selector: 'app-roles',
@@ -32,12 +34,12 @@ export class RolesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private rolesService: RolesService,
+    private store: Store<{ game: { events: [] } }>,
     private configService: ConfigService) {
   }
 
   ngOnInit() {
-    this.allowed = this.rolesService.rules.find(config => config.nbPlayer === this.configService.players.length);
+    this.allowed = this.configService.rules.find(config => config.nbPlayer === this.configService.players.length);
     this.selected = {red: 0, blue: 0};
     this.form = this.formBuilder.group({
       roles: new FormArray([], this.redBlueValidator()),
@@ -84,7 +86,13 @@ export class RolesComponent implements OnInit {
       (acc, curr, index) =>
         acc.concat((!!curr.value ? this.roles[index].characters : []))
       , []);
-
+    // this.configService.shuffleRoles();
+    this.store.dispatch(
+      new AddEvents(
+        {
+          events: this.configService.players
+            .map(player => ({type: 'app-role-turn', state: player}))
+        }));
     this.router.navigate(['game']);
   }
 

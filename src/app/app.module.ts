@@ -1,16 +1,18 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {StoreModule} from '@ngrx/store';
+import {ReactiveFormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LandingComponent} from './landing/landing.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {RolesComponent} from './roles/roles.component';
-import {ReactiveFormsModule} from '@angular/forms';
 import {GameComponent} from './game/game.component';
 import {AudioComponent} from './audio/audio.component';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import {metaReducers, reducers} from './store/reducers';
+import {GenericTurnComponent} from './dynamicTurns/generic-turn/generic-turn.component';
+import {RoleTurnComponent} from './dynamicTurns/role-turn/role-turn.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +21,15 @@ import { reducers, metaReducers } from './reducers';
     DashboardComponent,
     RolesComponent,
     GameComponent,
-    AudioComponent
+    AudioComponent,
+    GenericTurnComponent,
+    RoleTurnComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, { metaReducers })
+    StoreModule.forRoot(reducers, {metaReducers})
   ],
   providers: [],
   bootstrap: [AppComponent]

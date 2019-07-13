@@ -30,6 +30,10 @@ export class GameComponent implements OnInit {
   ngOnInit() {
   }
 
+  createCustomEvent(event: { type: any, state: any }) {
+
+  }
+
   /**  createCustomEvent(event: { type: any, state: any }) {
     console.log(event);
     const customElement: NgElement & WithProperties<any> = document.createElement(event.type) as any;

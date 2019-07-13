@@ -1,6 +1,7 @@
 import {ActionReducerMap, MetaReducer} from '@ngrx/store';
 import {environment} from '../../../environments/environment';
 import {ActionsUnion, ActionTypes} from '../actions/actions';
+import {Game} from '../../services/game/game.service';
 
 export interface State {
   game: any;
@@ -9,10 +10,12 @@ export interface State {
 // TODO to be defined
 export interface GameState {
   events: Array<{ type: any, state: any }>;
+  game: Game | null;
 }
 
 const initialState: GameState = {
   events: [],
+  game: null,
 };
 
 function gameReducer(state = initialState, action: ActionsUnion) {
@@ -29,6 +32,12 @@ function gameReducer(state = initialState, action: ActionsUnion) {
       return {
         ...state,
         events: state.events.splice(0, 1)
+      };
+
+    case ActionTypes.CreateGameSuccess:
+      return {
+        ...state,
+        game: action.payload,
       };
 
     default:

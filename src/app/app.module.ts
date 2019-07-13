@@ -13,6 +13,9 @@ import {AudioComponent} from './audio/audio.component';
 import {metaReducers, reducers} from './store/reducers';
 import {GenericTurnComponent} from './dynamicTurns/generic-turn/generic-turn.component';
 import {RoleTurnComponent} from './dynamicTurns/role-turn/role-turn.component';
+import {EffectsModule} from '@ngrx/effects';
+import {GameEffects} from './store/effects/game.effects';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,10 +29,12 @@ import {RoleTurnComponent} from './dynamicTurns/role-turn/role-turn.component';
     RoleTurnComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {metaReducers})
+    StoreModule.forRoot(reducers, {metaReducers}),
+    EffectsModule.forRoot([GameEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

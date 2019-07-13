@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {ConfigService} from '../services/config/config.service';
 import {FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
 import {Store} from '@ngrx/store';
-import {AddEvents} from '../store/actions/actions';
+import {AddEvents, CreateGame} from '../store/actions/actions';
 import {RoleTurnComponent} from '../dynamicTurns/role-turn/role-turn.component';
 
 @Component({
@@ -86,14 +86,16 @@ export class RolesComponent implements OnInit {
       (acc, curr, index) =>
         acc.concat((!!curr.value ? this.roles[index].characters : []))
       , []);
+    console.log('creategame')
+    this.store.dispatch(new CreateGame());
     // this.configService.shuffleRoles();
-    this.store.dispatch(
+    /**this.store.dispatch(
       new AddEvents(
         {
           events: this.configService.players
             .map(player => ({type: 'app-role-turn', state: player}))
         }));
-    this.router.navigate(['game']);
+    this.router.navigate(['game']);**/
   }
 
   get rolesForm(): FormArray {

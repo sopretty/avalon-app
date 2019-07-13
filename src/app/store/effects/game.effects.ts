@@ -18,7 +18,7 @@ export class GameEffects {
           roles: this.configService.roles.map(_ => _.name)
         })
           .pipe(
-            map(game => [new CreateGameSuccess(game),
+            switchMap(game => [new CreateGameSuccess(game),
               new AddEvents(
                 {
                   events: game.players.map(player => ({type: 'app-role-turn', state: player}))

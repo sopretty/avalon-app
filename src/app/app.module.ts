@@ -25,8 +25,8 @@ import {HttpClientModule} from '@angular/common/http';
     RolesComponent,
     GameComponent,
     AudioComponent,
-    GenericTurnComponent,
-    RoleTurnComponent
+    RoleTurnComponent,
+    GenericTurnComponent
   ],
   imports: [
     HttpClientModule,
@@ -37,7 +37,8 @@ import {HttpClientModule} from '@angular/common/http';
     EffectsModule.forRoot([GameEffects])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // entryComponents: [RoleTurnComponent, GenericTurnComponent],
 })
 export class AppModule {
 }

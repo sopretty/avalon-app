@@ -1,9 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
 import {GameState} from '../store/reducers';
 import {ConfigService} from '../services/config/config.service';
+import {TurnDirective} from '../dynamicTurns/turn.directive';
+import {RoleTurnComponent} from '../dynamicTurns/role-turn/role-turn.component';
+import {GenericTurnComponent} from '../dynamicTurns/generic-turn/generic-turn.component';
+
+const turns = {
+  'app-role-turn': RoleTurnComponent,
+};
 
 @Component({
   selector: 'app-game',
@@ -16,7 +23,11 @@ export class GameComponent implements OnInit {
 
   private events$: Observable<GameState>;
 
-  constructor(private configService: ConfigService, private store: Store<{ game: { events: [] } }>) {
+  @ViewChild(TurnDirective) turnHost: TurnDirective;
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+              private configService: ConfigService,
+              private store: Store<{ game: { events: [] } }>) {
     this.boardGame = this.configService.boardGame[this.configService.players.length];
     store.pipe(
       select('game'),
@@ -31,7 +42,14 @@ export class GameComponent implements OnInit {
   }
 
   createCustomEvent(event: { type: any, state: any }) {
+    console.log(event);
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(turns[event.type]);
 
+    const viewContainerRef = this.turnHost.viewContainerRef;
+    viewContainerRef.clear();
+
+    const componentRef = viewContainerRef.createComponent(componentFactory);
+    (componentRef.instance as GenericTurnComponent).state = event.state;
   }
 
   /**  createCustomEvent(event: { type: any, state: any }) {

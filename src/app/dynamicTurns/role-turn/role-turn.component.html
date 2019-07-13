@@ -1,6 +1,10 @@
+<div (click)="open()">
 <div>
-  Donnez le téléphone à {{store.name || 'Mathieu'}}
+  Give the cellphone to {{state.name}}
+  Otherwise tap the screen
 </div>
-<div (click)="finished()">
-  Vous êtes {{store.roles || 'Merlin'}}
+<div *ngIf="clicked">
+  You are in the {{state.team}} team
+  You role is {{state.role}}
+</div>
 </div>

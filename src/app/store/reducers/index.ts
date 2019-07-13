@@ -31,7 +31,7 @@ function gameReducer(state = initialState, action: ActionsUnion) {
     case ActionTypes.ConsumeEvent:
       return {
         ...state,
-        events: state.events.splice(0, 1)
+        events: state.events.slice(1)
       };
 
     case ActionTypes.CreateGameSuccess:

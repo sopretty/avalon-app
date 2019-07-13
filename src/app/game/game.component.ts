@@ -35,6 +35,8 @@ export class GameComponent implements OnInit {
     ).subscribe(_ => {
       if (_.events.length > 0) {
         this.createCustomEvent(_.events[0]);
+      }else{
+        viewContainerRef.clear();
       }
     });
   }

@@ -11,14 +11,18 @@ import {Store} from '@ngrx/store';
 export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
 
   @Input() state: any;
+  clicked: boolean;
 
   constructor(store: Store<{ game: { events: [] } }>) {
     super(store);
+    this.clicked = false;
   }
 
-
-  ngOnInit() {
-    console.log(this.state);
+  open() {
+    if (this.clicked) {
+      this.finished();
+    }
+    this.clicked = true;
   }
 
 }

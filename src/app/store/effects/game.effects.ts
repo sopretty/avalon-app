@@ -24,7 +24,7 @@ export class GameEffects {
                   events: game.players.map(player => ({type: 'app-role-turn', state: player}))
                 })]
             ),
-            tap((actions: any) => this.router.navigate(['/games', {id: actions[0].payload.id}]))
+            tap((actions: any) => this.router.navigate(['/games', actions[0].payload.id]))
           )
       )
     );

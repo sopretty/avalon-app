@@ -22,7 +22,7 @@ export class RolesComponent implements OnInit {
     },
     {
       description: 'Morgane (rouge), Perceval (bleu)',
-      characters: [{name: 'morgane', team: 'red'}, {name: 'perceval', team: 'blue'}],
+      characters: [{name: 'morgan', team: 'red'}, {name: 'perceval', team: 'blue'}],
     },
     {
       description: 'Oberon (rouge)',

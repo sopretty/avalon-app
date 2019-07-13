@@ -38,7 +38,7 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  // entryComponents: [RoleTurnComponent, GenericTurnComponent],
+  entryComponents: [RoleTurnComponent, GenericTurnComponent],
 })
 export class AppModule {
 }

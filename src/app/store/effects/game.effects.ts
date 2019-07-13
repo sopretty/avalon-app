@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {ActionTypes, AddEvents, CreateGameSuccess} from '../actions/actions';
 import {GameService} from '../../services/game/game.service';
 import {ConfigService} from '../../services/config/config.service';
@@ -30,7 +30,8 @@ export class GameEffects {
               }
             })
           )
-      );
+      ))
+  ;
 
 
   constructor(

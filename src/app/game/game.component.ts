@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
@@ -23,9 +23,10 @@ export class GameComponent implements OnInit {
 
   private events$: Observable<GameState>;
 
-  @ViewChild(TurnDirective) turnHost: TurnDirective;
+  // @ViewChild(TurnDirective) turnHost: TurnDirective;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
+              private viewContainerRef: ViewContainerRef,
               private configService: ConfigService,
               private store: Store<{ game: { events: [] } }>) {
     this.boardGame = this.configService.boardGame[this.configService.players.length];
@@ -45,7 +46,7 @@ export class GameComponent implements OnInit {
     console.log(event);
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(turns[event.type]);
 
-    const viewContainerRef = this.turnHost.viewContainerRef;
+    const viewContainerRef = this.viewContainerRef;
     viewContainerRef.clear();
 
     const componentRef = viewContainerRef.createComponent(componentFactory);

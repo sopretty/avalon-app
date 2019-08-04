@@ -1,15 +1,16 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewContainerRef} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
 import {GameState} from '../store/reducers';
 import {ConfigService} from '../services/config/config.service';
-import {TurnDirective} from '../dynamicTurns/turn.directive';
 import {RoleTurnComponent} from '../dynamicTurns/role-turn/role-turn.component';
 import {GenericTurnComponent} from '../dynamicTurns/generic-turn/generic-turn.component';
+import {AudioTurnComponent} from '../dynamicTurns/audio-turn/audio-turn.component';
 
 const turns = {
   'app-role-turn': RoleTurnComponent,
+  'app-audio-turn': AudioTurnComponent
 };
 
 @Component({
@@ -23,20 +24,26 @@ export class GameComponent implements OnInit {
 
   private events$: Observable<GameState>;
 
+  clear: boolean;
+
   // @ViewChild(TurnDirective) turnHost: TurnDirective;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private viewContainerRef: ViewContainerRef,
               private configService: ConfigService,
               private store: Store<{ game: { events: [] } }>) {
+    this.clear = false;
     this.boardGame = this.configService.boardGame[this.configService.players.length];
     store.pipe(
       select('game'),
     ).subscribe(_ => {
+      console.log(_);
       if (_.events.length > 0) {
-        this.createCustomEvent(_.events[0]);
-      }else{
+        this.clear = false;
+        this.createCustomEvent(_.events[_.events.length - 1]);
+      } else {
         viewContainerRef.clear();
+        this.clear = true;
       }
     });
   }
@@ -52,21 +59,8 @@ export class GameComponent implements OnInit {
     viewContainerRef.clear();
 
     const componentRef = viewContainerRef.createComponent(componentFactory);
-    (componentRef.instance as GenericTurnComponent).state = event.state;
-  }
-
-  /**  createCustomEvent(event: { type: any, state: any }) {
-    console.log(event);
-    const customElement: NgElement & WithProperties<any> = document.createElement(event.type) as any;
-
-    // customElement.addEventListener('eventFinished', () => document.body.removeChild(customElement));
-
-    if (event.state) {
-      Object.keys(event.state).forEach((key) => {
-        customElement[key] = event.state[key];
-      });
+    if (!!event.state) {
+      (componentRef.instance as GenericTurnComponent).state = event.state;
     }
-
-    document.body.appendChild(customElement);
-  }**/
+  }
 }

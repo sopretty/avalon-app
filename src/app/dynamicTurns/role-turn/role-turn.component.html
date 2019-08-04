@@ -1,10 +1,18 @@
 <div (click)="open()">
-<div>
-  Give the cellphone to {{state.name}}
-  Otherwise tap the screen
-</div>
-<div *ngIf="clicked">
-  You are in the {{state.team}} team
-  You role is {{state.role}}
-</div>
+  <div>
+    <p>
+      Give the cellphone to {{state.name}}
+    </p>
+    <p>
+      If you are {{state.name}} tap the screen to know your team/role
+    </p>
+  </div>
+  <div *ngIf="clicked">
+    <p>
+      You are in the {{state.team}} team
+    </p>
+    <p>
+      You role is {{state.role}}
+    </p>
+  </div>
 </div>

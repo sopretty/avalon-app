@@ -9,7 +9,7 @@ export interface State {
 
 // TODO to be defined
 export interface GameState {
-  events: Array<{ type: any, state: any }>;
+  events: Array<{ type: any, state?: any }>;
   game: Game | null;
 }
 
@@ -29,9 +29,9 @@ function gameReducer(state = initialState, action: ActionsUnion) {
       };
 
     case ActionTypes.ConsumeEvent:
+      state.events.pop()
       return {
         ...state,
-        events: state.events.slice(1)
       };
 
     case ActionTypes.CreateGameSuccess:

@@ -11,7 +11,7 @@ export enum ActionTypes {
 export class AddEvents implements Action {
   readonly type = ActionTypes.AddEvents;
 
-  constructor(public payload: { events: Array<{ type: any, state: any }> }) {
+  constructor(public payload: { events: Array<{ type: any, state?: any }> }) {
   }
 }
 

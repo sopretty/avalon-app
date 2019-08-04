@@ -18,11 +18,18 @@ export class GameEffects {
           roles: this.configService.roles.map(_ => _.name)
         })
           .pipe(
-            switchMap(game => [new CreateGameSuccess(game),
-              new AddEvents(
-                {
-                  events: game.players.map(player => ({type: 'app-role-turn', state: player}))
-                })]
+            switchMap(game => [
+                new CreateGameSuccess(game),
+                new AddEvents(
+                  {
+                    events: game.players.map(player => ({type: 'app-role-turn', state: player}))
+                  }),
+                new AddEvents({
+                  events: [{
+                    type: 'app-audio-turn',
+                  }]
+                })
+              ]
             ),
             tap((action: any) => {
               if (action.payload.id) {

@@ -86,7 +86,6 @@ export class RolesComponent implements OnInit {
       (acc, curr, index) =>
         acc.concat((!!curr.value ? this.roles[index].characters : []))
       , []);
-    console.log('creategame')
     this.store.dispatch(new CreateGame());
     // this.configService.shuffleRoles();
     /**this.store.dispatch(

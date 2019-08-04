@@ -9,7 +9,7 @@ import {LandingComponent} from './landing/landing.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {RolesComponent} from './roles/roles.component';
 import {GameComponent} from './game/game.component';
-import {AudioComponent} from './audio/audio.component';
+import {AudioTurnComponent} from './dynamicTurns/audio-turn/audio-turn.component';
 import {metaReducers, reducers} from './store/reducers';
 import {GenericTurnComponent} from './dynamicTurns/generic-turn/generic-turn.component';
 import {RoleTurnComponent} from './dynamicTurns/role-turn/role-turn.component';
@@ -24,7 +24,7 @@ import {HttpClientModule} from '@angular/common/http';
     DashboardComponent,
     RolesComponent,
     GameComponent,
-    AudioComponent,
+    AudioTurnComponent,
     RoleTurnComponent,
     GenericTurnComponent
   ],
@@ -38,7 +38,7 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [RoleTurnComponent, GenericTurnComponent],
+  entryComponents: [RoleTurnComponent, GenericTurnComponent, AudioTurnComponent],
 })
 export class AppModule {
 }

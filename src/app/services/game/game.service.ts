@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
+import {environment} from '../../../environments/environment'
+
 export interface PutPlayerBody {
   names: string[];
   roles: string[];
@@ -29,25 +31,11 @@ export class GameService {
   }
 
   createGame(players: PutPlayerBody): Observable<Game> {
-    return of({
-      id: 'id',
-      players: [
-        {
-          id: 'id1',
-          ind_player: 1,
-          name: 'Mathieu',
-          role: 'Oberon',
-          team: 'red',
-        },
-        {
-          id: 'id2',
-          ind_player: 2,
-          name: 'Romain',
-          role: 'Merlin',
-          team: 'blue',
-        },
-      ]
-    });
-    // return this._http.put<Game>(environment.apiUrl + environment.endpoints.createGame, players);
+     return this._http.put<Game>(environment.apiUrl + environment.endpoints.createGame, players);
+  }
+
+  getAudio(): Observable<any> {
+    return this._http.get(environment.apiUrl + '0e748649-6f93-4a59-b5fb-5a2b2c16d666/mp3',
+    { responseType: 'arraybuffer'});
   }
 }

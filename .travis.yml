@@ -1,24 +1,25 @@
-dist: trusty
-sudo: false
+sudo: required
+language: ruby
 
-language: node_js
-node_js:
-  - '8'
+env:
+  global:
+    - secure: nRtKXRqV6HhU3VbiTtWeHB0zveAk8yXm97KACXKVVOLlUfO7OF9iwrMoNFt7wRDDXNUztXOXZ7mQfZXJ3z9/Z/T7EtKiBV2YNktTXqdA2fHMGpyHyY9LftJV1OQMNAoUWJ4y5xINtAmB1CrkgN4jtpoNi4HIwJ5CiCGpJnHkK0pHBuL2NGl6aUwIR1ZJvSkSclXh5v+U9fq6/zsybjwFBS8v3CooP9N0hFYvMLApeBiPAEIKU2oAGWCUCL7FhMjZ6jOOHU0+aK8mJt/o6tMEyAbmFVkg1nXr+5UAU5AtgSJYW0+61Epww2tSMjYgacQ9KDCtBNWmDoZpy9EB/x+oLuG1bBRZi+6+9p4bZH2iQDzPPbULIXaffs6Ru9y6o5wcJNVFVegAzUQv8yNcksWNjncyOpvJZq7kQYVjFi/dzkxMilvAqp1p+OiQ1R8Rk6W/XqTn36bIADMGTCLfHwogJHUQnoMjZndof5HytlMCIrzNuCK1xlB+dzZZDrNatx5zhzuCHerJ6F2Ydbu3ASA5r8ifHLDf9EDps5sHNTP3IpiN2V/NKK4myi8fW7UwjmshaLG7pmKjZVCZpMkA/CsGew3UVFWl1PXB6aKS7XdNqhA5zan0mk42GSnxp6HRPdXBqVbhOU8MjB46I2cnXBvzOnxsRImGJtDJV0CCU8YCnl8=
+    - secure: g+iIOiORDw6b3yNX9wGB/WkO2UCEN3nJAbOU1IJhPTTcdjfsihO8hNovPx5hGcnxl1sAeN5uDUTyJUkXlWH2GRdDIkNZRZXvYf0j8vQa2lx9anLKaOW/58ivycA/FaLAE8qvzpf4rco8G5yfA1zCorXmJ3yBQjwrapO8fg4CO39gisQMSsUyIvuU76Rnc1BNAivK3XBaLcrRftcFzLlC/2bho/N4Py+62EpT+ahLkgYXB54KcFqHlAI0Y9bKJmonTlmDeEUdNZOafRf6/JHIrcvfnCSZNp8HNGbjeAqIrscJITCVNJaJ7U/KsiGy1DZGxsU45zhr3/Jkj98G3TjbSjCyTEwNPWbDTe5M6x/xwAPwY4TQCOjLDUNLR9gxyi4JjH4KeQPN2FOycTt4LBWnR4F3rrMXpz+O60YuehBfQZrUnf/mNvU74z86o7eCbukjDCspf1ZfunAZnewJbRy3VFUpjNmttyPkb9bEuyUHl0QZaW/7jQ8QenSwFO0lHDi8cqt310RD2F0XRVdbH3YYanG+GXH5QbJu59DYLQZEONJXGSxd8DOeIepRXvTM2Mf5UgSVUFSWNquUToUCIhBB1Pw6PjFwhBr5sSlW66LN8E1rsA3qHKJRzNbEDSoZdPfMrnuJovKf5jHjAv+WgA+5KSYIiSVm2XHXdiqz6ASleHo=
 
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
+services:
+  - docker
 
-cache:
-  directories:
-    - ./node_modules
+before_install:
+  - docker build -t sopretty/avalon .
 
-install:
-  - npm install
+after_script:
+  - docker images
 
-script:
-  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
-  -
+before_deploy:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+
+deploy:
+  provider: script
+  script: docker push sopretty/avalon-front
+  on:
+    branch: master

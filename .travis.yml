@@ -10,7 +10,8 @@ services:
   - docker
 
 before_install:
-  - docker build -t avalon .
+  - docker build -t avalon-front .
+  - docker tag avalon-front $DOCKER_USERNAME/avalon-front
 
 after_script:
   - docker images

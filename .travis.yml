@@ -1,5 +1,5 @@
 sudo: required
-language: ruby
+language: generic
 
 env:
   global:
@@ -10,7 +10,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t sopretty/avalon .
+  - docker build -t avalon .
 
 after_script:
   - docker images

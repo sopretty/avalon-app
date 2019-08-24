@@ -2,6 +2,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {StoreModule} from '@ngrx/store';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {EffectsModule} from '@ngrx/effects';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -13,9 +15,8 @@ import {AudioTurnComponent} from './dynamicTurns/audio-turn/audio-turn.component
 import {metaReducers, reducers} from './store/reducers';
 import {GenericTurnComponent} from './dynamicTurns/generic-turn/generic-turn.component';
 import {RoleTurnComponent} from './dynamicTurns/role-turn/role-turn.component';
-import {EffectsModule} from '@ngrx/effects';
 import {GameEffects} from './store/effects/game.effects';
-import {HttpClientModule} from '@angular/common/http';
+import {TurnDirective} from './dynamicTurns/turn.directive';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {HttpClientModule} from '@angular/common/http';
     GameComponent,
     AudioTurnComponent,
     RoleTurnComponent,
+    TurnDirective,
     GenericTurnComponent
   ],
   imports: [

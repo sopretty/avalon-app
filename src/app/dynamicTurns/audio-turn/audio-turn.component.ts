@@ -20,22 +20,24 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit {
   }
 
   ngOnInit() {
-    let audioCtx = new AudioContext();
+    const audioCtx = new AudioContext();
     this.source = audioCtx.createBufferSource();
     this._gameService.getAudio().subscribe(_ => {
 
-     audioCtx.decodeAudioData(_, (buffer) => {
-        this.source.buffer = buffer;
+        audioCtx.decodeAudioData(_, (buffer) => {
+            this.source.buffer = buffer;
 
-        this.source.connect(audioCtx.destination);
-      },
-       function(e){ console.log('test'); });
+            this.source.connect(audioCtx.destination);
+          },
+          () => {
+            console.log('test');
+          });
       }
     );
   }
 
   playAudio() {
-   this.source.start(0);
+    this.source.start(0);
   }
 
   stopAudio() {

@@ -18,7 +18,7 @@ const initialState: GameState = {
   game: null,
 };
 
-function gameReducer(state = initialState, action: ActionsUnion) {
+export function gameReducer(state = initialState, action: ActionsUnion) {
   switch (action.type) {
     case ActionTypes.AddEvents:
       const resEvents = state.events.slice();
@@ -29,7 +29,7 @@ function gameReducer(state = initialState, action: ActionsUnion) {
       };
 
     case ActionTypes.ConsumeEvent:
-      state.events.pop()
+      state.events.pop();
       return {
         ...state,
       };

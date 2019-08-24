@@ -1,6 +1,0 @@
-Historical of the package versions :
--------------------------------------
-
-Note : The version of the package appears in the file __init__.py.
-
-- v1.0.0 : initial version

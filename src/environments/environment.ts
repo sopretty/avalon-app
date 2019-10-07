@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://www.avalon-back.sopretty.me/',
+  apiUrl: 'https://avalon-back.sopretty.me/',
   endpoints: {
     createGame: 'games'
   }

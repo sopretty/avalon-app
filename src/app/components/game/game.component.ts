@@ -2,7 +2,7 @@ import {Component, ComponentFactoryResolver, OnInit, ViewContainerRef} from '@an
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
-import {GameState} from '../../store/reducers';
+import {GameState, Event, State} from '../../store/reducers';
 import {ConfigService} from '../../services/config/config.service';
 import {RoleTurnComponent} from '../dynamicTurns/role-turn/role-turn.component';
 import {GenericTurnComponent} from '../dynamicTurns/generic-turn/generic-turn.component';
@@ -26,31 +26,33 @@ export class GameComponent implements OnInit {
 
   clear: boolean;
 
-  // @ViewChild(TurnDirective) turnHost: TurnDirective;
-
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private viewContainerRef: ViewContainerRef,
               private configService: ConfigService,
-              private store: Store<{ game: { events: [] } }>) {
+              private store: Store<State>) {
     this.clear = false;
     this.boardGame = this.configService.boardGame[this.configService.players.length];
     store.pipe(
       select('game'),
     ).subscribe(_ => {
-      if (_.events.length > 0) {
-        this.clear = false;
-        this.createCustomEvent(_.events[_.events.length - 1]);
-      } else {
-        viewContainerRef.clear();
-        this.clear = true;
-      }
+      this.handleEvent(_);
     });
   }
 
   ngOnInit() {
   }
 
-  createCustomEvent(event: { type: any, state: any }) {
+  handleEvent(game: GameState) {
+    if (game && game.events && game.events.length > 0) {
+      this.clear = false;
+      this.createCustomEvent(game.events[game.events.length - 1]);
+    } else {
+      this.viewContainerRef.clear();
+      this.clear = true;
+    }
+  }
+
+  createCustomEvent(event: Event) {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(turns[event.type]);
 
     const viewContainerRef = this.viewContainerRef;

@@ -4,8 +4,8 @@ import {ActivatedRoute} from '@angular/router';
 
 import {GenericTurnComponent} from '../generic-turn/generic-turn.component';
 import {GameService} from '../../../services/game/game.service';
-import * as selectors from '../../../store/reducers/selectors';
 import {State} from '../../../store/reducers';
+import * as actions from '../../../store/actions/actions';
 
 @Component({
   selector: 'app-audio-turn',
@@ -14,32 +14,32 @@ import {State} from '../../../store/reducers';
 })
 export class AudioTurnComponent extends GenericTurnComponent implements OnInit {
 
-  source: any;
-  gameId: string;
+  private source: any;
+  private gameId: string;
+  private audio: any;
 
   constructor(private _store: Store<State>, private _gameService: GameService, private route: ActivatedRoute) {
     super(_store);
-    this._store.pipe(select(selectors.selectGameState)).subscribe(game => {
-      this.gameId = game.id;
-    });
   }
 
   ngOnInit() {
-    if (this.gameId) {
+    this._store.dispatch(actions.getAudio());
+    this._store.pipe(select('game')).subscribe(state => {
+      this.gameId = state.game.id;
+      this.audio = state.audio;
+    });
+
+    if (this.gameId && this.audio) {
       const audioCtx = new AudioContext();
       this.source = audioCtx.createBufferSource();
 
-      this._gameService.getAudio(this.gameId)
-        .subscribe(_ => {
-            audioCtx.decodeAudioData(_, (buffer) => {
-                this.source.buffer = buffer;
-                this.source.connect(audioCtx.destination);
-              },
-              () => {
-                console.log('decodeAudioError');
-              });
-          }
-        );
+      audioCtx.decodeAudioData(this.audio, (buffer) => {
+          this.source.buffer = buffer;
+          this.source.connect(audioCtx.destination);
+        },
+        () => {
+          console.log('decodeAudioError');
+        });
     }
 
   }

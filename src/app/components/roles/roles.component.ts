@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {ConfigService} from '../../services/config/config.service';
 import {FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
 import {Store} from '@ngrx/store';
-import {CreateGame} from '../../store/actions/actions';
+import {createGame} from '../../store/actions/actions';
 import {State} from '../../store/reducers';
 
 @Component({
@@ -86,7 +86,7 @@ export class RolesComponent implements OnInit {
       (acc, curr, index) =>
         acc.concat((!!curr.value ? this.roles[index].characters : []))
       , []);
-    this.store.dispatch(new CreateGame());
+    this.store.dispatch(createGame());
   }
 
   get rolesForm(): FormArray {

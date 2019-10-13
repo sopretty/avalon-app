@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 
-import {ConsumeEvent} from '../../../store/actions/actions';
 import {State} from '../../../store/reducers';
+import {consumeEvents} from '../../../store/actions/actions';
 
 @Component({
   selector: 'app-generic-turn',
@@ -20,8 +20,7 @@ export class GenericTurnComponent implements OnInit {
   }
 
   finished() {
-    this.store.dispatch(
-      new ConsumeEvent());
+    this.store.dispatch(consumeEvents());
   }
 
 }

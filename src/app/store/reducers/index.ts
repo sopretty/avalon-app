@@ -1,48 +1,62 @@
-import {ActionReducerMap, createSelector, MetaReducer} from '@ngrx/store';
+import {Action, ActionReducerMap, createReducer, MetaReducer, on} from '@ngrx/store';
 import {environment} from '../../../environments/environment';
-import {ActionsUnion, ActionTypes} from '../actions/actions';
+import * as actions from '../actions/actions';
 import {Game} from '../../services/game/game.service';
 
 export interface State {
-  game: any;
+  game: GameState;
+}
+
+export interface Event {
+  type: any;
+  state?: any;
 }
 
 // TODO to be defined
 export interface GameState {
-  events: Array<{ type: any, state?: any }>;
+  events: Array<Event>;
   game: Game | null;
+  audio: ArrayBuffer | null;
 }
 
 const initialState: GameState = {
   events: [],
   game: null,
+  audio: null
 };
 
-export function gameReducer(state = initialState, action: ActionsUnion) {
-  switch (action.type) {
-    case ActionTypes.AddEvents:
-      const resEvents = state.events.slice();
-      resEvents.unshift(...action.payload.events);
-      return {
-        ...state,
-        events: resEvents
-      };
+const gameReducer = createReducer(
+  initialState,
+  on(actions.addEvents, (state, {events}) => {
+    console.log(events);
+    const resEvents = state.events.slice();
+    resEvents.unshift(...events);
+    return {
+      ...state,
+      events: resEvents
+    };
+  }),
+  on(actions.consumeEvents, (state) => {
+    state.events.pop();
+    return {
+      ...state,
+    };
+  }),
+  on(actions.createGameSuccess, (state, game) => ({
+    ...state,
+    game,
+  })),
+  on(actions.setAudio, (state) => {
+    console.log('totot')
+    return ({
+      ...state,
+    });
+  })
+);
 
-    case ActionTypes.ConsumeEvent:
-      state.events.pop();
-      return {
-        ...state,
-      };
 
-    case ActionTypes.CreateGameSuccess:
-      return {
-        ...state,
-        game: action.payload,
-      };
-
-    default:
-      return state;
-  }
+export function reducer(state: GameState | undefined, action: Action) {
+  return gameReducer(state, action);
 }
 
 export const reducers: ActionReducerMap<State> = {

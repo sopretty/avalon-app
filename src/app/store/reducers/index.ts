@@ -1,4 +1,4 @@
-import {ActionReducerMap, MetaReducer} from '@ngrx/store';
+import {ActionReducerMap, createSelector, MetaReducer} from '@ngrx/store';
 import {environment} from '../../../environments/environment';
 import {ActionsUnion, ActionTypes} from '../actions/actions';
 import {Game} from '../../services/game/game.service';
@@ -48,6 +48,5 @@ export function gameReducer(state = initialState, action: ActionsUnion) {
 export const reducers: ActionReducerMap<State> = {
   game: gameReducer
 };
-
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];

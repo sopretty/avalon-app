@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 
-import {ConsumeEvent} from '../../store/actions/actions';
+import {ConsumeEvent} from '../../../store/actions/actions';
+import {State} from '../../../store/reducers';
 
 @Component({
   selector: 'app-generic-turn',
@@ -12,7 +13,7 @@ export class GenericTurnComponent implements OnInit {
 
   state: any;
 
-  constructor(private store: Store<{ game: { events: [] } }>) {
+  constructor(private store: Store<State>) {
   }
 
   ngOnInit() {

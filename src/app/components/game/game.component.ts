@@ -2,8 +2,8 @@ import {Component, ComponentFactoryResolver, OnInit, ViewContainerRef} from '@an
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 
-import {GameState} from '../store/reducers';
-import {ConfigService} from '../services/config/config.service';
+import {GameState} from '../../store/reducers';
+import {ConfigService} from '../../services/config/config.service';
 import {RoleTurnComponent} from '../dynamicTurns/role-turn/role-turn.component';
 import {GenericTurnComponent} from '../dynamicTurns/generic-turn/generic-turn.component';
 import {AudioTurnComponent} from '../dynamicTurns/audio-turn/audio-turn.component';
@@ -37,7 +37,6 @@ export class GameComponent implements OnInit {
     store.pipe(
       select('game'),
     ).subscribe(_ => {
-      console.log(_);
       if (_.events.length > 0) {
         this.clear = false;
         this.createCustomEvent(_.events[_.events.length - 1]);
@@ -52,7 +51,6 @@ export class GameComponent implements OnInit {
   }
 
   createCustomEvent(event: { type: any, state: any }) {
-    console.log(event);
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(turns[event.type]);
 
     const viewContainerRef = this.viewContainerRef;

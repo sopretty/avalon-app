@@ -31,15 +31,4 @@ export class ConfigService {
     ];
   }
 
-  shuffleRoles(): void {
-    this.shuffleArray(this.players)
-      .map((player, idx) => ({}));
-  }
-
-  shuffleArray(arr: {}[]): {}[] {
-    return arr
-      .map(a => [Math.random(), a])
-      .sort((a: any[], b: any[]) => a[0] - b[0])
-      .map(a => a[1]);
-  }
 }

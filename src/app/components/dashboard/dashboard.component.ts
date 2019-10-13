@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ConfigService} from '../services/config/config.service';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {ConfigService} from '../../services/config/config.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.numberChoosed = this.minNumberPlayer;
-    this.players = Array.from(new Array(this.numberChoosed), (p, index) => ('Nom' + index));
+    this.players = Array.from(new Array(this.numberChoosed), (p, index) => (`DefaultName-${index + 1}`));
     this.form = this.formBuilder.group({
       players: new FormArray([]),
       nbPlayers: new FormControl(this.minNumberPlayer),
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   }
 
   submit(): void {
-    this.configService.players = this.players.map(player => ({name: player, team: null}));
+    this.configService.players = this.playersForm.controls.map(form => ({name: form.value, team: null}));
     this.router.navigate(['roles']);
   }
 
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(newPlayerNumber => {
         if (this.playersForm.length < newPlayerNumber) {
           this.createArray(newPlayerNumber - this.playersForm.length).forEach((_, i) => {
-              this.playersForm.push(new FormControl('Nom' + this.playersForm.length));
+              this.playersForm.push(new FormControl(`DefaultName-${this.playersForm.length + 1}`));
             }
           );
         }

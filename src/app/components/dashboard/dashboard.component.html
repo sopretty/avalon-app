@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div>
-    <label for="number-select">Choisissez le nombre de joueurs:</label>
+    <label for="number-select">Choose the number of players:</label>
     <select formControlName="nbPlayers" id="number-select">
       <option
         *ngFor="let numberPlayer of createArray(maxNumberPlayer-minNumberPlayer +1); let i = index">{{minNumberPlayer + i}}</option>
@@ -11,7 +11,7 @@
   </div>
   <div *ngIf="!form.valid">Vous avez dépassé le nombre limite de joueur rouge ou bleu</div>
   <div>
-    <button [disabled]="form.invalid">Selectionner les rôles !</button>
+    <button [disabled]="form.invalid">Select the roles</button>
   </div>
 </form>
 

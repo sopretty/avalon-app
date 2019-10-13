@@ -34,8 +34,8 @@ export class GameService {
      return this._http.put<Game>(environment.apiUrl + environment.endpoints.createGame, players);
   }
 
-  getAudio(): Observable<any> {
-    return this._http.get(environment.apiUrl + '0e748649-6f93-4a59-b5fb-5a2b2c16d666/mp3',
+  getAudio(gameId: string): Observable<any> {
+    return this._http.get(environment.apiUrl + gameId + '/mp3',
     { responseType: 'arraybuffer'});
   }
 }

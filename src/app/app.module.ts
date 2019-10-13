@@ -7,16 +7,16 @@ import {EffectsModule} from '@ngrx/effects';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {LandingComponent} from './landing/landing.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {RolesComponent} from './roles/roles.component';
-import {GameComponent} from './game/game.component';
-import {AudioTurnComponent} from './dynamicTurns/audio-turn/audio-turn.component';
+import {LandingComponent} from './components/landing/landing.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {RolesComponent} from './components/roles/roles.component';
+import {GameComponent} from './components/game/game.component';
+import {AudioTurnComponent} from './components/dynamicTurns/audio-turn/audio-turn.component';
 import {metaReducers, reducers} from './store/reducers';
-import {GenericTurnComponent} from './dynamicTurns/generic-turn/generic-turn.component';
-import {RoleTurnComponent} from './dynamicTurns/role-turn/role-turn.component';
+import {GenericTurnComponent} from './components/dynamicTurns/generic-turn/generic-turn.component';
+import {RoleTurnComponent} from './components/dynamicTurns/role-turn/role-turn.component';
 import {GameEffects} from './store/effects/game.effects';
-import {TurnDirective} from './dynamicTurns/turn.directive';
+import {TurnDirective} from './components/dynamicTurns/turn.directive';
 
 @NgModule({
   declarations: [

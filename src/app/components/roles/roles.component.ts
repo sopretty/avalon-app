@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ConfigService} from '../services/config/config.service';
+import {ConfigService} from '../../services/config/config.service';
 import {FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
 import {Store} from '@ngrx/store';
-import {AddEvents, CreateGame} from '../store/actions/actions';
-import {RoleTurnComponent} from '../dynamicTurns/role-turn/role-turn.component';
+import {CreateGame} from '../../store/actions/actions';
+import {State} from '../../store/reducers';
 
 @Component({
   selector: 'app-roles',
@@ -17,15 +17,15 @@ export class RolesComponent implements OnInit {
   allowed: { red: number, blue: number };
   roles: { description: string, characters: { name: string, team: string }[] }[] = [
     {
-      description: 'Mordred (rouge)',
+      description: 'Mordred (red)',
       characters: [{name: 'mordred', team: 'red'}],
     },
     {
-      description: 'Morgane (rouge), Perceval (bleu)',
+      description: 'Morgane (red), Perceval (blue)',
       characters: [{name: 'morgan', team: 'red'}, {name: 'perceval', team: 'blue'}],
     },
     {
-      description: 'Oberon (rouge)',
+      description: 'Oberon (red)',
       characters: [{name: 'oberon', team: 'red'}],
     },
   ];
@@ -34,7 +34,7 @@ export class RolesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private store: Store<{ game: { events: [] } }>,
+    private store: Store<State>,
     private configService: ConfigService) {
   }
 
@@ -87,14 +87,6 @@ export class RolesComponent implements OnInit {
         acc.concat((!!curr.value ? this.roles[index].characters : []))
       , []);
     this.store.dispatch(new CreateGame());
-    // this.configService.shuffleRoles();
-    /**this.store.dispatch(
-      new AddEvents(
-        {
-          events: this.configService.players
-            .map(player => ({type: 'app-role-turn', state: player}))
-        }));
-    this.router.navigate(['game']);**/
   }
 
   get rolesForm(): FormArray {

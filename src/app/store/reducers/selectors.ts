@@ -1,6 +1,6 @@
-import {createSelector} from '@ngrx/store';
-import {GameState, State} from './index';
-import {Game} from '../../services/game/game.service';
+import { createSelector } from '@ngrx/store';
+import { Event, GameState, State } from './index';
+import { Game } from '../../services/game/game.service';
 
 export const selectGame = (state: State) => state.game;
 
@@ -12,4 +12,14 @@ export const selectGameState = createSelector<State, GameState, Game>(
 export const selectGameId = createSelector<State, GameState, string>(
   selectGame,
   (state: GameState) => state.game.id
+);
+
+export const selectAudio = createSelector<State, GameState, ArrayBuffer | null>(
+  selectGame,
+  (state: GameState) => state.audio
+);
+
+export const selectEvents = createSelector<State, GameState, Array<Event>>(
+  selectGame,
+  (state: GameState) => state.events
 );

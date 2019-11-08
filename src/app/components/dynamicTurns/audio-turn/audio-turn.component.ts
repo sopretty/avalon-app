@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
 
-import {GenericTurnComponent} from '../generic-turn/generic-turn.component';
-import {GameService} from '../../../services/game/game.service';
-import {State} from '../../../store/reducers';
+import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
+import { State } from '../../../store/reducers';
 import * as actions from '../../../store/actions/actions';
+import * as selectors from '../../../store/reducers/selectors';
 
 @Component({
   selector: 'app-audio-turn',
@@ -18,34 +18,41 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit {
   private gameId: string;
   private audio: any;
 
-  constructor(private _store: Store<State>, private _gameService: GameService, private route: ActivatedRoute) {
+  constructor(private _store: Store<State>, private route: ActivatedRoute) {
     super(_store);
   }
 
   ngOnInit() {
-    this._store.dispatch(actions.getAudio());
-    this._store.pipe(select('game')).subscribe(state => {
-      this.gameId = state.game.id;
-      this.audio = state.audio;
+
+    this._store.pipe(select(selectors.selectGameId)).subscribe(id => {
+      this.gameId = id;
+      console.log('dispatch audio');
+      this._store.dispatch(actions.getAudio({ gameId: this.gameId }));
     });
 
-    if (this.gameId && this.audio) {
-      const audioCtx = new AudioContext();
-      this.source = audioCtx.createBufferSource();
+    this._store.pipe(select(selectors.selectAudio)).subscribe(audio => {
+      console.log('get audio', audio);
+      this.audio = audio;
+      if (this.gameId && this.audio) {
+        const audioCtx = new AudioContext();
+        this.source = audioCtx.createBufferSource();
 
-      audioCtx.decodeAudioData(this.audio, (buffer) => {
-          this.source.buffer = buffer;
-          this.source.connect(audioCtx.destination);
-        },
-        () => {
-          console.log('decodeAudioError');
-        });
-    }
+        audioCtx.decodeAudioData(this.audio, (buffer) => {
+            this.source.buffer = buffer;
+            this.source.connect(audioCtx.destination);
+          },
+          () => {
+            console.log('decodeAudioError');
+          });
+      }
+    });
 
   }
 
   playAudio() {
-    this.source.start();
+    if(this.source){
+      this.source.start();
+    }
   }
 
   playGame() {

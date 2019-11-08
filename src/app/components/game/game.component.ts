@@ -1,12 +1,13 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewContainerRef} from '@angular/core';
-import {Observable} from 'rxjs';
-import {select, Store} from '@ngrx/store';
+import { Component, ComponentFactoryResolver, OnInit, ViewContainerRef } from '@angular/core';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 
-import {GameState, Event, State} from '../../store/reducers';
-import {ConfigService} from '../../services/config/config.service';
-import {RoleTurnComponent} from '../dynamicTurns/role-turn/role-turn.component';
-import {GenericTurnComponent} from '../dynamicTurns/generic-turn/generic-turn.component';
-import {AudioTurnComponent} from '../dynamicTurns/audio-turn/audio-turn.component';
+import { GameState, Event, State } from '../../store/reducers';
+import { ConfigService } from '../../services/config/config.service';
+import { RoleTurnComponent } from '../dynamicTurns/role-turn/role-turn.component';
+import { GenericTurnComponent } from '../dynamicTurns/generic-turn/generic-turn.component';
+import { AudioTurnComponent } from '../dynamicTurns/audio-turn/audio-turn.component';
+import * as selectors from '../../store/reducers/selectors';
 
 const turns = {
   'app-role-turn': RoleTurnComponent,
@@ -22,8 +23,6 @@ export class GameComponent implements OnInit {
 
   private boardGame: { fail: number, mission: number }[];
 
-  private events$: Observable<GameState>;
-
   clear: boolean;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
@@ -33,19 +32,19 @@ export class GameComponent implements OnInit {
     this.clear = false;
     this.boardGame = this.configService.boardGame[this.configService.players.length];
     store.pipe(
-      select('game'),
-    ).subscribe(_ => {
-      this.handleEvent(_);
+      select(selectors.selectEvents),
+    ).subscribe(events => {
+      this.handleEvent(events);
     });
   }
 
   ngOnInit() {
   }
 
-  handleEvent(game: GameState) {
-    if (game && game.events && game.events.length > 0) {
+  handleEvent(events: Event[]) {
+    if (events && events.length > 0) {
       this.clear = false;
-      this.createCustomEvent(game.events[game.events.length - 1]);
+      this.createCustomEvent(events[events.length - 1]);
     } else {
       this.viewContainerRef.clear();
       this.clear = true;

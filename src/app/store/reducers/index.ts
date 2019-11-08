@@ -1,7 +1,7 @@
-import {Action, ActionReducerMap, createReducer, MetaReducer, on} from '@ngrx/store';
-import {environment} from '../../../environments/environment';
+import { Action, ActionReducerMap, createReducer, MetaReducer, on } from '@ngrx/store';
+import { environment } from '../../../environments/environment';
 import * as actions from '../actions/actions';
-import {Game} from '../../services/game/game.service';
+import { Game } from '../../services/game/game.service';
 
 export interface State {
   game: GameState;
@@ -27,8 +27,7 @@ const initialState: GameState = {
 
 const gameReducer = createReducer(
   initialState,
-  on(actions.addEvents, (state, {events}) => {
-    console.log(events);
+  on(actions.addEvents, (state, { events }) => {
     const resEvents = state.events.slice();
     resEvents.unshift(...events);
     return {
@@ -37,19 +36,22 @@ const gameReducer = createReducer(
     };
   }),
   on(actions.consumeEvents, (state) => {
-    state.events.pop();
+    const events = state.events;
+    events.pop();
+
     return {
       ...state,
+      events: [...events]
     };
   }),
   on(actions.createGameSuccess, (state, game) => ({
     ...state,
     game,
   })),
-  on(actions.setAudio, (state) => {
-    console.log('totot')
+  on(actions.setAudio, (state, payload) => {
     return ({
       ...state,
+      audio: payload.audio
     });
   })
 );

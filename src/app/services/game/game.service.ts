@@ -61,7 +61,6 @@ export class GameService {
       {responseType: 'arraybuffer'});
   }
 
-
   getBoard(gameId: string): Observable<GameBoard> {
     return this._http.get<GameBoard>(`${environment.apiUrl}${gameId}/board`);
   }

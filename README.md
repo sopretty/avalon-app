@@ -1,5 +1,4 @@
 # AvalonApp
-
 ## Text to speech : 
 
 Utilisation de l'outil TTSMP3 (https://ttsmp3.com/text-to-speech/French/)

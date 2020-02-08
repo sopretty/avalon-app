@@ -22,6 +22,8 @@ const turns = {
 })
 export class GameComponent implements OnInit {
 
+  static voteNumber = 5;
+
   private boardGame: { fail: number, mission: number }[];
 
   clear: boolean;
@@ -38,6 +40,8 @@ export class GameComponent implements OnInit {
     ).subscribe(events => {
       this.handleEvent(events);
     });
+
+    console.log(this.boardGame);
   }
 
   ngOnInit() {
@@ -64,5 +68,9 @@ export class GameComponent implements OnInit {
     if (!!event.state) {
       (componentRef.instance as GenericTurnComponent).state = event.state;
     }
+  }
+
+  get voteNumber() {
+    return Array(GameComponent.voteNumber);
   }
 }

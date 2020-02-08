@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {map, tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { map, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 import * as selectors from '../../store/reducers/selectors';
-import {State} from '../../store/reducers';
+import { State } from '../../store/reducers';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,7 @@ export class CheckGameGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> {
+    return of(true);
     return this._store.pipe(
       select(selectors.selectGameState),
       map(game => !!game && !!game.id),

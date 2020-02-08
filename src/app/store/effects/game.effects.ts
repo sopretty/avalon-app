@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
-import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { select, Store } from '@ngrx/store';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { GameService } from '../../services/game/game.service';
 import { ConfigService } from '../../services/config/config.service';
 import * as actions from '../actions/actions';
-import { State } from '../reducers';
 
 @Injectable()
 export class GameEffects {
@@ -50,12 +48,20 @@ export class GameEffects {
       )
   );
 
+  getBoard$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actions.getBoard),
+        switchMap(({ gameId }) => this.gameService.getBoard(gameId)),
+        map(board => actions.setBoard({ board }))
+      )
+  );
+
   constructor(
     private actions$: Actions,
     private gameService: GameService,
     private configService: ConfigService,
     private router: Router,
-    private store: Store<State>,
   ) {
   }
 }

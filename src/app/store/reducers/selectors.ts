@@ -23,3 +23,4 @@ export const selectEvents = createSelector<State, GameState, Array<Event>>(
   selectGame,
   (state: GameState) => state.events
 );
+

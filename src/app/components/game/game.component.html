@@ -1,7 +1,17 @@
-<div *ngIf="clear">
-  <span matBadge="1" matBadgeOverlap="false"></span>
-  <span matBadge="2" matBadgeOverlap="false"></span>
-  <span matBadge="3" matBadgeOverlap="false"></span>
-  <span matBadge="4" matBadgeOverlap="false"></span>
-  <span matBadge="5" matBadgeColor="warn" matBadgeOverlap="false"></span>
+<div *ngIf="clear" class="missions">
+  <div *ngFor="let item of boardGame; let i = index">
+    <div class="title">quest n°{{i + 1}}</div>
+    <div class="circle">
+      <div class="content">{{item.mission}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="vote-track">
+  <div *ngFor="let item of boardGame; let i = index">
+    <div class="title">quest n°{{i + 1}}</div>
+    <div class="circle">
+      <div class="content">{{item.mission}}</div>
+    </div>
+  </div>
 </div>

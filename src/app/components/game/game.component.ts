@@ -1,13 +1,14 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewContainerRef } from '@angular/core';
-import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 
-import { GameState, Event, State } from '../../store/reducers';
+import { Event, State } from '../../store/reducers';
 import { ConfigService } from '../../services/config/config.service';
 import { RoleTurnComponent } from '../dynamicTurns/role-turn/role-turn.component';
 import { GenericTurnComponent } from '../dynamicTurns/generic-turn/generic-turn.component';
 import { AudioTurnComponent } from '../dynamicTurns/audio-turn/audio-turn.component';
 import * as selectors from '../../store/reducers/selectors';
+import { getBoard } from '../../store/actions/actions';
+import { ActivatedRoute } from '@angular/router';
 
 const turns = {
   'app-role-turn': RoleTurnComponent,
@@ -28,6 +29,7 @@ export class GameComponent implements OnInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private viewContainerRef: ViewContainerRef,
               private configService: ConfigService,
+              private route: ActivatedRoute,
               private store: Store<State>) {
     this.clear = false;
     this.boardGame = this.configService.boardGame[this.configService.players.length];
@@ -39,6 +41,7 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(getBoard({ gameId: this.route.snapshot.params.id }));
   }
 
   handleEvent(events: Event[]) {

@@ -12,6 +12,7 @@ export class CheckRolesGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): boolean {
+    return true;
     if (this._configService.players.length > 0) {
       return true;
     }

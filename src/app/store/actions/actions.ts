@@ -1,6 +1,6 @@
-import {createAction, props} from '@ngrx/store';
-import {Event} from '../reducers/index';
-import {Game} from '../../services/game/game.service';
+import { createAction, props } from '@ngrx/store';
+import { Event } from '../reducers/index';
+import { Game, GameBoard } from '../../services/game/game.service';
 
 export const addEvents = createAction(
   '[Game Page] Add events',
@@ -28,4 +28,14 @@ export const getAudio = createAction(
 export const setAudio = createAction(
   '[Game Page] Set audio file',
   props<{ audio: ArrayBuffer }>()
+);
+
+export const getBoard = createAction(
+  '[Game Page] Get the current board',
+  props<{ gameId: string }>()
+);
+
+export const setBoard = createAction(
+  '[Game Page] Set the current board',
+  props<{ board: GameBoard }>()
 );

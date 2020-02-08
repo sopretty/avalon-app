@@ -60,9 +60,3 @@ const gameReducer = createReducer(
 export function reducer(state: GameState | undefined, action: Action) {
   return gameReducer(state, action);
 }
-
-export const reducers: ActionReducerMap<State> = {
-  game: gameReducer
-};
-
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];

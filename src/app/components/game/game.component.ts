@@ -9,6 +9,9 @@ import { AudioTurnComponent } from '../dynamicTurns/audio-turn/audio-turn.compon
 import * as selectors from '../../store/reducers/selectors';
 import { getBoard } from '../../store/actions/actions';
 import { ActivatedRoute } from '@angular/router';
+import { Game, GameBoard, Player } from '../../services/game/game.service';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from './dialog/dialog.component';
 
 const turns = {
   'app-role-turn': RoleTurnComponent,
@@ -24,7 +27,7 @@ export class GameComponent implements OnInit {
 
   static voteNumber = 5;
 
-  private boardGame: { fail: number, mission: number }[];
+  private game: Game;
 
   clear: boolean;
 
@@ -32,16 +35,19 @@ export class GameComponent implements OnInit {
               private viewContainerRef: ViewContainerRef,
               private configService: ConfigService,
               private route: ActivatedRoute,
+              private dialog: MatDialog,
               private store: Store<State>) {
     this.clear = false;
-    this.boardGame = this.configService.boardGame[this.configService.players.length];
+
     store.pipe(
       select(selectors.selectEvents),
     ).subscribe(events => {
       this.handleEvent(events);
     });
 
-    console.log(this.boardGame);
+    store.pipe(select(selectors.selectGameState)).subscribe(game => this.game = game);
+
+    console.log(this.game);
   }
 
   ngOnInit() {
@@ -70,7 +76,30 @@ export class GameComponent implements OnInit {
     }
   }
 
+  openPlayerDialog() {
+    this.dialog.open(DialogComponent, {
+      disableClose: true,
+      width: '250px',
+      data: { players: this.players, pickNumber: this.board.quests[this.board.current_quest + 1].quest }
+    });
+
+  }
+
+
   get voteNumber() {
     return Array(GameComponent.voteNumber);
+  }
+
+  get board(): GameBoard {
+    return this.game.board;
+  }
+
+  get players(): Player[] {
+    return this.game.players;
+  }
+
+  get currentPlayer(): Player {
+    // TODO les ids ne match pas, du coup je retourne le premier mais à enlever !
+    return this.players.find(player => player.id === this.board.current_id_player) || this.players[0];
   }
 }

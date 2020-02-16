@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 export interface PutPlayerBody {
   names: string[];
@@ -20,6 +20,7 @@ export interface Player {
 export interface Game {
   id: string;
   players: Player[];
+  board?: GameBoard;
 }
 
 export interface GameBoard {
@@ -27,6 +28,7 @@ export interface GameBoard {
   'current_ind_player': number;
   'current_name_player': string;
   'current_quest': number;
+  quests: { fail: number, quest: number }[];
   'nb_echec_to_fail': {
     'echec1': number;
     'echec2': number;
@@ -58,7 +60,7 @@ export class GameService {
 
   getAudio(gameId: any): Observable<ArrayBuffer> {
     return this._http.get(`${environment.apiUrl}${gameId}/mp3`,
-      {responseType: 'arraybuffer'});
+      { responseType: 'arraybuffer' });
   }
 
   getBoard(gameId: string): Observable<GameBoard> {

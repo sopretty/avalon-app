@@ -17,6 +17,9 @@ import { GenericTurnComponent } from './components/dynamicTurns/generic-turn/gen
 import { RoleTurnComponent } from './components/dynamicTurns/role-turn/role-turn.component';
 import { GameEffects } from './store/effects/game.effects';
 import { TurnDirective } from './components/dynamicTurns/turn.directive';
+import { DialogComponent } from './components/game/dialog/dialog.component';
+import { MatCheckboxModule, MatDialogModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,19 +31,24 @@ import { TurnDirective } from './components/dynamicTurns/turn.directive';
     AudioTurnComponent,
     RoleTurnComponent,
     TurnDirective,
-    GenericTurnComponent
+    GenericTurnComponent,
+    DialogComponent
   ],
   imports: [
+    // Material
+    MatDialogModule,
+    MatCheckboxModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot({ game: reducers.reducer }),
-    EffectsModule.forRoot([GameEffects])
+    EffectsModule.forRoot([GameEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [RoleTurnComponent, GenericTurnComponent, AudioTurnComponent],
+  entryComponents: [RoleTurnComponent, GenericTurnComponent, AudioTurnComponent, DialogComponent],
 })
 export class AppModule {
 }

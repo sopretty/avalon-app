@@ -8,7 +8,7 @@ export class ConfigService {
   rules: { nbPlayer: number, blue: number, red: number }[];
   players: { name: string, team: string, roles?: string }[];
   roles: { name: string, team: string }[];
-  boardGame: { fail: number, mission: number }[][];
+  boardGame: { fail: number, quest: number }[][];
 
   constructor() {
     this.players = [];
@@ -22,12 +22,12 @@ export class ConfigService {
       {nbPlayer: 10, blue: 6, red: 4}
     ];
     this.boardGame = [
-      [{mission: 2, fail: 1}, {mission: 3, fail: 1}, {mission: 2, fail: 1}, {mission: 3, fail: 1}, {mission: 3, fail: 1}],
-      [{mission: 2, fail: 1}, {mission: 3, fail: 1}, {mission: 4, fail: 1}, {mission: 3, fail: 1}, {mission: 4, fail: 1}],
-      [{mission: 2, fail: 1}, {mission: 3, fail: 1}, {mission: 3, fail: 1}, {mission: 4, fail: 2}, {mission: 4, fail: 1}],
-      [{mission: 3, fail: 1}, {mission: 4, fail: 1}, {mission: 4, fail: 1}, {mission: 5, fail: 2}, {mission: 5, fail: 1}],
-      [{mission: 3, fail: 1}, {mission: 4, fail: 1}, {mission: 4, fail: 1}, {mission: 5, fail: 2}, {mission: 5, fail: 1}],
-      [{mission: 3, fail: 1}, {mission: 4, fail: 1}, {mission: 4, fail: 1}, {mission: 5, fail: 2}, {mission: 5, fail: 1}],
+      [{quest: 2, fail: 1}, {quest: 3, fail: 1}, {quest: 2, fail: 1}, {quest: 3, fail: 1}, {quest: 3, fail: 1}],
+      [{quest: 2, fail: 1}, {quest: 3, fail: 1}, {quest: 4, fail: 1}, {quest: 3, fail: 1}, {quest: 4, fail: 1}],
+      [{quest: 2, fail: 1}, {quest: 3, fail: 1}, {quest: 3, fail: 1}, {quest: 4, fail: 2}, {quest: 4, fail: 1}],
+      [{quest: 3, fail: 1}, {quest: 4, fail: 1}, {quest: 4, fail: 1}, {quest: 5, fail: 2}, {quest: 5, fail: 1}],
+      [{quest: 3, fail: 1}, {quest: 4, fail: 1}, {quest: 4, fail: 1}, {quest: 5, fail: 2}, {quest: 5, fail: 1}],
+      [{quest: 3, fail: 1}, {quest: 4, fail: 1}, {quest: 4, fail: 1}, {quest: 5, fail: 2}, {quest: 5, fail: 1}],
     ];
   }
 

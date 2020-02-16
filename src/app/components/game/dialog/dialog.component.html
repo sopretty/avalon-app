@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Choose {{data.pickNumber}} players</h1>
+<div mat-dialog-content>
+  <div *ngFor="let player of data.players">
+    <mat-checkbox>{{player.name}}</mat-checkbox>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button (click)="closeDialog()">Cancel</button>
+  <button [mat-dialog-close]="data.players" cdkFocusInitial [disabled]="selected < data.pickNumber">Done</button>
+</div>

@@ -25,6 +25,17 @@ const initialState: GameState = {
   audio: null
 };
 
+
+// TODO demander à romain de retourner ce genre d'objet
+const quests: { fail: number, quest: number }[][] = [
+  [{ quest: 2, fail: 1 }, { quest: 3, fail: 1 }, { quest: 2, fail: 1 }, { quest: 3, fail: 1 }, { quest: 3, fail: 1 }],
+  [{ quest: 2, fail: 1 }, { quest: 3, fail: 1 }, { quest: 4, fail: 1 }, { quest: 3, fail: 1 }, { quest: 4, fail: 1 }],
+  [{ quest: 2, fail: 1 }, { quest: 3, fail: 1 }, { quest: 3, fail: 1 }, { quest: 4, fail: 2 }, { quest: 4, fail: 1 }],
+  [{ quest: 3, fail: 1 }, { quest: 4, fail: 1 }, { quest: 4, fail: 1 }, { quest: 5, fail: 2 }, { quest: 5, fail: 1 }],
+  [{ quest: 3, fail: 1 }, { quest: 4, fail: 1 }, { quest: 4, fail: 1 }, { quest: 5, fail: 2 }, { quest: 5, fail: 1 }],
+  [{ quest: 3, fail: 1 }, { quest: 4, fail: 1 }, { quest: 4, fail: 1 }, { quest: 5, fail: 2 }, { quest: 5, fail: 1 }],
+];
+
 const gameReducer = createReducer(
   initialState,
   on(actions.addEvents, (state, { events }) => {
@@ -53,7 +64,17 @@ const gameReducer = createReducer(
       ...state,
       audio: payload.audio
     });
-  })
+  }),
+  on(actions.setBoard, (state, { board }) => ({
+    ...state,
+    game: {
+      ...state.game,
+      board: {
+        ...board,
+        quests: quests[state.game.players.length],
+      }
+    }
+  }))
 );
 
 

@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Event } from '../reducers/index';
-import { Game, GameBoard } from '../../services/game/game.service';
+import { Game, GameBoard, Player } from '../../services/game/game.service';
 
 export const addEvents = createAction(
   '[Game Page] Add events',
@@ -39,3 +39,4 @@ export const setBoard = createAction(
   '[Game Page] Set the current board',
   props<{ board: GameBoard }>()
 );
+

@@ -3,7 +3,6 @@ import {Store} from '@ngrx/store';
 
 import {GenericTurnComponent} from '../generic-turn/generic-turn.component';
 import {State} from '../../../store/reducers';
-import * as selectors from '../../../store/reducers/selectors';
 
 @Component({
   selector: 'app-role-turn',

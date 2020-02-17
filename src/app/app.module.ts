@@ -20,6 +20,7 @@ import { TurnDirective } from './components/dynamicTurns/turn.directive';
 import { DialogComponent } from './components/game/dialog/dialog.component';
 import { MatCheckboxModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { VoteTurnComponent } from './components/dynamicTurns/vote-turn/vote-turn.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RoleTurnComponent,
     TurnDirective,
     GenericTurnComponent,
-    DialogComponent
+    DialogComponent,
+    VoteTurnComponent
   ],
   imports: [
     // Material
@@ -48,7 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [RoleTurnComponent, GenericTurnComponent, AudioTurnComponent, DialogComponent],
+  entryComponents: [RoleTurnComponent, GenericTurnComponent, AudioTurnComponent, VoteTurnComponent, DialogComponent],
 })
 export class AppModule {
 }

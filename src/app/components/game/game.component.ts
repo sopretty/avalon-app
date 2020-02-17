@@ -7,15 +7,17 @@ import { RoleTurnComponent } from '../dynamicTurns/role-turn/role-turn.component
 import { GenericTurnComponent } from '../dynamicTurns/generic-turn/generic-turn.component';
 import { AudioTurnComponent } from '../dynamicTurns/audio-turn/audio-turn.component';
 import * as selectors from '../../store/reducers/selectors';
-import { getBoard } from '../../store/actions/actions';
+import { addEvents, getBoard } from '../../store/actions/actions';
 import { ActivatedRoute } from '@angular/router';
 import { Game, GameBoard, Player } from '../../services/game/game.service';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from './dialog/dialog.component';
+import { VoteTurnComponent } from '../dynamicTurns/vote-turn/vote-turn.component';
 
 const turns = {
   'app-role-turn': RoleTurnComponent,
-  'app-audio-turn': AudioTurnComponent
+  'app-audio-turn': AudioTurnComponent,
+  'app-vote-turn': VoteTurnComponent
 };
 
 @Component({
@@ -47,7 +49,6 @@ export class GameComponent implements OnInit {
 
     store.pipe(select(selectors.selectGameState)).subscribe(game => this.game = game);
 
-    console.log(this.game);
   }
 
   ngOnInit() {
@@ -77,12 +78,18 @@ export class GameComponent implements OnInit {
   }
 
   openPlayerDialog() {
-    this.dialog.open(DialogComponent, {
+    console.log(this.board.quests, this.board.current_quest)
+    const dialogRef = this.dialog.open(DialogComponent, {
       disableClose: true,
       width: '250px',
-      data: { players: this.players, pickNumber: this.board.quests[this.board.current_quest + 1].quest }
+      data: { players: this.players, pickNumber: this.board.quests[this.board.current_quest - 1].quest }
     });
 
+    dialogRef.afterClosed().subscribe((playersSelected: Player[]) => {
+      this.store.dispatch(addEvents({
+        events: playersSelected.map(player => ({ type: 'app-vote-turn', state: player }))
+      }));
+    });
   }
 
 

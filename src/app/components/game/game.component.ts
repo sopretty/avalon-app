@@ -3,21 +3,23 @@ import { select, Store } from '@ngrx/store';
 
 import { Event, State } from '../../store/reducers';
 import { ConfigService } from '../../services/config/config.service';
-import { RoleTurnComponent } from '../dynamicTurns/role-turn/role-turn.component';
-import { GenericTurnComponent } from '../dynamicTurns/generic-turn/generic-turn.component';
-import { AudioTurnComponent } from '../dynamicTurns/audio-turn/audio-turn.component';
+import { RoleTurnComponent } from '../dynamic-turns/role-turn/role-turn.component';
+import { GenericTurnComponent } from '../dynamic-turns/generic-turn/generic-turn.component';
+import { AudioTurnComponent } from '../dynamic-turns/audio-turn/audio-turn.component';
 import * as selectors from '../../store/reducers/selectors';
-import { addEvents, getBoard } from '../../store/actions/actions';
+import { addEvents, getBoard, nextPlayer, setRejection } from '../../store/actions/actions';
 import { ActivatedRoute } from '@angular/router';
-import { Game, GameBoard, Player } from '../../services/game/game.service';
+import { Game, GameBoard, GameService, Player } from '../../services/game/game.service';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from './dialog/dialog.component';
-import { VoteTurnComponent } from '../dynamicTurns/vote-turn/vote-turn.component';
+import { VoteTurnComponent } from '../dynamic-turns/vote-turn/vote-turn.component';
+import { EndTurnComponent } from '../dynamic-turns/end-turn/end-turn.component';
 
 const turns = {
   'app-role-turn': RoleTurnComponent,
   'app-audio-turn': AudioTurnComponent,
-  'app-vote-turn': VoteTurnComponent
+  'app-vote-turn': VoteTurnComponent,
+  'app-end-turn': EndTurnComponent
 };
 
 @Component({
@@ -36,6 +38,7 @@ export class GameComponent implements OnInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private viewContainerRef: ViewContainerRef,
               private configService: ConfigService,
+              private gameService: GameService,
               private route: ActivatedRoute,
               private dialog: MatDialog,
               private store: Store<State>) {
@@ -78,7 +81,6 @@ export class GameComponent implements OnInit {
   }
 
   openPlayerDialog() {
-    console.log(this.board.quests, this.board.current_quest)
     const dialogRef = this.dialog.open(DialogComponent, {
       disableClose: true,
       width: '250px',
@@ -89,7 +91,22 @@ export class GameComponent implements OnInit {
       this.store.dispatch(addEvents({
         events: playersSelected.map(player => ({ type: 'app-vote-turn', state: player }))
       }));
+      this.store.dispatch(setRejection({ rejection: 0 }));
+      this.store.dispatch(addEvents({ events: [{ type: 'app-end-turn' }] }));
     });
+  }
+
+  questFailed(index: number): boolean {
+    return typeof this.board.quests[index].status === 'boolean' && !this.board.quests[index].status;
+  }
+
+  questSucceed(index: number): boolean {
+    return typeof this.board.quests[index].status === 'boolean' && this.board.quests[index].status;
+  }
+
+  nextTurn() {
+    this.store.dispatch(setRejection({ rejection: this.board.nb_mission_unsend + 1 }));
+    this.store.dispatch(nextPlayer());
   }
 
 
@@ -108,5 +125,13 @@ export class GameComponent implements OnInit {
   get currentPlayer(): Player {
     // TODO les ids ne match pas, du coup je retourne le premier mais à enlever !
     return this.players.find(player => player.id === this.board.current_id_player) || this.players[0];
+  }
+
+  get isGameEnded(): boolean {
+    if (this.clear) {
+      const questGroupbyStatus = this.gameService.isGameEnded(this.board.quests);
+      return questGroupbyStatus.fail > 2 || questGroupbyStatus.success > 2;
+    }
+    return false;
   }
 }

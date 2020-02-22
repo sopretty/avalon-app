@@ -3,6 +3,7 @@ import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { Store } from '@ngrx/store';
 import { State } from '../../../store/reducers';
 import { Player } from '../../../services/game/game.service';
+import { setVote } from '../../../store/actions/actions';
 
 @Component({
   selector: 'app-vote-turn',
@@ -13,11 +14,17 @@ export class VoteTurnComponent extends GenericTurnComponent implements OnInit {
 
   @Input() state: Player;
 
-  constructor(store: Store<State>) {
-    super(store);
+  constructor(private _store: Store<State>) {
+    super(_store);
   }
 
-  open() {
+  fail() {
+    this._store.dispatch(setVote({ vote: false }));
+    this.finished();
+  }
+
+  success() {
+    this._store.dispatch(setVote({ vote: true }));
     this.finished();
   }
 

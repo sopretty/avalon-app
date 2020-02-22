@@ -26,12 +26,10 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit {
 
     this._store.pipe(select(selectors.selectGameId)).subscribe(id => {
       this.gameId = id;
-      console.log('dispatch audio');
       this._store.dispatch(actions.getAudio({ gameId: this.gameId }));
     });
 
     this._store.pipe(select(selectors.selectAudio)).subscribe(audio => {
-      console.log('get audio', audio);
       this.audio = audio;
       if (this.gameId && this.audio) {
         const audioCtx = new AudioContext();

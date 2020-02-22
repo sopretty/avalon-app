@@ -17,7 +17,7 @@ export class CheckGameGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> {
-    return of(true);
+    
     return this._store.pipe(
       select(selectors.selectGameState),
       map(game => !!game && !!game.id),

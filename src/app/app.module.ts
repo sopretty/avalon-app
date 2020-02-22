@@ -11,16 +11,19 @@ import { LandingComponent } from './components/landing/landing.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { GameComponent } from './components/game/game.component';
-import { AudioTurnComponent } from './components/dynamicTurns/audio-turn/audio-turn.component';
+import { AudioTurnComponent } from './components/dynamic-turns/audio-turn/audio-turn.component';
 import * as reducers from './store/reducers';
-import { GenericTurnComponent } from './components/dynamicTurns/generic-turn/generic-turn.component';
-import { RoleTurnComponent } from './components/dynamicTurns/role-turn/role-turn.component';
+import { GenericTurnComponent } from './components/dynamic-turns/generic-turn/generic-turn.component';
+import { RoleTurnComponent } from './components/dynamic-turns/role-turn/role-turn.component';
 import { GameEffects } from './store/effects/game.effects';
-import { TurnDirective } from './components/dynamicTurns/turn.directive';
+import { TurnDirective } from './components/dynamic-turns/turn.directive';
 import { DialogComponent } from './components/game/dialog/dialog.component';
-import { MatCheckboxModule, MatDialogModule } from '@angular/material';
+import { MatCheckboxModule, MatDialogModule, MatSelectModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { VoteTurnComponent } from './components/dynamicTurns/vote-turn/vote-turn.component';
+import { VoteTurnComponent } from './components/dynamic-turns/vote-turn/vote-turn.component';
+import { EndTurnComponent } from './components/dynamic-turns/end-turn/end-turn.component';
+import { metaReducers } from './store/reducers/meta-reducer';
+import { EndGameComponent } from './components/end-game/end-game.component';
 
 @NgModule({
   declarations: [
@@ -34,23 +37,26 @@ import { VoteTurnComponent } from './components/dynamicTurns/vote-turn/vote-turn
     TurnDirective,
     GenericTurnComponent,
     DialogComponent,
-    VoteTurnComponent
+    VoteTurnComponent,
+    EndTurnComponent,
+    EndGameComponent
   ],
   imports: [
-    // Material
-    MatDialogModule,
-    MatCheckboxModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({ game: reducers.reducer }),
+    StoreModule.forRoot({ game: reducers.reducer }, { metaReducers }),
     EffectsModule.forRoot([GameEffects]),
+    // Material
+    MatDialogModule,
+    MatCheckboxModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [RoleTurnComponent, GenericTurnComponent, AudioTurnComponent, VoteTurnComponent, DialogComponent],
+  entryComponents: [RoleTurnComponent, GenericTurnComponent, AudioTurnComponent, VoteTurnComponent, DialogComponent, EndTurnComponent],
 })
 export class AppModule {
 }

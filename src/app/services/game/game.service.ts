@@ -24,26 +24,12 @@ export interface Game {
 }
 
 export interface GameBoard {
-  'current_id_player': string;
-  'current_ind_player': number;
-  'current_name_player': string;
-  'current_quest': number;
-  quests: { fail: number, quest: number }[];
-  'nb_echec_to_fail': {
-    'echec1': number;
-    'echec2': number;
-    'echec3': number;
-    'echec4': number;
-    'echec5': number;
-  };
-  'nb_mission_unsend': number;
-  'nb_player_to_send': {
-    'quest1': number;
-    'quest2': number;
-    'quest3': number;
-    'quest4': number;
-    'quest5': number;
-  };
+  current_id_player: string;
+  current_ind_player: number;
+  current_name_player: string;
+  current_quest: number;
+  quests: { fail: number, quest: number, status?: boolean }[];
+  nb_mission_unsend: number;
 }
 
 @Injectable({
@@ -65,5 +51,19 @@ export class GameService {
 
   getBoard(gameId: string): Observable<GameBoard> {
     return this._http.get<GameBoard>(`${environment.apiUrl}${gameId}/board`);
+  }
+
+
+  isGameEnded(quests: { fail: number, quest: number, status?: boolean }[]): { fail: number, success: number } {
+    return quests.reduce((acc, curr) => {
+      if (typeof curr.status === 'boolean') {
+        if (curr.status) {
+          return { fail: acc.fail, success: acc.success + 1 };
+        } else {
+          return { fail: acc.fail + 1, success: acc.success };
+        }
+      }
+      return acc;
+    }, { fail: 0, success: 0 });
   }
 }

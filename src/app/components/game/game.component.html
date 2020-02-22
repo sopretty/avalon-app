@@ -1,9 +1,10 @@
-<div *ngIf="clear" class="board">
+<div *ngIf="clear && !isGameEnded" class="board">
 
   <div class="quests">
     <div *ngFor="let item of board.quests; let i = index" class="quest">
       <div class="title">quest n°{{i + 1}}</div>
-      <div [ngClass]="{'circle': true, 'current-round': i + 1 === board.current_quest}">
+      <div
+        [ngClass]="{'circle': true, 'current-round': i + 1 === board.current_quest, 'fail-circle': questFailed(i), 'success-circle': questSucceed(i)}">
         <div class="content">{{item.quest}}</div>
       </div>
       <div class="fail">
@@ -15,8 +16,12 @@
   <div class="board-middle">
     It's {{currentPlayer.name}}'s turn.
     You need to pick who will do the quest
-    <div>If the vote succeed <button (click)="openPlayerDialog()">pick the player</button></div>
-    <div>The vote fail <button>pass your turn</button></div>
+    <div>If the vote succeed
+      <button (click)="openPlayerDialog()">pick the player</button>
+    </div>
+    <div>The vote fail
+      <button [disabled]="board.nb_mission_unsend === 5" (click)="nextTurn()">next turn</button>
+    </div>
   </div>
 
   <div class="vote-track">
@@ -26,4 +31,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="isGameEnded">
+  <app-end-game></app-end-game>
 </div>

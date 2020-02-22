@@ -40,3 +40,20 @@ export const setBoard = createAction(
   props<{ board: GameBoard }>()
 );
 
+export const setVote = createAction(
+  '[Game Page] Set a vote',
+  props<{ vote: boolean }>()
+);
+
+export const nextQuest = createAction(
+  '[Game Page] Next quest',
+);
+
+export const nextPlayer = createAction(
+  '[Game Page] Next player',
+);
+
+export const setRejection = createAction(
+  '[Game Page] Set the number of rejection',
+  props<{ rejection: number }>()
+);

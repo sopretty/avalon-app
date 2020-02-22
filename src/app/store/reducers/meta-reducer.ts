@@ -1,9 +1,12 @@
 import { ActionReducer, MetaReducer } from '@ngrx/store';
+import { environment } from '../../../environments/environment';
 
-function logger(reducer: ActionReducer<any>): ActionReducer<any> {
+export function logger(reducer: ActionReducer<any>): ActionReducer<any> {
   return (state, action) => {
-    console.log('state', state);
-    console.log('action', action);
+    if (!environment.production) {
+      console.log('state', state);
+      console.log('action', action);
+    }
 
     return reducer(state, action);
   };

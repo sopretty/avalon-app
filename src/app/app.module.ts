@@ -16,9 +16,8 @@ import * as reducers from './store/reducers';
 import { GenericTurnComponent } from './components/dynamic-turns/generic-turn/generic-turn.component';
 import { RoleTurnComponent } from './components/dynamic-turns/role-turn/role-turn.component';
 import { GameEffects } from './store/effects/game.effects';
-import { TurnDirective } from './components/dynamic-turns/turn.directive';
 import { DialogComponent } from './components/game/dialog/dialog.component';
-import { MatCheckboxModule, MatDialogModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatInputModule, MatSelectModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VoteTurnComponent } from './components/dynamic-turns/vote-turn/vote-turn.component';
 import { EndTurnComponent } from './components/dynamic-turns/end-turn/end-turn.component';
@@ -34,7 +33,6 @@ import { EndGameComponent } from './components/end-game/end-game.component';
     GameComponent,
     AudioTurnComponent,
     RoleTurnComponent,
-    TurnDirective,
     GenericTurnComponent,
     DialogComponent,
     VoteTurnComponent,
@@ -53,6 +51,9 @@ import { EndGameComponent } from './components/end-game/end-game.component';
     MatCheckboxModule,
     BrowserAnimationsModule,
     MatSelectModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -13,14 +13,15 @@
     </div>
   </div>
 
-  <div class="board-middle">
+  <div class="board-middle mat-h3" [style.margin-top.px]="18">
     It's {{currentPlayer.name}}'s turn.
     You need to pick who will do the quest
     <div>If the vote succeed
-      <button (click)="openPlayerDialog()">pick the player</button>
+      <button color="primary" mat-raised-button (click)="openPlayerDialog()">pick the player</button>
     </div>
     <div>The vote fail
-      <button [disabled]="board.nb_mission_unsend === 5" (click)="nextTurn()">next turn</button>
+      <button mat-raised-button color="warn" [disabled]="board.nb_mission_unsend === 5" (click)="nextTurn()">next turn
+      </button>
     </div>
   </div>
 

@@ -1,3 +1,9 @@
-<div (click)="endTurn()">
-  <p>{{board.quests[board.current_quest - 1].status ? 'SUCCESS' : 'FAIL'}}</p>
+<div class="flex-center-column">
+  <div class="flex-center-row">
+    <div class="flex-center-column">
+      <div (click)="endTurn()" class="mat-h1">
+        <p>{{board.quests[board.current_quest - 1].status ? 'SUCCESS' : 'FAIL'}}</p>
+      </div>
+    </div>
+  </div>
 </div>

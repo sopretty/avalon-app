@@ -9,7 +9,8 @@ import {State} from '../../store/reducers';
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.scss']
+  styleUrls: ['./roles.component.scss'],
+  host: { class: 'component-container' }
 })
 export class RolesComponent implements OnInit {
 

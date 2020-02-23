@@ -9,7 +9,8 @@ import { nextPlayer, nextQuest } from '../../../store/actions/actions';
 @Component({
   selector: 'app-end-turn',
   templateUrl: './end-turn.component.html',
-  styleUrls: ['./end-turn.component.scss']
+  styleUrls: ['./end-turn.component.scss'],
+  host: { class: 'component-container dynamic-turns' }
 })
 export class EndTurnComponent extends GenericTurnComponent {
 
@@ -24,8 +25,8 @@ export class EndTurnComponent extends GenericTurnComponent {
   }
 
   endTurn() {
-    this._store.dispatch(nextQuest())
-    this._store.dispatch(nextPlayer())
+    this._store.dispatch(nextQuest());
+    this._store.dispatch(nextPlayer());
     this.finished();
   }
 

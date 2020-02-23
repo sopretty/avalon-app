@@ -1,5 +1,11 @@
-<div>
-  Start the story and close your eyes !
+<div class="flex-center-column">
+  <div class="flex-center-row">
+    <div class="flex-center-column">
+      <div class="mat-display-2">
+        Start the story and close your eyes !
+      </div>
+      <button mat-raised-button (click)="playAudio()">Start or restart the story</button>
+      <button mat-raised-button color="primary" (click)="playGame()">Start the game</button>
+    </div>
+  </div>
 </div>
-<button (click)="playAudio()">Start or restart the story</button>
-<button (click)="playGame()">Start the game</button>

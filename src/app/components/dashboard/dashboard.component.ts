@@ -1,12 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {ConfigService} from '../../services/config/config.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ConfigService } from '../../services/config/config.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  host: { class: 'component-container' }
 })
 export class DashboardComponent implements OnInit {
 
@@ -40,12 +41,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  numberPlayerChoosed(value: string): void {
-    this.numberChoosed = Number(value);
+  numberPlayerChoosed(event): void {
+    this.numberChoosed = Number(event.value);
   }
 
   submit(): void {
-    this.configService.players = this.playersForm.controls.map(form => ({name: form.value, team: null}));
+    this.configService.players = this.playersForm.controls.map(form => ({ name: form.value, team: null }));
     this.router.navigate(['roles']);
   }
 

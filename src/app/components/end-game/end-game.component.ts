@@ -9,7 +9,8 @@ import * as selectors from '../../store/reducers/selectors';
 @Component({
   selector: 'app-end-game',
   templateUrl: './end-game.component.html',
-  styleUrls: ['./end-game.component.scss']
+  styleUrls: ['./end-game.component.scss'],
+  host: { class: 'component-container dynamic-turns' }
 })
 export class EndGameComponent implements OnInit {
 
@@ -27,8 +28,9 @@ export class EndGameComponent implements OnInit {
     this.store.pipe(select(selectors.selectGameState)).subscribe(game => this.game = game);
   }
 
-  select(player: Player) {
-    this.selectedPlayer = player;
+  select(event) {
+    console.log(event)
+    this.selectedPlayer = event.value;
   }
 
   get questStatuses(): { success: number, fail: number } {

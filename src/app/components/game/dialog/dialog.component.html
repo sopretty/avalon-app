@@ -6,7 +6,9 @@
     </div>
   </div>
   <div mat-dialog-actions>
-    <button (click)="closeDialog()">Cancel</button>
-    <button [mat-dialog-close]="playerSelected" [disabled]="numberSelected !== data.pickNumber">Done</button>
+    <button mat-raised-button (click)="closeDialog()">Cancel</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="playerSelected"
+            [disabled]="numberSelected !== data.pickNumber">Done
+    </button>
   </div>
 </form>

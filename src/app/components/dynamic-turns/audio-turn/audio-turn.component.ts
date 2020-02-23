@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { ActivatedRoute } from '@angular/router';
 
 import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { State } from '../../../store/reducers';
@@ -10,15 +9,16 @@ import * as selectors from '../../../store/reducers/selectors';
 @Component({
   selector: 'app-audio-turn',
   templateUrl: './audio-turn.component.html',
-  styleUrls: ['./audio-turn.component.scss']
+  styleUrls: ['./audio-turn.component.scss'],
+  host: { class: 'component-container dynamic-turns' }
 })
-export class AudioTurnComponent extends GenericTurnComponent implements OnInit {
+export class AudioTurnComponent extends GenericTurnComponent implements OnInit, OnDestroy {
 
   private source: any;
   private gameId: string;
   private audio: any;
 
-  constructor(private _store: Store<State>, private route: ActivatedRoute) {
+  constructor(private _store: Store<State>) {
     super(_store);
   }
 
@@ -47,8 +47,15 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit {
 
   }
 
+
+  ngOnDestroy(): void {
+    this.source = undefined;
+    this.audio = undefined;
+  }
+
+
   playAudio() {
-    if(this.source){
+    if (this.source) {
       this.source.start();
     }
   }

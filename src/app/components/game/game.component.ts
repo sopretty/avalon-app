@@ -25,7 +25,8 @@ const turns = {
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
+  host: { class: 'component-container' }
 })
 export class GameComponent implements OnInit {
 
@@ -88,11 +89,14 @@ export class GameComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((playersSelected: Player[]) => {
-      this.store.dispatch(addEvents({
-        events: playersSelected.map(player => ({ type: 'app-vote-turn', state: player }))
-      }));
-      this.store.dispatch(setRejection({ rejection: 0 }));
-      this.store.dispatch(addEvents({ events: [{ type: 'app-end-turn' }] }));
+      if (playersSelected) {
+        this.store.dispatch(addEvents({
+          events: playersSelected.map(player => ({ type: 'app-vote-turn', state: player }))
+        }));
+        this.store.dispatch(setRejection({ rejection: 0 }));
+        this.store.dispatch(addEvents({ events: [{ type: 'app-end-turn' }] }));
+      }
+
     });
   }
 

@@ -1,3 +1,11 @@
-Give the phone to {{state.name}}
-<button (click)="fail()">FAIL</button>
-<button (click)="success()">SUCCESS</button>
+<div class="flex-center-column">
+  <div class="flex-center-row">
+    <div class="flex-center-column mat-h1">
+      {{state.name}}'s turn to vote
+      <div class="flex-center-row">
+        <button mat-raised-button color="warn" (click)="fail()">FAIL</button>
+        <button mat-raised-button color="primary" (click)="success()">SUCCESS</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,13 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import {GenericTurnComponent} from '../generic-turn/generic-turn.component';
-import {State} from '../../../store/reducers';
+import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
+import { State } from '../../../store/reducers';
 
 @Component({
   selector: 'app-role-turn',
   templateUrl: './role-turn.component.html',
-  styleUrls: ['./role-turn.component.scss']
+  styleUrls: ['./role-turn.component.scss'],
+  host: { class: 'component-container dynamic-turns' }
 })
 export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
 

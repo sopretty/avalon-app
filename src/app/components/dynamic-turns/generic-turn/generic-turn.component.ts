@@ -7,7 +7,7 @@ import {consumeEvents} from '../../../store/actions/actions';
 @Component({
   selector: 'app-generic-turn',
   templateUrl: './generic-turn.component.html',
-  styleUrls: ['./generic-turn.component.scss']
+  styleUrls: ['./generic-turn.component.scss'],
 })
 export class GenericTurnComponent implements OnInit {
 

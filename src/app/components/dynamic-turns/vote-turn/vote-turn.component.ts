@@ -8,7 +8,8 @@ import { setVote } from '../../../store/actions/actions';
 @Component({
   selector: 'app-vote-turn',
   templateUrl: './vote-turn.component.html',
-  styleUrls: ['./vote-turn.component.scss']
+  styleUrls: ['./vote-turn.component.scss'],
+  host: { class: 'component-container dynamic-turns' }
 })
 export class VoteTurnComponent extends GenericTurnComponent implements OnInit {
 

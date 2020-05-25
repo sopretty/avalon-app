@@ -17,7 +17,7 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
   private source: any;
   private gameId: string;
   private audio: any;
-  private loading: boolean;
+  loading: boolean;
 
   constructor(private _store: Store<State>) {
     super(_store);
@@ -48,11 +48,6 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
     });
 
   }
-
-  get loading() {
-    return this.loading;
-  }
-
 
   ngOnDestroy(): void {
     this.source = undefined;

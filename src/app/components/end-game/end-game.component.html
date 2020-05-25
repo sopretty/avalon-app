@@ -1,0 +1,32 @@
+<div class="flex-center-column">
+  <div class="flex-center-row">
+    <div class="flex-center-column">
+      <div *ngIf="questStatuses.success && !selectedPlayer">
+        Blue team won!
+        Red team has the opportunity to win the game by correctly naming which of the blue players is Merlin.
+        <mat-form-field>
+          <mat-label>Blue player</mat-label>
+          <mat-select (selectionChange)="select($event)" name="player" [value]="selectedPlayer">
+            <mat-option *ngFor="let player of bluePlayers" [value]="player">
+              {{player.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="questStatuses.fail && !selectedPlayer">
+        <p>Red team won</p>
+        <button mat-raised-button routerLink="/">Play again</button>
+      </div>
+
+      <div *ngIf="selectedPlayer">
+        <div *ngIf="selectedPlayer.role === 'merlin'">
+          Red find Merlin and win the game!
+        </div>
+        <div *ngIf="selectedPlayer.role !== 'merlin'">
+          Blue win the game!
+        </div>
+        <button mat-raised-button color="primary" routerLink="/">Play again</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+sudo: required
+language: generic
+
+env:
+  global:
+    - secure: "T2J6juzM/sF+xy4rgyQY00IracDVJ/9ycg97TbMHwUd8gRuNyz87MR7bhLVdIixeEPVp/7MYcJo4X3UdpK0DT/xGX9QQTUMmUz49Ttwn8HFKEXg6ABH9Xupi3cE/PFccenu/dQxrFceq06D37uzVf6BCA/BGdTijSPXFoQru6vON6jNn6T2VF/6Bpiwb6jqaUl2SdSv1IsLgpSwXRdOMCHXJZKfCyiu7/Cd3IkdoDFoSISXAWMf84J9D4WKT5pZCagj2i7qWaFSxvbaGjw2QfocsaJnIniDV73CpqcglrkqN2gUMWiM883MdhUqROGDiRN3AbJtZFWOvPBi6iEPOPOmZZexZIOlnWI0Y1PtJJFSw9+KXRmOni0nk0GyPRs6gTbJKfizlallXM7/bN85AAdAzbegPqPbwgb1sua7H3KXxUhQ8JFLt7KIcY7rhwofEtkYAQY4zgH1iYkBoSb1Xh7zxh5b6j01s78oSd+RFJdSKUoE0epldrrTziUGH5hUvwezd6mOrOFlsG4a7yx4F5mHUR5av9RxymUOl5muplHHBqNvlthiYpAGP4jXPYcqy2kVke/zkoFoYD1O/lhquUpTj0etRqMwTFyhuZ+TTttSnKMotZ+1KfGUxF8BcZJR+bB4I2nDPmEk7pexnMMPhIKI9YyaW+hn77rhfQHA3/R8="
+    - secure: "nRtKXRqV6HhU3VbiTtWeHB0zveAk8yXm97KACXKVVOLlUfO7OF9iwrMoNFt7wRDDXNUztXOXZ7mQfZXJ3z9/Z/T7EtKiBV2YNktTXqdA2fHMGpyHyY9LftJV1OQMNAoUWJ4y5xINtAmB1CrkgN4jtpoNi4HIwJ5CiCGpJnHkK0pHBuL2NGl6aUwIR1ZJvSkSclXh5v+U9fq6/zsybjwFBS8v3CooP9N0hFYvMLApeBiPAEIKU2oAGWCUCL7FhMjZ6jOOHU0+aK8mJt/o6tMEyAbmFVkg1nXr+5UAU5AtgSJYW0+61Epww2tSMjYgacQ9KDCtBNWmDoZpy9EB/x+oLuG1bBRZi+6+9p4bZH2iQDzPPbULIXaffs6Ru9y6o5wcJNVFVegAzUQv8yNcksWNjncyOpvJZq7kQYVjFi/dzkxMilvAqp1p+OiQ1R8Rk6W/XqTn36bIADMGTCLfHwogJHUQnoMjZndof5HytlMCIrzNuCK1xlB+dzZZDrNatx5zhzuCHerJ6F2Ydbu3ASA5r8ifHLDf9EDps5sHNTP3IpiN2V/NKK4myi8fW7UwjmshaLG7pmKjZVCZpMkA/CsGew3UVFWl1PXB6aKS7XdNqhA5zan0mk42GSnxp6HRPdXBqVbhOU8MjB46I2cnXBvzOnxsRImGJtDJV0CCU8YCnl8="
+
+services:
+  - docker
+
+before_install:
+  - docker build -t avalon-front .
+  - docker tag avalon-front $DOCKER_USERNAME/avalon-front:master
+
+after_script:
+  - docker images
+
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker  login -u "$DOCKER_USERNAME" --password-stdin
+
+deploy:
+  provider: script
+  script: docker push sopretty/avalon-front
+  on:
+    branch: master

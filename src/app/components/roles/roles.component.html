@@ -1,0 +1,26 @@
+<div class="flex-center-column">
+  <div class="flex-center-row">
+    <div class="flex-center-column">
+      <div class="mat-h1">
+        What roles do you want to add ?
+      </div>
+      <div class="mat-h2">
+        Number of red roles allowed: {{allowed.red}}
+      </div>
+      <div class="mat-h2">
+        Number of blue roles allowed: {{allowed.blue}}
+      </div>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div formArrayName="roles" *ngFor="let order of rolesForm.controls; let i = index">
+          <mat-checkbox [formControlName]="i">
+            {{roles[i].description}}
+          </mat-checkbox>
+        </div>
+        <div *ngIf="!form.valid">You have exceeded the red or blue players limit</div>
+        <div class="flex-center-column">
+          <button mat-raised-button color="primary" [disabled]="form.invalid">Start the game !</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

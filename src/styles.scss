@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  margin: 0;
+}
+
+app-root {
+  display: flex;
+  flex-grow: 1;
+}
+
+.component-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+// flex grid
+.flex-center-column {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-center-row {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dynamic-turns {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}

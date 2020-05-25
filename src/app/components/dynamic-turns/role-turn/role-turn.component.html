@@ -1,0 +1,24 @@
+<div class="flex-center-column">
+  <div class="flex-center-row">
+    <div class="flex-center-column">
+      <div (click)="open()">
+        <div class="mat-h1">
+          <p>
+            Give the cellphone to {{state.name}}
+          </p>
+          <p>
+            If you are {{state.name}} tap the screen to know your team/role
+          </p>
+        </div>
+        <div *ngIf="clicked" class="mat-h1">
+          <p>
+            You are in the {{state.team}} team
+          </p>
+          <p>
+            You role is {{state.role}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

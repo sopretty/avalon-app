@@ -1,0 +1,88 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.quests {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.current-round {
+  border-style: solid;
+  border-width: 5px;
+  border-color: green;
+}
+
+.quest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110px;
+}
+
+.circle {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #000
+}
+
+.fail-circle {
+  background-color: red;
+}
+
+.success-circle {
+  background-color: blue;
+}
+
+.last {
+  background: red;
+}
+
+.board-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  color: #fff;
+}
+
+
+.fail {
+  color: red;
+  display: flex;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.vote-track {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.current-fail {
+  border-style: solid;
+  border-width: 5px;
+  border-color: orange;
+}

@@ -1,0 +1,39 @@
+<div *ngIf="clear && !isGameEnded" class="board">
+
+  <div class="quests">
+    <div *ngFor="let item of board.quests; let i = index" class="quest">
+      <div class="title">quest n°{{i + 1}}</div>
+      <div
+        [ngClass]="{'circle': true, 'current-round': i + 1 === board.current_quest, 'fail-circle': questFailed(i), 'success-circle': questSucceed(i)}">
+        <div class="content">{{item.quest}}</div>
+      </div>
+      <div class="fail">
+        {{item.fail}} fail(s) required
+      </div>
+    </div>
+  </div>
+
+  <div class="board-middle mat-h3" [style.margin-top.px]="18">
+    It's {{currentPlayer.name}}'s turn.
+    You need to pick who will do the quest
+    <div>If the vote succeed
+      <button color="primary" mat-raised-button (click)="openPlayerDialog()">pick the player</button>
+    </div>
+    <div>The vote fail
+      <button mat-raised-button color="warn" [disabled]="board.nb_mission_unsend === 5" (click)="nextTurn()">next turn
+      </button>
+    </div>
+  </div>
+
+  <div class="vote-track">
+    <div *ngFor="let item of voteNumber; let i = index; let last = last">
+      <div [ngClass]="{'circle': true, 'last': last, 'current-fail': i + 1 === board.nb_mission_unsend}">
+        <div class="content">{{i + 1}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isGameEnded">
+  <app-end-game></app-end-game>
+</div>

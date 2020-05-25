@@ -49,6 +49,10 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
 
   }
 
+  get loading() {
+    return this.loading;
+  }
+
 
   ngOnDestroy(): void {
     this.source = undefined;

@@ -14,14 +14,19 @@ import * as selectors from '../../../store/reducers/selectors';
 })
 export class AudioTurnComponent extends GenericTurnComponent implements OnInit, OnDestroy {
 
-  private source: any;
+
   private gameId: string;
-  private audio: any;
+  audioContext: AudioContext;
+  buffer: AudioBuffer;
   loading: boolean;
+  playing: boolean;
+  source: any;
 
   constructor(private _store: Store<State>) {
     super(_store);
     this.loading = true;
+    this.playing = false;
+    this.audioContext = new AudioContext();
   }
 
   ngOnInit() {
@@ -31,19 +36,14 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
     });
 
     this._store.pipe(select(selectors.selectAudio)).subscribe(audio => {
-      this.audio = audio;
-      if (this.gameId && this.audio) {
-        this.loading = false;
-        const audioCtx = new AudioContext();
-        this.source = audioCtx.createBufferSource();
-
-        audioCtx.decodeAudioData(this.audio, (buffer) => {
-            this.source.buffer = buffer;
-            this.source.connect(audioCtx.destination);
+      if (this.gameId && audio) {
+        this.audioContext.decodeAudioData(audio, (buffer) => {
+            this.buffer = buffer;
           },
-          () => {
-            console.log('decodeAudioError');
+          (err) => {
+            console.log(err, 'decodeAudioError');
           });
+        this.loading = false;
       }
     });
 
@@ -51,20 +51,26 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
 
   ngOnDestroy(): void {
     this.source = undefined;
-    this.audio = undefined;
+    this.audioContext = undefined;
   }
 
 
   playAudio() {
+    this.stopAudio();
+    this.source = this.audioContext.createBufferSource();
+    this.source.buffer = this.buffer;
+    this.source.connect(this.audioContext.destination);
+    this.source.start(0);
+  }
+
+  stopAudio() {
     if (this.source) {
-      this.source.start();
+      this.source.stop();
     }
   }
 
   playGame() {
-    if (this.source) {
-      this.source.stop();
-    }
+    this.stopAudio();
     this.finished();
   }
 

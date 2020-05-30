@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { State } from '../../../store/reducers';
 import * as selectors from '../../../store/reducers/selectors';
-import { getQuest } from '../../../store/actions/actions';
+import { getBoard, getQuest } from '../../../store/actions/actions';
 import { Quest } from '../../../services/game/game.service';
 
 @Component({
@@ -34,6 +34,7 @@ export class EndTurnComponent extends GenericTurnComponent implements OnInit {
   }
 
   endTurn() {
+    this._store.dispatch(getBoard({ gameId: this.state.gameId }));
     this.finished();
   }
 

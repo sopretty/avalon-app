@@ -4,7 +4,7 @@
     <div *ngFor="let item of board.quests; let i = index" class="quest">
       <div class="title">quest n°{{i + 1}}</div>
       <div
-        [ngClass]="{'circle': true, 'current-round': i + 1 === board.current_quest, 'fail-circle': questFailed(i), 'success-circle': questSucceed(i)}">
+        [ngClass]="{'circle': true, 'current-round': i === board.current_quest, 'fail-circle': questFailed(i), 'success-circle': questSucceed(i)}">
         <div class="content">{{item.quest}}</div>
       </div>
       <div class="fail">

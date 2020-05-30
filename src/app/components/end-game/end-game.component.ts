@@ -29,7 +29,6 @@ export class EndGameComponent implements OnInit {
   }
 
   select(event) {
-    console.log(event)
     this.selectedPlayer = event.value;
   }
 

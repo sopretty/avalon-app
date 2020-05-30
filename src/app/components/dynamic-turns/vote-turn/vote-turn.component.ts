@@ -17,7 +17,6 @@ export class VoteTurnComponent extends GenericTurnComponent implements OnInit {
 
   constructor(private _store: Store<State>) {
     super(_store);
-    console.log(this.state);
   }
 
   fail() {

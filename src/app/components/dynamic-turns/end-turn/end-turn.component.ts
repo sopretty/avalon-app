@@ -20,7 +20,6 @@ export class EndTurnComponent extends GenericTurnComponent implements OnInit {
 
   constructor(private _store: Store<State>) {
     super(_store);
-
   }
 
   ngOnInit() {
@@ -28,9 +27,7 @@ export class EndTurnComponent extends GenericTurnComponent implements OnInit {
     this._store.pipe(
       select(selectors.selectBoard),
     ).subscribe(board => {
-      console.log(this.state, this.quest, board);
       if (board.quests && board.quests[this.state.questId] && typeof board.quests[this.state.questId].status === 'boolean') {
-        console.log('if', this.state, this.quest);
         this.quest = board.quests[this.state.questId];
       }
     });

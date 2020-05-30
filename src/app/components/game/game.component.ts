@@ -7,7 +7,7 @@ import { RoleTurnComponent } from '../dynamic-turns/role-turn/role-turn.componen
 import { GenericTurnComponent } from '../dynamic-turns/generic-turn/generic-turn.component';
 import { AudioTurnComponent } from '../dynamic-turns/audio-turn/audio-turn.component';
 import * as selectors from '../../store/reducers/selectors';
-import { addEvents, getBoard, nextPlayer, setRejection } from '../../store/actions/actions';
+import { createQuest, getBoard, questUnsend } from '../../store/actions/actions';
 import { ActivatedRoute } from '@angular/router';
 import { Game, GameBoard, GameService, Player } from '../../services/game/game.service';
 import { MatDialog } from '@angular/material';
@@ -85,16 +85,16 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, {
       disableClose: true,
       width: '250px',
-      data: { players: this.players, pickNumber: this.board.quests[this.board.current_quest - 1].quest }
+      data: { players: this.players, pickNumber: this.board.quests[this.board.current_quest].quest }
     });
 
     dialogRef.afterClosed().subscribe((playersSelected: Player[]) => {
       if (playersSelected) {
-        this.store.dispatch(addEvents({
-          events: playersSelected.map(player => ({ type: 'app-vote-turn', state: player }))
+        this.store.dispatch(createQuest({
+          gameId: this.game.id,
+          players: playersSelected,
+          questId: this.game.board.current_quest
         }));
-        this.store.dispatch(setRejection({ rejection: 0 }));
-        this.store.dispatch(addEvents({ events: [{ type: 'app-end-turn' }] }));
       }
 
     });
@@ -109,8 +109,7 @@ export class GameComponent implements OnInit {
   }
 
   nextTurn() {
-    this.store.dispatch(setRejection({ rejection: this.board.nb_mission_unsend + 1 }));
-    this.store.dispatch(nextPlayer());
+    this.store.dispatch(questUnsend({ gameId: this.game.id }));
   }
 
 
@@ -127,7 +126,6 @@ export class GameComponent implements OnInit {
   }
 
   get currentPlayer(): Player {
-    // TODO les ids ne match pas, du coup je retourne le premier mais à enlever !
     return this.players.find(player => player.id === this.board.current_id_player) || this.players[0];
   }
 

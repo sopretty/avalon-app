@@ -13,20 +13,19 @@ import { setVote } from '../../../store/actions/actions';
 })
 export class VoteTurnComponent extends GenericTurnComponent implements OnInit {
 
-  @Input() state: Player;
+  @Input() state: { player: Player, gameId: string, questId: number };
 
   constructor(private _store: Store<State>) {
     super(_store);
+    console.log(this.state);
   }
 
   fail() {
-    this._store.dispatch(setVote({ vote: false }));
-    this.finished();
+    this._store.dispatch(setVote({ gameId: this.state.gameId, questId: this.state.questId, playerId: this.state.player.id, vote: false }));
   }
 
   success() {
-    this._store.dispatch(setVote({ vote: true }));
-    this.finished();
+    this._store.dispatch(setVote({ gameId: this.state.gameId, questId: this.state.questId, playerId: this.state.player.id, vote: true }));
   }
 
 }

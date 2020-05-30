@@ -20,14 +20,14 @@
       <button color="primary" mat-raised-button (click)="openPlayerDialog()">pick the player</button>
     </div>
     <div>The vote fail
-      <button mat-raised-button color="warn" [disabled]="board.nb_mission_unsend === 5" (click)="nextTurn()">next turn
+      <button mat-raised-button color="warn" [disabled]="board.nb_quest_unsend === 5" (click)="nextTurn()">next turn
       </button>
     </div>
   </div>
 
   <div class="vote-track">
     <div *ngFor="let item of voteNumber; let i = index; let last = last">
-      <div [ngClass]="{'circle': true, 'last': last, 'current-fail': i + 1 === board.nb_mission_unsend}">
+      <div [ngClass]="{'circle': true, 'last': last, 'current-fail': i + 1 === board.nb_quest_unsend}">
         <div class="content">{{i + 1}}</div>
       </div>
     </div>

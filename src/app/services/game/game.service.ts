@@ -23,13 +23,25 @@ export interface Game {
   board?: GameBoard;
 }
 
+export interface Quest {
+  fail: number;
+  quest: number;
+  votes?: boolean[];
+  status?: boolean;
+}
+
 export interface GameBoard {
   current_id_player: string;
   current_ind_player: number;
   current_name_player: string;
   current_quest: number;
-  quests: { fail: number, quest: number, status?: boolean }[];
-  nb_mission_unsend: number;
+  quests: Quest[];
+  nb_quest_unsend: number;
+}
+
+export interface QuestResult {
+  votes: boolean[];
+  status: boolean;
 }
 
 @Injectable({
@@ -53,6 +65,21 @@ export class GameService {
     return this._http.get<GameBoard>(`${environment.apiUrl}${gameId}/board`);
   }
 
+  questUnsend(gameId: string): Observable<GameBoard> {
+    return this._http.post<GameBoard>(`${environment.apiUrl}${gameId}/quest_unsend`, undefined);
+  }
+
+  setVote(gameId: string, questId: number, playerId: string, vote: boolean): Observable<void> {
+    return this._http.post<void>(`${environment.apiUrl}${gameId}/quest/${questId}`, { [playerId]: vote });
+  }
+
+  createQuest(gameId: string, questId: number, playerIds: string[]): Observable<void> {
+    return this._http.put<void>(`${environment.apiUrl}${gameId}/quest/${questId}`, playerIds);
+  }
+
+  getQuest(gameId: string, questId: number): Observable<QuestResult> {
+    return this._http.get<QuestResult>(`${environment.apiUrl}${gameId}/quest/${questId}`);
+  }
 
   isGameEnded(quests: { fail: number, quest: number, status?: boolean }[]): { fail: number, success: number } {
     return quests.reduce((acc, curr) => {

@@ -1,8 +1,13 @@
 <div class="flex-center-column">
   <div class="flex-center-row">
-    <div class="flex-center-column">
+    <div class="flex-center-column" *ngIf="quest && quest.votes">
       <div (click)="endTurn()" class="mat-h1">
-        <p>{{board.quests[board.current_quest - 1].status ? 'SUCCESS' : 'FAIL'}}</p>
+        <p>{{quest.status ? 'SUCCESS' : 'FAIL'}}</p>
+        <div>Résultat:
+          <div *ngFor="let vote of quest.votes">
+            <p>{{vote ? 'SUCCESS' : 'FAIL'}}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

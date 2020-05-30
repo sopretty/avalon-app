@@ -17,12 +17,14 @@ export interface GameState {
   events: Array<Event>;
   game: Game | null;
   audio: ArrayBuffer | null;
+  loading: boolean | null;
 }
 
 const initialState: GameState = {
   events: [],
   game: null,
-  audio: null
+  audio: null,
+  loading: null,
 };
 
 const gameReducer = createReducer(
@@ -63,55 +65,32 @@ const gameReducer = createReducer(
       }
     }
   })),
-  on(actions.setVote, (state, { vote }) => ({
-      ...state,
-      game: {
-        ...state.game,
-        board: {
-          ...state.game.board,
-          quests: state.game.board.quests.map((quest, index) => index === state.game.board.current_quest - 1 ? {
-            ...quest,
-            status: typeof quest.status !== 'undefined' ? quest.status && vote : vote
-          } : quest)
-        }
-      }
-    })
-  ),
-  on(actions.nextPlayer, (state) => ({
-      ...state,
-      game: {
-        ...state.game,
-        board: {
-          ...state.game.board,
-          current_id_player: state.game.players[
-          (state.game.players.findIndex(player => player.id === state.game.board.current_id_player) + 1)
-          % state.game.players.length
-            ].id
-        }
-      }
-    })
-  ),
-  on(actions.nextQuest, (state) => ({
+  on(actions.setQuest, (state, { quest, questId }) => ({
     ...state,
     game: {
       ...state.game,
       board: {
         ...state.game.board,
-        current_quest: state.game.board.current_quest + 1
+        quests: state.game.board.quests.map((questState, index) => index === questId ? {
+          ...questState,
+          ...quest
+        } : questState)
       }
     }
   })),
-  on(actions.setRejection, (state, { rejection }) => ({
-      ...state,
-      game: {
-        ...state.game,
-        board: {
-          ...state.game.board,
-          nb_mission_unsend: rejection,
-        }
-      }
-    })
-  ),
+  // Loading state
+  on(actions.onLoad, (state) => ({
+    ...state,
+    loading: true
+  })),
+  on(actions.onSuccess, (state) => ({
+    ...state,
+    loading: false
+  })),
+  on(actions.onError, (state) => ({
+    ...state,
+    loading: false
+  })),
 );
 
 

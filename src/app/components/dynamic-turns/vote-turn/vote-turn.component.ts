@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { Store } from '@ngrx/store';
+
+import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { State } from '../../../store/reducers';
-import { Player } from '../../../services/game/game.service';
 import { setVote } from '../../../store/actions/actions';
+import { Player } from '../../../types';
 
 @Component({
   selector: 'app-vote-turn',

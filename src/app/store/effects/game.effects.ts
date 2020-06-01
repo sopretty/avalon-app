@@ -5,10 +5,10 @@ import { catchError, map, mapTo, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { GameService } from '../../services/game/game.service';
-import { ConfigService } from '../../services/config/config.service';
 import * as actions from '../actions/actions';
 import { addEvents, onError, onLoad, onSuccess } from '../actions/actions';
 import { consumeEvents } from '../actions/actions';
+import { ConfigService } from '../../services/config/config.service';
 
 @Injectable()
 export class GameEffects {
@@ -27,7 +27,7 @@ export class GameEffects {
               }
             }),
             switchMap(game => [
-                actions.createGameSuccess(game),
+                actions.setGame(game),
                 actions.addEvents({
                   events: game.players.map(player => ({ type: 'app-role-turn', state: player }))
                 }),
@@ -51,12 +51,12 @@ export class GameEffects {
       )
   );
 
-  getBoard$ = createEffect(
+  getGame$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(actions.getBoard),
-        switchMap(({ gameId }) => this.gameService.getBoard(gameId)),
-        map(board => actions.setBoard({ board }))
+        ofType(actions.getGame),
+        switchMap(({ gameId }) => this.gameService.getGame(gameId)),
+        map(game => actions.setGame({ game }))
       )
   );
 
@@ -99,7 +99,7 @@ export class GameEffects {
     this.actions$.pipe(
       ofType(actions.questUnsend),
       switchMap(({ gameId }) => this.gameService.questUnsend(gameId)),
-      map(board => actions.setBoard({ board }))
+      map(game => actions.setGame({ game }))
     ));
 
   getQuest$ = createEffect(() =>
@@ -112,6 +112,23 @@ export class GameEffects {
             questId
           })))),
       map(({ quest, questId }) => actions.setQuest({ quest, questId }))
+    )
+  );
+
+  getRules$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.getRules),
+      switchMap(() =>
+        this.configService.getRules()),
+      map((rules) => actions.setRules({ rules }))
+    ));
+
+  guessMerlin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.guessMerlin),
+      switchMap(({ gameId, playerId, merlinId }) =>
+        this.gameService.guessMerlin(gameId, playerId, merlinId)),
+      map((gameResult) => actions.setResult({ gameResult }))
     )
   );
 

@@ -1,7 +1,7 @@
-import { Action, ActionReducerMap, createReducer, MetaReducer, on } from '@ngrx/store';
-import { environment } from '../../../environments/environment';
+import { Action, createReducer, on } from '@ngrx/store';
+
 import * as actions from '../actions/actions';
-import { Game } from '../../services/game/game.service';
+import { Game, Rules } from '../../types';
 
 export interface State {
   game: GameState;
@@ -12,12 +12,12 @@ export interface Event {
   state?: any;
 }
 
-// TODO to be defined
 export interface GameState {
   events: Array<Event>;
   game: Game | null;
   audio: ArrayBuffer | null;
   loading: boolean | null;
+  rules: Rules;
 }
 
 const initialState: GameState = {
@@ -25,6 +25,7 @@ const initialState: GameState = {
   game: null,
   audio: null,
   loading: null,
+  rules: null,
 };
 
 const gameReducer = createReducer(
@@ -46,36 +47,27 @@ const gameReducer = createReducer(
       events: [...events]
     };
   }),
-  on(actions.createGameSuccess, (state, game) => ({
-    ...state,
-    game,
-  })),
   on(actions.setAudio, (state, payload) => {
     return ({
       ...state,
       audio: payload.audio
     });
   }),
-  on(actions.setBoard, (state, { board }) => ({
+  on(actions.setGame, (state, { game }) => ({
     ...state,
     game: {
       ...state.game,
-      board: {
-        ...board,
-      }
+      ...game
     }
   })),
   on(actions.setQuest, (state, { quest, questId }) => ({
     ...state,
     game: {
       ...state.game,
-      board: {
-        ...state.game.board,
-        quests: state.game.board.quests.map((questState, index) => index === questId ? {
-          ...questState,
-          ...quest
-        } : questState)
-      }
+      quests: state.game.quests.map((questState, index) => index === questId ? {
+        ...questState,
+        ...quest
+      } : questState)
     }
   })),
   // Loading state

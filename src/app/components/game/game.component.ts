@@ -1,19 +1,19 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewContainerRef } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 import { Event, State } from '../../store/reducers';
-import { ConfigService } from '../../services/config/config.service';
 import { RoleTurnComponent } from '../dynamic-turns/role-turn/role-turn.component';
 import { GenericTurnComponent } from '../dynamic-turns/generic-turn/generic-turn.component';
 import { AudioTurnComponent } from '../dynamic-turns/audio-turn/audio-turn.component';
 import * as selectors from '../../store/reducers/selectors';
-import { createQuest, getBoard, questUnsend } from '../../store/actions/actions';
-import { ActivatedRoute } from '@angular/router';
-import { Game, GameBoard, GameService, Player } from '../../services/game/game.service';
-import { MatDialog } from '@angular/material';
+import { createQuest, getGame, questUnsend } from '../../store/actions/actions';
+import { GameService } from '../../services/game/game.service';
 import { DialogComponent } from './dialog/dialog.component';
 import { VoteTurnComponent } from '../dynamic-turns/vote-turn/vote-turn.component';
 import { EndTurnComponent } from '../dynamic-turns/end-turn/end-turn.component';
+import { Game, Player } from '../../types';
 
 const turns = {
   'app-role-turn': RoleTurnComponent,
@@ -32,13 +32,12 @@ export class GameComponent implements OnInit {
 
   static voteNumber = 5;
 
-  private game: Game;
+  game: Game;
 
   clear: boolean;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private viewContainerRef: ViewContainerRef,
-              private configService: ConfigService,
               private gameService: GameService,
               private route: ActivatedRoute,
               private dialog: MatDialog,
@@ -52,11 +51,10 @@ export class GameComponent implements OnInit {
     });
 
     store.pipe(select(selectors.selectGameState)).subscribe(game => this.game = game);
-
   }
 
   ngOnInit() {
-    this.store.dispatch(getBoard({ gameId: this.route.snapshot.params.id }));
+    this.store.dispatch(getGame({ gameId: this.route.snapshot.params.id }));
   }
 
   handleEvent(events: Event[]) {
@@ -85,7 +83,7 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, {
       disableClose: true,
       width: '250px',
-      data: { players: this.players, pickNumber: this.board.quests[this.board.current_quest].quest }
+      data: { players: this.players, pickNumber: this.game.quests[this.game.current_quest].nb_players_to_send }
     });
 
     dialogRef.afterClosed().subscribe((playersSelected: Player[]) => {
@@ -93,7 +91,7 @@ export class GameComponent implements OnInit {
         this.store.dispatch(createQuest({
           gameId: this.game.id,
           players: playersSelected,
-          questId: this.game.board.current_quest
+          questId: this.game.current_quest
         }));
       }
 
@@ -101,11 +99,11 @@ export class GameComponent implements OnInit {
   }
 
   questFailed(index: number): boolean {
-    return typeof this.board.quests[index].status === 'boolean' && !this.board.quests[index].status;
+    return typeof this.game.quests[index].status === 'boolean' && !this.game.quests[index].status;
   }
 
   questSucceed(index: number): boolean {
-    return typeof this.board.quests[index].status === 'boolean' && this.board.quests[index].status;
+    return typeof this.game.quests[index].status === 'boolean' && this.game.quests[index].status;
   }
 
   nextTurn() {
@@ -117,23 +115,12 @@ export class GameComponent implements OnInit {
     return Array(GameComponent.voteNumber);
   }
 
-  get board(): GameBoard {
-    return this.game.board;
-  }
-
   get players(): Player[] {
     return this.game.players;
   }
 
   get currentPlayer(): Player {
-    return this.players.find(player => player.id === this.board.current_id_player) || this.players[0];
+    return this.players.find(player => player.id === this.game.current_id_player) || this.players[0];
   }
 
-  get isGameEnded(): boolean {
-    if (this.clear) {
-      const questGroupbyStatus = this.gameService.isGameEnded(this.board.quests);
-      return questGroupbyStatus.fail > 2 || questGroupbyStatus.success > 2;
-    }
-    return false;
-  }
 }

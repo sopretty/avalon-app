@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {ConfigService} from '../../services/config/config.service';
-import {FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
-import {Store} from '@ngrx/store';
-import {createGame} from '../../store/actions/actions';
-import {State} from '../../store/reducers';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { createGame } from '../../store/actions/actions';
+import { State } from '../../store/reducers';
+import { ConfigService } from '../../services/config/config.service';
+import { selectRules } from '../../store/reducers/selectors';
 
 @Component({
   selector: 'app-roles',
@@ -19,29 +20,40 @@ export class RolesComponent implements OnInit {
   roles: { description: string, characters: { name: string, team: string }[] }[] = [
     {
       description: 'Mordred (red)',
-      characters: [{name: 'mordred', team: 'red'}],
+      characters: [{ name: 'mordred', team: 'red' }],
     },
     {
       description: 'Morgane (red), Perceval (blue)',
-      characters: [{name: 'morgan', team: 'red'}, {name: 'perceval', team: 'blue'}],
+      characters: [{ name: 'morgan', team: 'red' }, { name: 'perceval', team: 'blue' }],
     },
     {
       description: 'Oberon (red)',
-      characters: [{name: 'oberon', team: 'red'}],
+      characters: [{ name: 'oberon', team: 'red' }],
     },
   ];
   form: FormGroup;
+  loading: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private store: Store<State>,
     private configService: ConfigService) {
+    this.loading = true;
   }
 
   ngOnInit() {
-    this.allowed = this.configService.rules.find(config => config.nbPlayer === this.configService.players.length);
-    this.selected = {red: 0, blue: 0};
+    this.store.select(selectRules).subscribe(rules => {
+      if (rules) {
+        this.loading = false;
+        const ruleKey = Object.keys(rules).find((nbPlayer) => Number(nbPlayer) === this.configService.players.length);
+        if (ruleKey) {
+          this.allowed = { blue: rules[ruleKey].blue, red: rules[ruleKey].red };
+        }
+
+      }
+    });
+    this.selected = { red: 0, blue: 0 };
     this.form = this.formBuilder.group({
       roles: new FormArray([], this.redBlueValidator()),
     });
@@ -51,7 +63,7 @@ export class RolesComponent implements OnInit {
   redBlueValidator() {
     const validator: ValidatorFn = (formArray: FormArray) => {
       const totalTeam = this.characterValidator(formArray);
-      return totalTeam.blue > this.allowed.blue || totalTeam.red > this.allowed.red ? {required: true} : null;
+      return totalTeam.blue > this.allowed.blue || totalTeam.red > this.allowed.red ? { required: true } : null;
     };
     return validator;
   }
@@ -59,9 +71,9 @@ export class RolesComponent implements OnInit {
   getCharacterTeam(index: number): { blue: number, red: number } {
     return this.roles[index].characters.reduce(
       (accRole, currRole) => {
-        return {blue: accRole.blue + (currRole.team === 'blue' ? 1 : 0), red: accRole.red + (currRole.team === 'red' ? 1 : 0)};
+        return { blue: accRole.blue + (currRole.team === 'blue' ? 1 : 0), red: accRole.red + (currRole.team === 'red' ? 1 : 0) };
       }
-      , {blue: 0, red: 0});
+      , { blue: 0, red: 0 });
   }
 
   addCheckRoles(): void {
@@ -76,10 +88,10 @@ export class RolesComponent implements OnInit {
       .reduce((acc, curr, index) => {
         if (!!curr) {
           const charTeam = this.getCharacterTeam(index);
-          return {blue: acc.blue + charTeam.blue, red: acc.red + charTeam.red};
+          return { blue: acc.blue + charTeam.blue, red: acc.red + charTeam.red };
         }
         return acc;
-      }, {blue: 0, red: 0});
+      }, { blue: 0, red: 0 });
   }
 
   submit(): void {

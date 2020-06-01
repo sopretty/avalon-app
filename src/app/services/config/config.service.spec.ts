@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ConfigService } from './config.service';
+import { ConfigService } from './rules.service';
 
-describe('ConfigService', () => {
+describe('RulesService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {

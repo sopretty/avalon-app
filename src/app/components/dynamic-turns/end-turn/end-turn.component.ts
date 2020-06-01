@@ -4,8 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { State } from '../../../store/reducers';
 import * as selectors from '../../../store/reducers/selectors';
-import { getBoard, getQuest } from '../../../store/actions/actions';
-import { Quest } from '../../../services/game/game.service';
+import { getGame, getQuest } from '../../../store/actions/actions';
+import { Quest } from '../../../types';
 
 @Component({
   selector: 'app-end-turn',
@@ -25,16 +25,16 @@ export class EndTurnComponent extends GenericTurnComponent implements OnInit {
   ngOnInit() {
     this._store.dispatch(getQuest({ gameId: this.state.gameId, questId: this.state.questId }));
     this._store.pipe(
-      select(selectors.selectBoard),
-    ).subscribe(board => {
-      if (board.quests && board.quests[this.state.questId] && typeof board.quests[this.state.questId].status === 'boolean') {
-        this.quest = board.quests[this.state.questId];
+      select(selectors.selectGameState),
+    ).subscribe(game => {
+      if (game.quests && game.quests[this.state.questId] && typeof game.quests[this.state.questId].status === 'boolean') {
+        this.quest = game.quests[this.state.questId];
       }
     });
   }
 
   endTurn() {
-    this._store.dispatch(getBoard({ gameId: this.state.gameId }));
+    this._store.dispatch(getGame({ gameId: this.state.gameId }));
     this.finished();
   }
 

@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Player } from '../../../services/game/game.service';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
+import { Player } from '../../../types';
 
 @Component({
   selector: 'app-dialog',

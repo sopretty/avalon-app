@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 
-import { Game, GameService, Player } from '../../services/game/game.service';
+import { GameService } from '../../services/game/game.service';
 import { State } from '../../store/reducers';
 import * as selectors from '../../store/reducers/selectors';
+import { Game, Player } from '../../types';
+import { guessMerlin } from '../../store/actions/actions';
 
 @Component({
   selector: 'app-end-game',
@@ -14,7 +16,7 @@ import * as selectors from '../../store/reducers/selectors';
 })
 export class EndGameComponent implements OnInit {
 
-  private game: Game;
+  game: Game;
 
   selectedPlayer: Player;
 
@@ -29,15 +31,22 @@ export class EndGameComponent implements OnInit {
   }
 
   select(event) {
+    this.store.dispatch(guessMerlin({
+      gameId: this.game.id,
+      playerId: this.game.players.find(player => !!player.assassin).id,
+      merlinId: event.value.id
+    }));
     this.selectedPlayer = event.value;
-  }
-
-  get questStatuses(): { success: number, fail: number } {
-    return this.gameService.isGameEnded(this.game.board.quests);
   }
 
   get bluePlayers(): Player[] {
     return this.game.players.filter(player => player.team === 'blue');
+  }
+
+  playerRole(id: string): string {
+    if (this.game.players[id]) {
+      return this.game.players[id].role;
+    }
   }
 
 }

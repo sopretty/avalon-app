@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import { Event, GameState, State } from './index';
-import { Game, GameBoard } from '../../services/game/game.service';
+
+import { Event, GameState, State } from '.';
+import { Game, Rules } from '../../types';
 
 export const selectGame = (state: State) => state.game;
 
@@ -24,9 +25,10 @@ export const selectEvents = createSelector<State, GameState, Array<Event>>(
   (state: GameState) => state.events
 );
 
-export const selectBoard = createSelector<State, GameState, GameBoard>(
+export const selectRules = createSelector<State, GameState, Rules>(
   selectGame,
-  (state: GameState) => state.game.board
+  (state: GameState) => state.rules
 );
+
 
 

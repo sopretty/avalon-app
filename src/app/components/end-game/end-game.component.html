@@ -19,11 +19,11 @@
       </div>
 
       <div *ngIf="selectedPlayer">
-        <div *ngIf="!playerRole(game.result.merlin_id)"></div>
-        <div *ngIf="playerRole(game.result.merlin_id) === 'merlin'">
+        <div *ngIf="!playerRole(game.result.guess_merlin_id)"></div>
+        <div *ngIf="playerRole(game.result.guess_merlin_id) === 'merlin'">
           Red find Merlin and win the game!
         </div>
-        <div *ngIf="playerRole(game.result.merlin_id) !== 'merlin'">
+        <div *ngIf="playerRole(game.result.guess_merlin_id) !== 'merlin'">
           Blue win the game!
         </div>
         <button mat-raised-button color="primary" routerLink="/">Play again</button>

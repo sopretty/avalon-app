@@ -40,17 +40,18 @@ export class DashboardComponent implements OnInit {
           this.maxNumberPlayer = Number(rulesKeys[rulesKeys.length - 1]);
           this.loading = false;
           this.rules = rules;
+          this.numberChoosed = this.minNumberPlayer;
+          this.players = Array.from(new Array(this.numberChoosed), (p, index) => (`DefaultName-${index + 1}`));
+          this.form = this.formBuilder.group({
+            players: new FormArray([]),
+            nbPlayers: new FormControl(this.minNumberPlayer),
+          });
+          this.addPlayerNames();
+          this.onFormChange();
         }
       }
     );
-    this.numberChoosed = this.minNumberPlayer;
-    this.players = Array.from(new Array(this.numberChoosed), (p, index) => (`DefaultName-${index + 1}`));
-    this.form = this.formBuilder.group({
-      players: new FormArray([]),
-      nbPlayers: new FormControl(this.minNumberPlayer),
-    });
-    this.addPlayerNames();
-    this.onFormChange();
+
   }
 
   addPlayerNames(): void {
@@ -65,7 +66,9 @@ export class DashboardComponent implements OnInit {
   }
 
   createArray(n: number): any[] {
-    return new Array(n).fill(null);
+    if (n) {
+      return new Array(n).fill(null);
+    }
   }
 
   onFormChange(): void {

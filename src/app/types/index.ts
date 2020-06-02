@@ -14,7 +14,7 @@ export interface Player {
 
 export interface GameResult {
   status: boolean;
-  merlin_id?: string;
+  guess_merlin_id?: string;
 }
 
 export interface Game {
@@ -30,7 +30,7 @@ export interface Game {
 export interface Quest {
   nb_votes_to_fail: number;
   nb_players_to_send: number;
-  votes?: boolean[];
+  votes?: { [playerId: string]: boolean }[];
   status?: boolean;
 }
 

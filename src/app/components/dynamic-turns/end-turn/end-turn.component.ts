@@ -27,7 +27,8 @@ export class EndTurnComponent extends GenericTurnComponent implements OnInit {
     this._store.pipe(
       select(selectors.selectGameState),
     ).subscribe(game => {
-      if (game.quests && game.quests[this.state.questId] && typeof game.quests[this.state.questId].status === 'boolean') {
+      console.log(game.quests, game.quests[this.state.questId], typeof game.quests[this.state.questId].status === 'boolean');
+      if (!!game.quests && !!game.quests[this.state.questId] && typeof game.quests[this.state.questId].status === 'boolean') {
         this.quest = game.quests[this.state.questId];
       }
     });
@@ -36,6 +37,13 @@ export class EndTurnComponent extends GenericTurnComponent implements OnInit {
   endTurn() {
     this._store.dispatch(getGame({ gameId: this.state.gameId }));
     this.finished();
+  }
+
+  get votes() {
+    if (this.quest) {
+      return Object.keys(this.quest.votes);
+    }
+    return [];
   }
 
 }

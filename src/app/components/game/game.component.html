@@ -1,14 +1,14 @@
-<div *ngIf="clear && !game" class="board">
+<div *ngIf="clear && game && !game.result" class="board">
 
   <div class="quests">
     <div *ngFor="let item of game.quests; let i = index" class="quest">
       <div class="title">quest n°{{i + 1}}</div>
       <div
         [ngClass]="{'circle': true, 'current-round': i === game.current_quest, 'fail-circle': questFailed(i), 'success-circle': questSucceed(i)}">
-        <div class="content">{{item.quest}}</div>
+        <div class="content">{{item.nb_players_to_send}}</div>
       </div>
       <div class="fail">
-        {{item.fail}} fail(s) required
+        {{item.nb_votes_to_fail}} fail(s) required
       </div>
     </div>
   </div>

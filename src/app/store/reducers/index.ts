@@ -53,21 +53,24 @@ const gameReducer = createReducer(
       audio: payload.audio
     });
   }),
-  on(actions.setGame, (state, { game }) => ({
+  on(actions.setGame, (state, game) => ({
     ...state,
-    game: {
-      ...state.game,
-      ...game
-    }
+    game: game,
   })),
   on(actions.setQuest, (state, { quest, questId }) => ({
     ...state,
     game: {
       ...state.game,
-      quests: state.game.quests.map((questState, index) => index === questId ? {
-        ...questState,
-        ...quest
-      } : questState)
+      quests: state.game.quests.map((questState, index) =>
+        index === questId ?
+          { ...quest } : { ...questState })
+    }
+  })),
+  on(actions.setRules, (state, { rules }) => ({
+    ...state,
+    rules: {
+      ...state.rules,
+      ...rules
     }
   })),
   // Loading state

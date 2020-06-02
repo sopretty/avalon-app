@@ -50,7 +50,10 @@ export class GameComponent implements OnInit {
       this.handleEvent(events);
     });
 
-    store.pipe(select(selectors.selectGameState)).subscribe(game => this.game = game);
+    store.pipe(select(selectors.selectGameState)).subscribe(game => {
+      console.log(game);
+      this.game = game;
+    });
   }
 
   ngOnInit() {

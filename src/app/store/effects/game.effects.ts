@@ -56,7 +56,7 @@ export class GameEffects {
       this.actions$.pipe(
         ofType(actions.getGame),
         switchMap(({ gameId }) => this.gameService.getGame(gameId)),
-        map(game => actions.setGame({ game }))
+        map(game => actions.setGame(game))
       )
   );
 
@@ -99,7 +99,7 @@ export class GameEffects {
     this.actions$.pipe(
       ofType(actions.questUnsend),
       switchMap(({ gameId }) => this.gameService.questUnsend(gameId)),
-      map(game => actions.setGame({ game }))
+      map(game => actions.setGame(game))
     ));
 
   getQuest$ = createEffect(() =>

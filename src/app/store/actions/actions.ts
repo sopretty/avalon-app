@@ -24,7 +24,7 @@ export const getGame = createAction(
 );
 export const setGame = createAction(
   '[Game Page] Set the current game',
-  props<{ game: Game }>()
+  props<Game>()
 );
 
 // Result Actions

@@ -1,3 +1,4 @@
+import { onLoadSend, onLoadUnsend, onErrorUnsend, onErrorSend, onSuccessSend } from './../actions/actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
@@ -51,14 +52,27 @@ export class GameEffects {
       )
   );
 
+
+  getGameLoading$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.getGame),
+    map(() => onLoad())
+  ));
+
+
   getGame$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(actions.getGame),
         switchMap(({ gameId }) => this.gameService.getGame(gameId)),
-        map(game => actions.setGame(game))
+        switchMap(game => [actions.setGame(game), actions.onSuccess()]),
+        catchError(() => of(actions.onError()))
       )
   );
+
+  createQuestLoading$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.createQuest),
+    map(() => onLoadSend())
+  ));
 
   createQuest$ = createEffect(() => this.actions$.pipe(
     ofType(actions.createQuest),
@@ -67,12 +81,12 @@ export class GameEffects {
         mapTo({ players, questId, gameId }),
       )),
     switchMap(({ players, questId, gameId }) => ([
-      onSuccess(),
+      onSuccessSend(),
       addEvents({
         events: players.map(player => ({ type: 'app-vote-turn', state: { player, questId, gameId } }))
       }), addEvents({ events: [{ type: 'app-end-turn', state: { questId, gameId } }] })])
     ),
-    catchError(() => of(onError()))
+    catchError(() => of(onErrorSend()))
     )
   );
 
@@ -90,16 +104,18 @@ export class GameEffects {
     catchError(() => of(onError(), consumeEvents()))
   ));
 
-  createQuestLoading$ = createEffect(() => this.actions$.pipe(
-    ofType(actions.createQuest),
-    map(() => onLoad())
-  ));
+  questUnsendLoading$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.questUnsend),
+      map(() => onLoadUnsend())
+    ));
 
   questUnsend$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.questUnsend),
       switchMap(({ gameId }) => this.gameService.questUnsend(gameId)),
-      map(game => actions.setGame(game))
+      switchMap(game => [actions.setGame(game), actions.onSuccessUnsend()]),
+      catchError(() => of(onErrorUnsend())),
     ));
 
   getQuest$ = createEffect(() =>

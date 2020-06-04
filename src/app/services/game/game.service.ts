@@ -18,32 +18,32 @@ export class GameService {
   }
 
   getAudio(gameId: any): Observable<ArrayBuffer> {
-    return this._http.get(`${environment.apiUrl}/games/${gameId}/mp3`,
+    return this._http.get(`${environment.apiUrl}games/${gameId}/mp3`,
       { responseType: 'arraybuffer' });
   }
 
   getGame(gameId: string): Observable<Game> {
-    return this._http.get<Game>(`${environment.apiUrl}/games/${gameId}`);
+    return this._http.get<Game>(`${environment.apiUrl}games/${gameId}`);
   }
 
   questUnsend(gameId: string): Observable<Game> {
-    return this._http.post<Game>(`${environment.apiUrl}/games/${gameId}/quest_unsend`, undefined);
+    return this._http.post<Game>(`${environment.apiUrl}games/${gameId}/quest_unsend`, undefined);
   }
 
   setVote(gameId: string, questId: number, playerId: string, vote: boolean): Observable<void> {
-    return this._http.post<void>(`${environment.apiUrl}/games/${gameId}/quests/${questId}`, { [playerId]: vote });
+    return this._http.post<void>(`${environment.apiUrl}games/${gameId}/quests/${questId}`, { [playerId]: vote });
   }
 
   createQuest(gameId: string, questId: number, playerIds: string[]): Observable<void> {
-    return this._http.put<void>(`${environment.apiUrl}/games/${gameId}/quests/${questId}`, playerIds);
+    return this._http.put<void>(`${environment.apiUrl}games/${gameId}/quests/${questId}`, playerIds);
   }
 
   getQuest(gameId: string, questId: number): Observable<QuestResult> {
-    return this._http.get<QuestResult>(`${environment.apiUrl}/games/${gameId}/quests/${questId}`);
+    return this._http.get<QuestResult>(`${environment.apiUrl}games/${gameId}/quests/${questId}`);
   }
 
   guessMerlin(gameId: string, playerId: string, merlinId: string): Observable<GameResult> {
-    return this._http.post<GameResult>(`${environment.apiUrl}/games/${gameId}/guess_merlin`, { [playerId]: merlinId });
+    return this._http.post<GameResult>(`${environment.apiUrl}games/${gameId}/guess_merlin`, { [playerId]: merlinId });
   }
 
 }

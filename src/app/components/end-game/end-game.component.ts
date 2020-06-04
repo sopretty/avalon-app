@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 
-import { GameService } from '../../services/game/game.service';
 import { State } from '../../store/reducers';
 import * as selectors from '../../store/reducers/selectors';
 import { Game, Player } from '../../types';
@@ -21,8 +19,6 @@ export class EndGameComponent implements OnInit {
   selectedPlayer: Player;
 
   constructor(
-    private gameService: GameService,
-    private route: ActivatedRoute,
     private store: Store<State>) {
   }
 

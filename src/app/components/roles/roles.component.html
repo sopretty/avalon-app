@@ -17,8 +17,9 @@
           </mat-checkbox>
         </div>
         <div *ngIf="!form.valid">You have exceeded the red or blue players limit</div>
-        <div class="flex-center-column">
-          <button mat-raised-button color="primary" [disabled]="form.invalid">Start the game !</button>
+        <div class="flex-center-column button-container">
+          <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
+          <button mat-raised-button color="primary" [disabled]="form.invalid || loading">Start the game !</button>
         </div>
       </form>
     </div>

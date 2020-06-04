@@ -73,7 +73,7 @@ const gameReducer = createReducer(
       ...rules
     }
   })),
-  // Loading state
+  // Loading states
   on(actions.onLoad, (state) => ({
     ...state,
     loading: true
@@ -85,6 +85,50 @@ const gameReducer = createReducer(
   on(actions.onError, (state) => ({
     ...state,
     loading: false
+  })),
+  // Unsend quest Loading
+  on(actions.onLoadUnsend, (state) => ({
+    ...state,
+    game: {
+      ...state.game,
+      loadingUnsend: true,
+    }
+  })),
+  on(actions.onSuccessUnsend, (state) => ({
+    ...state,
+    game: {
+      ...state.game,
+      loadingUnsend: false,
+    }
+  })),
+  on(actions.onErrorUnsend, (state) => ({
+    ...state,
+    game: {
+      ...state.game,
+      loadingUnsend: false,
+    }
+  })),
+  // Send quest Loading
+  on(actions.onLoadSend, (state) => ({
+    ...state,
+    game: {
+      ...state.game,
+      loadingSend: true,
+    }
+  })),
+  on(actions.onSuccessSend, (state) => ({
+    ...state,
+    game: {
+      ...state.game,
+      loadingSend: false,
+    }
+  })),
+  on(actions.onErrorSend, (state) => ({
+    ...state,
+    game: {
+      ...state.game,
+      loadingSend: false,
+    }
   })),
 );
 

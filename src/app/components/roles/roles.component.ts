@@ -39,13 +39,12 @@ export class RolesComponent implements OnInit {
     private router: Router,
     private store: Store<State>,
     private configService: ConfigService) {
-    this.loading = true;
+    this.loading = false;
   }
 
   ngOnInit() {
     this.store.select(selectRules).subscribe(rules => {
       if (rules) {
-        this.loading = false;
         const ruleKey = Object.keys(rules).find((nbPlayer) => Number(nbPlayer) === this.configService.players.length);
         if (ruleKey) {
           this.allowed = { blue: rules[ruleKey].blue, red: rules[ruleKey].red };
@@ -95,6 +94,7 @@ export class RolesComponent implements OnInit {
   }
 
   submit(): void {
+    this.loading = true;
     this.configService.roles = this.rolesForm.controls.reduce(
       (acc, curr, index) =>
         acc.concat((!!curr.value ? this.roles[index].characters : []))

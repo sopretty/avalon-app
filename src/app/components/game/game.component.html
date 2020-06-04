@@ -1,4 +1,4 @@
-<div *ngIf="clear && game && !game.result" class="board">
+<div *ngIf="clear && game && !game.result && !globalLoading" class="board">
 
   <div class="quests">
     <div *ngFor="let item of game.quests; let i = index" class="quest">
@@ -17,10 +17,17 @@
     It's {{currentPlayer.name}}'s turn.
     You need to pick who will do the quest
     <div>If the vote succeed
-      <button color="primary" mat-raised-button (click)="openPlayerDialog()">pick the player</button>
+      <button color="primary" mat-raised-button [disabled]="game.loadingSend" (click)="openPlayerDialog()">
+        <mat-spinner *ngIf="game.loadingSend" diameter="24" class="spinner-container"></mat-spinner>
+        pick the player
+      </button>
+
     </div>
     <div>The vote fail
-      <button mat-raised-button color="warn" [disabled]="game.nb_quest_unsend === 5" (click)="nextTurn()">next turn
+      <button mat-raised-button color="warn" [disabled]="game.nb_quest_unsend === 5 || game.loadingUnsend"
+              (click)="nextTurn()">
+        <mat-spinner *ngIf="game.loadingUnsend" diameter="24" class="spinner-container"></mat-spinner>
+        next turn
       </button>
     </div>
   </div>
@@ -36,4 +43,8 @@
 
 <div *ngIf="!!game.result">
   <app-end-game></app-end-game>
+</div>
+
+<div *ngIf="clear && globalLoading" class="global-spinner">
+  <mat-spinner></mat-spinner>
 </div>

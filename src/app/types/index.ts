@@ -25,6 +25,8 @@ export interface Game {
   quests: Quest[];
   nb_quest_unsend: number;
   result?: GameResult;
+  loadingUnsend?: boolean;
+  loadingSend?: boolean;
 }
 
 export interface Quest {

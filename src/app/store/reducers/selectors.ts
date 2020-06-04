@@ -30,5 +30,8 @@ export const selectRules = createSelector<State, GameState, Rules>(
   (state: GameState) => state.rules
 );
 
-
+export const selectLoading = createSelector<State, GameState, boolean>(
+  selectGame,
+  (state: GameState) => state.loading
+);
 

@@ -82,8 +82,18 @@ export const setAudio = createAction(
   props<{ audio: ArrayBuffer }>()
 );
 
-// Loading Actions
+// Global Loading Actions
 
 export const onLoad = createAction('[All Pages] Set loading state');
 export const onSuccess = createAction('[All Pages] Set success state');
 export const onError = createAction('[All Pages] Set error state');
+
+/// Send & Unsend Loading Actions
+
+export const onLoadUnsend = createAction('[Game Page] Set loading state during unsend');
+export const onSuccessUnsend = createAction('[Game Page] Set success state during unsend');
+export const onErrorUnsend = createAction('[Game Page] Set error state during unsend');
+
+export const onLoadSend = createAction('[Game Page] Set loading state during send');
+export const onSuccessSend = createAction('[Game Page] Set success state during send');
+export const onErrorSend = createAction('[Game Page] Set error state during send');

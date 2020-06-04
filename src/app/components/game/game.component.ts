@@ -34,6 +34,8 @@ export class GameComponent implements OnInit {
 
   game: Game;
 
+  globalLoading: boolean;
+
   clear: boolean;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
@@ -50,8 +52,13 @@ export class GameComponent implements OnInit {
       this.handleEvent(events);
     });
 
+    store.pipe(
+      select(selectors.selectLoading),
+    ).subscribe(loading => {
+      this.globalLoading = loading;
+    });
+
     store.pipe(select(selectors.selectGameState)).subscribe(game => {
-      console.log(game);
       this.game = game;
     });
   }

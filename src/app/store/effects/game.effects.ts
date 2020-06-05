@@ -30,7 +30,7 @@ export class GameEffects {
             switchMap(game => [
                 actions.setGame(game),
                 actions.addEvents({
-                  events: game.players.map(player => ({ type: 'app-role-turn', state: player }))
+                  events: game.players.reverse().map(player => ({ type: 'app-role-turn', state: player }))
                 }),
                 actions.addEvents({
                   events: [{
@@ -83,7 +83,7 @@ export class GameEffects {
     switchMap(({ players, questId, gameId }) => ([
       onSuccessSend(),
       addEvents({
-        events: players.map(player => ({ type: 'app-vote-turn', state: { player, questId, gameId } }))
+        events: players.reverse().map(player => ({ type: 'app-vote-turn', state: { player, questId, gameId } }))
       }), addEvents({ events: [{ type: 'app-end-turn', state: { questId, gameId } }] })])
     ),
     catchError(() => of(onErrorSend()))

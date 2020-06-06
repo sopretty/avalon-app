@@ -1,0 +1,78 @@
+.mat-button {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 48px;
+    width: 180px;
+    color: white;
+    position:relative;
+    border-radius: 0px;
+
+    &:after {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      position: absolute;
+      top:0;
+      left:0;
+      box-shadow: 0px 0px 0.25em 0.25em rgba(0,0,0,0.5) inset;
+    }
+}
+
+.button--primary {
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 8px 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 0.1px white;
+    background: linear-gradient( #004d1a ,#2eb82e,#004d1a);
+    border: 0.25em outset #004d1a;
+    cursor: pointer;
+}
+
+/**
+    Secondary Buttons
+ */
+
+.button--secondary {
+  background-color: blue !important;
+}
+
+/**
+    Danger Buttons
+ */
+
+.button--danger {
+  background-color: red !important;
+}
+
+/**
+    Disable Button
+ */
+
+.button--disabled {
+  background-color: gray !important;
+}
+
+.button-container {
+  background-color: green;
+  border-width: 2px;
+  border-style: outset outset outset inset;
+  border-color: #FB2;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0.09375em #000;
+}
+
+.button-outline {
+  display: inline-block;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    border: 0.2em double #FB2;
+}

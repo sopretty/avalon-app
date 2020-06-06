@@ -30,6 +30,7 @@ import { VoteTurnComponent } from './components/dynamic-turns/vote-turn/vote-tur
 import { EndTurnComponent } from './components/dynamic-turns/end-turn/end-turn.component';
 import { metaReducers } from './store/reducers/meta-reducer';
 import { EndGameComponent } from './components/end-game/end-game.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EndGameComponent } from './components/end-game/end-game.component';
     DialogComponent,
     VoteTurnComponent,
     EndTurnComponent,
-    EndGameComponent
+    EndGameComponent,
+    ButtonComponent
   ],
   imports: [
     HttpClientModule,

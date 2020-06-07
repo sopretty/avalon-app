@@ -1,7 +1,7 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewContainerRef } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Event, State } from '../../store/reducers';
 import { RoleTurnComponent } from '../dynamic-turns/role-turn/role-turn.component';

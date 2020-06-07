@@ -17,14 +17,12 @@ import { GenericTurnComponent } from './components/dynamic-turns/generic-turn/ge
 import { RoleTurnComponent } from './components/dynamic-turns/role-turn/role-turn.component';
 import { GameEffects } from './store/effects/game.effects';
 import { DialogComponent } from './components/game/dialog/dialog.component';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatInputModule,
-  MatProgressSpinnerModule,
-  MatSelectModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VoteTurnComponent } from './components/dynamic-turns/vote-turn/vote-turn.component';
 import { EndTurnComponent } from './components/dynamic-turns/end-turn/end-turn.component';

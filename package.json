@@ -21,10 +21,10 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
-    "@ngrx/effects": "^8.6.0",
-    "@ngrx/store": "^8.6.0",
+    "@ngrx/effects": "^9.2.0",
+    "@ngrx/store": "^9.2.0",
     "core-js": "^3.6.4",
-    "rxjs": "~6.5.4",
+    "rxjs": "~6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

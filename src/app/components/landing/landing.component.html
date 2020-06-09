@@ -1,44 +1,13 @@
 <div class="bcg">
-
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
-  </div>
-  <div class="firefly">
+  <!-- Fireflies -->
+  <div *ngFor="let firefly of fireflies" class="firefly">
   </div>
 
   <div class="flex-center-column">
     <div class="flex-center-row">
       <div class="flex-center-column">
         <div class="mat-display-4 white">Avalon</div>
-        <app-button (click)="launchGame()" text="Play"></app-button>
-        <!-- <button mat-raised-button (click)="launchGame()">
-          Play
-        </button> -->
+        <app-button (click)="launchGame()" [text]="'LANDING.playButtonLabel' | translate"></app-button>
       </div>
     </div>
   </div>

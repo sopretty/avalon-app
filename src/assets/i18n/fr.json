@@ -1,0 +1,39 @@
+{
+  "LANDING": {
+    "playButtonLabel": "Jouer"
+  },
+  "DASHBOARD": {
+    "selectLabel": "Choisissez un nombre de joueur",
+    "defaultName": "DefaultName",
+    "invalidFormWarning": "Vous devez choisir un nom pour chaque joueur",
+    "selectCharactersButtonLabel": "Choisissez vos personnages"
+  },
+  "ROLES": {
+    "title": "Quel roles voulez vous ajouter ?",
+    "redDescription": "Nombre de rôles rouge autorisé:",
+    "blueDescription": "Nombre de rôles bleu autorisé:",
+    "invalidFormWarning": "Vous ne pouvez pas avoir plus de personnage que de joueur rouge ou bleu",
+    "startGameButtonLabel": "Démarrer l'histoire"
+  },
+  "AUDIO": {
+    "title": "Débuter l'histoire et fermez vos yeux !",
+    "startStoryButtonLabel": "Démarrer ou relancer l'histoire",
+    "stopStoryButtonLabel": "Arrêter l'histoire",
+    "startGameButtonLabel": "Commencer la partie"
+  },
+  "GAME": {
+    "questTitle": "Quête n°",
+    "questRequired": "echec(s) requis",
+    "currentTurn": "C'est le tour de {{value}}.\n Vous devez choisir l'équipe qui partira en quête",
+    "voteSucceed": "Si la majorité vote pour que l'équipe parte",
+    "pickPlayer": "Choisissez l'équipe",
+    "voteFailed": "Si la majorité vote contre",
+    "nextTurn": "Passer le tour"
+  },
+  "ROLE_TURN": {
+    "title": "Passez le téléphone à {{value}}",
+    "description": "Si vous êtes {{value}} appuyer sur l'écran pour connaître votre rôle/équipe",
+    "titleRevealed": "Vous êtes dans l'équipe {{value}}",
+    "descriptionRevealed": "Votre rôle est {{value}}"
+  }
+}

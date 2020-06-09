@@ -1,0 +1,39 @@
+{
+  "LANDING": {
+    "playButtonLabel": "Play"
+  },
+  "DASHBOARD": {
+    "selectLabel": "Choose the number of players",
+    "defaultName": "DefaultName",
+    "invalidFormWarning": "You have to set a name for each users",
+    "selectCharactersButtonLabel": "Select game's characters"
+   },
+   "ROLES": {
+     "title": "What roles do you want to add ?",
+     "redDescription": "Number of red roles allowed:",
+     "blueDescription": "Number of blue roles allowed:",
+     "invalidFormWarning": "You have exceeded the red or blue players limit",
+     "startGameButtonLabel": "Start the story"
+   },
+   "AUDIO": {
+    "title": "Start the story and close your eyes !",
+    "startStoryButtonLabel": "Start or restart the story",
+    "stopStoryButtonLabel": "Stop the story",
+    "startGameButtonLabel": "Start the game"
+  },
+  "GAME": {
+    "questTitle": "quest n°",
+    "questRequired": "fail(s) required",
+    "currentTurn": "It's {{value}}'s turn.\nYou need to pick who will do the quest",
+    "voteSucceed": "If the vote succeed",
+    "pickPlayer": "pick the player",
+    "voteFailed": "The vote fail",
+    "nextTurn": "next turn"
+  },
+  "ROLE_TURN": {
+    "title": "Give the cellphone to {{value}}",
+    "description": "If you are {{value}} tap the screen to know your team/role",
+    "titleRevealed": "You are in the {{value}} team",
+    "descriptionRevealed": "You role is {{value}}"
+  }
+}

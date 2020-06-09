@@ -60,7 +60,6 @@ export class GameComponent implements OnInit {
 
     store.pipe(select(selectors.selectGameState)).subscribe(game => {
       this.game = game;
-      console.log(game);
     });
   }
 

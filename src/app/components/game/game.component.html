@@ -2,32 +2,32 @@
 
   <div class="quests">
     <div *ngFor="let item of game.quests; let i = index" class="quest">
-      <div class="title">quest n°{{i + 1}}</div>
+      <div class="title">{{'GAME.questTitle' | translate}}{{i + 1}}</div>
       <div
         [ngClass]="{'circle': true, 'current-round': i === game.current_quest, 'fail-circle': questFailed(i), 'success-circle': questSucceed(i)}">
         <div class="content">{{item.nb_players_to_send}}</div>
       </div>
       <div class="fail">
-        {{item.nb_votes_to_fail}} fail(s) required
+        {{item.nb_votes_to_fail}} {{'GAME.questRequired' | translate}}
       </div>
     </div>
   </div>
 
   <div class="board-middle mat-h3" [style.margin-top.px]="18">
-    It's {{currentPlayer.name}}'s turn.
-    You need to pick who will do the quest
-    <div>If the vote succeed
+    {{'GAME.currentTurn' | translate: {value: currentPlayer.name} }}
+    
+    <div>{{'GAME.voteSucceed' | translate}}
       <button color="primary" mat-raised-button [disabled]="game.loadingSend" (click)="openPlayerDialog()">
         <mat-spinner *ngIf="game.loadingSend" diameter="24" class="spinner-container"></mat-spinner>
-        pick the player
+        {{'GAME.pickPlayer' | translate}}
       </button>
 
     </div>
-    <div>The vote fail
+    <div>{{'GAME.voteSucceed' | translate}}
       <button mat-raised-button color="warn" [disabled]="game.nb_quest_unsend === 5 || game.loadingUnsend"
               (click)="nextTurn()">
         <mat-spinner *ngIf="game.loadingUnsend" diameter="24" class="spinner-container"></mat-spinner>
-        next turn
+        {{'GAME.nextTurn' | translate}}
       </button>
     </div>
   </div>

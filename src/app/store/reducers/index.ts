@@ -39,7 +39,7 @@ const gameReducer = createReducer(
     };
   }),
   on(actions.consumeEvents, (state) => {
-    const events = state.events;
+    const events = state.events.slice();
     events.pop();
 
     return {

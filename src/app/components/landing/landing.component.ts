@@ -9,10 +9,17 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
 
+  nbFireflies: number;
+
   constructor(private router: Router) {
+    this.nbFireflies = 15;
   }
 
   ngOnInit() {
+  }
+
+  get fireflies(): Array<number>{
+    return Array.from(Array(this.nbFireflies).keys()) ;
   }
 
   public launchGame() {

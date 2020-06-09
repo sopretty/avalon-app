@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -22,14 +23,17 @@ export class DashboardComponent implements OnInit {
   form: FormGroup;
   loading: boolean;
   rules: Rules;
+  defaultNameTranslation = "DefaultName";
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private store: Store<State>,
     private configService: ConfigService,
+    private translateService: TranslateService,
   ) {
     this.loading = true;
+    this.defaultNameTranslation = this.translateService.instant('DASHBOARD.defaultName');
   }
 
   ngOnInit() {
@@ -41,7 +45,7 @@ export class DashboardComponent implements OnInit {
           this.loading = false;
           this.rules = rules;
           this.numberChoosed = this.minNumberPlayer;
-          this.players = Array.from(new Array(this.numberChoosed), (p, index) => (`DefaultName-${index + 1}`));
+          this.players = Array.from(new Array(this.numberChoosed), (p, index) => (`${this.defaultNameTranslation}-${index + 1}`));
           this.form = this.formBuilder.group({
             players: new FormArray([]),
             nbPlayers: new FormControl(this.minNumberPlayer),

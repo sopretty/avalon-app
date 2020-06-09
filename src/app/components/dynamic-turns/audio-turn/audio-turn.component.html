@@ -6,11 +6,11 @@
       </div>
       <div class="flex-center-column" *ngIf="!loading">
         <div class="mat-display-2">
-          Start the story and close your eyes !
+          {{'AUDIO.title' | translate}}
         </div>
-        <button mat-raised-button (click)="playAudio()">Start or restart the story</button>
-        <button mat-raised-button (click)="stopAudio()">Stop the story</button>
-        <button mat-raised-button color="primary" (click)="playGame()">Start the game</button>
+        <button mat-raised-button (click)="playAudio()">{{'AUDIO.startStoryButtonLabel' | translate}}</button>
+        <button mat-raised-button (click)="stopAudio()">{{'AUDIO.stopStoryButtonLabel' | translate}}</button>
+        <button mat-raised-button color="primary" (click)="playGame()">{{'AUDIO.startGameButtonLabel' | translate}}</button>
       </div>
     </div>
   </div>

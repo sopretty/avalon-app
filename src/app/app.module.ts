@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,11 @@ import { EndTurnComponent } from './components/dynamic-turns/end-turn/end-turn.c
 import { metaReducers } from './store/reducers/meta-reducer';
 import { EndGameComponent } from './components/end-game/end-game.component';
 import { ButtonComponent } from './button/button.component';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, '../assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -54,7 +60,12 @@ import { ButtonComponent } from './button/button.component';
     AppRoutingModule,
     StoreModule.forRoot({ game: reducers.reducer }, { metaReducers }),
     EffectsModule.forRoot([GameEffects]),
-    TranslateModule.forRoot({defaultLanguage: 'en'}),
+    TranslateModule.forRoot({
+    loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+  }}),
     // Material
     MatDialogModule,
     MatCheckboxModule,

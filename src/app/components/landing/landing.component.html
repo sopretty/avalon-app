@@ -7,7 +7,10 @@
     <div class="flex-center-row">
       <div class="flex-center-column">
         <div class="mat-display-4 white">Avalon</div>
-        <app-button (click)="launchGame()" [text]="'LANDING.playButtonLabel' | translate"></app-button>
+        <!-- <app-button (click)="launchGame()" [text]=""></app-button> -->
+        <button mat-raised-button (click)="launchGame()">
+          {{'LANDING.playButtonLabel' | translate}}
+        </button>	  
       </div>
     </div>
   </div>

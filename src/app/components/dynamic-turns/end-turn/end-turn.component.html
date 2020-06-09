@@ -2,10 +2,10 @@
   <div class="flex-center-row">
     <div class="flex-center-column">
       <div class="mat-h1">
-        <p>{{quest.status ? 'SUCCESS' : 'FAIL'}}</p>
-        <div>Résultat:
+        <p>{{quest.status ? ('END_TURN.success' | translate) : ('END_TURN.fail' | translate) }}</p>
+        <div>{{'END_TURN.result' | translate}}
           <div *ngFor="let vote of votes">
-            <p>{{quest.votes[vote] ? 'SUCCESS' : 'FAIL'}}</p>
+            <p>{{quest.votes[vote] ? ('END_TURN.success' | translate) : ('END_TURN.fail' | translate) }}</p>
           </div>
         </div>
       </div>

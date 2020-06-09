@@ -1,14 +1,14 @@
 <form [formGroup]="form">
-  <h1 mat-dialog-title>Choose {{data.pickNumber}} players</h1>
+  <h1 mat-dialog-title>{{'DIALOG.title' | translate: {value: data.pickNumber} }}</h1>
   <div mat-dialog-content>
     <div formArrayName="players" *ngFor="let player of playersForm.controls; let i = index">
       <mat-checkbox [formControlName]="i">{{data.players[i].name}}</mat-checkbox>
     </div>
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button (click)="closeDialog()">Cancel</button>
+    <button mat-raised-button (click)="closeDialog()">{{'DIALOG.cancelButtonLabel' | translate }}</button>
     <button mat-raised-button color="primary" [mat-dialog-close]="playerSelected"
-            [disabled]="numberSelected !== data.pickNumber">Done
+            [disabled]="numberSelected !== data.pickNumber">{{'DIALOG.doneButtonLabel' | translate }}
     </button>
   </div>
 </form>

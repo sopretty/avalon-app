@@ -81,12 +81,13 @@ export class GameEffects {
         mapTo({ players, questId, gameId }),
       )),
     switchMap(({ players, questId, gameId }) => ([
-      onSuccessSend(),
-      addEvents({
-        events: players.reverse().map(player => ({ type: 'app-vote-turn', state: { player, questId, gameId } }))
-      }), addEvents({ events: [{ type: 'app-end-turn', state: { questId, gameId } }] })])
+        onSuccessSend(),
+        addEvents({
+          events: players.slice().reverse().map(player => ({ type: 'app-vote-turn', state: { player, questId, gameId } }))
+        }), addEvents({ events: [{ type: 'app-end-turn', state: { questId, gameId } }] })
+      ]) 
     ),
-    catchError(() => of(onErrorSend()))
+    catchError((err) => {console.log(err); return of(onErrorSend())})
     )
   );
 

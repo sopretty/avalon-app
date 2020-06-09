@@ -35,5 +35,28 @@
     "description": "If you are {{value}} tap the screen to know your team/role",
     "titleRevealed": "You are in the {{value}} team",
     "descriptionRevealed": "You role is {{value}}"
+  },
+  "DIALOG": {
+    "title": "Choose {{value}} players",
+    "cancelButtonLabel": "Cancel",
+    "doneButtonLabel": "Done"
+  },
+  "VOTE_TURN": {
+    "title": "{{value}}'s turn to vote",
+    "failLabelButton": "FAIL",
+    "successButtonLabel": "SUCCESS"
+  },
+  "END_TURN": {
+    "result": "Result:",
+    "fail": "FAIL",
+    "success": "SUCCESS"
+  },
+  "END_GAME": {
+    "blueTeamWin": "Blue team won!\nRed team has the opportunity to win the game by correctly naming which of the blue players is Merlin.",
+    "redTeamWin": "Red team won",
+    "playAgain": "Play again",
+    "redTeamWinVote": "Red find Merlin and win the game!",
+    "blueTeamWinVote": "Blue win the game!",
+    "selectLabel": "Blue players"
   }
 }

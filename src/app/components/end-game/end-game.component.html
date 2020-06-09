@@ -2,10 +2,9 @@
   <div class="flex-center-row">
     <div class="flex-center-column">
       <div *ngIf="game.result.status && !selectedPlayer">
-        Blue team won!
-        Red team has the opportunity to win the game by correctly naming which of the blue players is Merlin.
+        {{'END_GAME.blueTeamWin' | translate}}
         <mat-form-field>
-          <mat-label>Blue player</mat-label>
+          <mat-label>{{'END_GAME.selectLabel' | translate}}</mat-label>
           <mat-select (selectionChange)="select($event)" name="player" [value]="">
             <mat-option *ngFor="let player of bluePlayers" [value]="player">
               {{player.name}}
@@ -14,19 +13,19 @@
         </mat-form-field>
       </div>
       <div *ngIf="!game.result.status && !selectedPlayer">
-        <p>Red team won</p>
-        <button mat-raised-button routerLink="/">Play again</button>
+        <p>{{'END_GAME.redTeamWin' | translate}}</p>
+        <button mat-raised-button routerLink="/">{{'END_GAME.playAgain' | translate}}</button>
       </div>
 
       <div *ngIf="selectedPlayer">
         <div *ngIf="!playerRole(game.result.guess_merlin_id)"></div>
         <div *ngIf="playerRole(game.result.guess_merlin_id) === 'merlin'">
-          Red find Merlin and win the game!
+          {{'END_GAME.redTeamWinVote' | translate}}
         </div>
         <div *ngIf="playerRole(game.result.guess_merlin_id) !== 'merlin'">
-          Blue win the game!
+          {{'END_GAME.blueTeamWinVote' | translate}}
         </div>
-        <button mat-raised-button color="primary" routerLink="/">Play again</button>
+        <button mat-raised-button color="primary" routerLink="/">{{'END_GAME.playAgain' | translate}}</button>
       </div>
     </div>
   </div>

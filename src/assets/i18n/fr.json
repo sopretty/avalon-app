@@ -4,11 +4,11 @@
   },
   "DASHBOARD": {
     "selectLabel": "Choisissez un nombre de joueur",
-    "defaultName": "DefaultName",
+    "defaultName": "défaut",
     "invalidFormWarning": "Vous devez choisir un nom pour chaque joueur",
     "selectCharactersButtonLabel": "Choisissez vos personnages"
   },
-  "ROLES": {
+  "ROLES_TURN": {
     "title": "Quel roles voulez vous ajouter ?",
     "redDescription": "Nombre de rôles rouge autorisé:",
     "blueDescription": "Nombre de rôles bleu autorisé:",
@@ -32,8 +32,31 @@
   },
   "ROLE_TURN": {
     "title": "Passez le téléphone à {{value}}",
-    "description": "Si vous êtes {{value}} appuyer sur l'écran pour connaître votre rôle/équipe",
+    "description": "Si vous êtes {{value}} appuyez sur l'écran pour connaître votre rôle/équipe",
     "titleRevealed": "Vous êtes dans l'équipe {{value}}",
     "descriptionRevealed": "Votre rôle est {{value}}"
+  },
+  "DIALOG": {
+    "title": "Choisissez {{value}} joueurs",
+    "cancelButtonLabel": "Annuler",
+    "doneButtonLabel": "Valider"
+  },
+  "VOTE_TURN": {
+    "title": "C'est le tour de {{value}}",
+    "failLabelButton": "ECHEC",
+    "successButtonLabel": "SUCCES"
+  },
+  "END_TURN": {
+    "result": "Résultat:",
+    "fail": "ECHEC",
+    "success": "SUCCES"
+  },
+  "END_GAME": {
+    "blueTeamWin": "L'équipe bleue gagne!\nL'équipe rouge a l'opportunité de gagner en trouvant qui était Merlin parmi les joueurs bleus.",
+    "redTeamWin": "L'équipe rouge gagne",
+    "playAgain": "Rejouer",
+    "redTeamWinVote": "L'équipe rouge a trouvé Merlin et gagne la partie !",
+    "blueTeamWinVote": "L'équipe rouge n'a pas trouvé Merlin, l'équipe bleue gagne la partie !",
+    "selectLabel": "Joeurs bleus"
   }
 }

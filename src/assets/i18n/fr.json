@@ -9,7 +9,7 @@
     "selectCharactersButtonLabel": "Choisissez vos personnages"
   },
   "ROLES": {
-    "title": "Quel roles voulez vous ajouter ?",
+    "title": "Quels rôles voulez vous ajouter ?",
     "redDescription": "Nombre de rôles rouge autorisé:",
     "blueDescription": "Nombre de rôles bleu autorisé:",
     "invalidFormWarning": "Vous ne pouvez pas avoir plus de personnage que de joueur rouge ou bleu",
@@ -63,6 +63,6 @@
     "playAgain": "Rejouer",
     "redTeamWinVote": "L'équipe rouge a trouvé Merlin et gagne la partie !",
     "blueTeamWinVote": "L'équipe rouge n'a pas trouvé Merlin, l'équipe bleue gagne la partie !",
-    "selectLabel": "Joeurs bleus"
+    "selectLabel": "Joueurs bleus"
   }
 }

@@ -35,9 +35,10 @@
   },
   "ROLE_TURN": {
     "title": "Passez le téléphone à {{value}}",
-    "description": "Si vous êtes {{value}} appuyez sur l'écran pour connaître votre rôle/équipe",
+    "description": "Si vous êtes {{value}} appuyez deux fois sur l'écran pour connaître votre rôle/équipe",
     "titleRevealed": "Vous êtes dans l'équipe {{value}}",
-    "descriptionRevealed": "Votre rôle est {{value}}"
+    "descriptionRevealed": "Votre rôle est {{value}}",
+    "hideRole": "Appuyez deux fois pour cacher votre rôle"
   },
   "DIALOG": {
     "title": "Choisissez {{value}} joueurs",

@@ -35,9 +35,10 @@
   },
   "ROLE_TURN": {
     "title": "Give the cellphone to {{value}}",
-    "description": "If you are {{value}} tap the screen to know your team/role",
+    "description": "If you are {{value}} tap twice the screen to know your team/role",
     "titleRevealed": "You are in the {{value}} team",
-    "descriptionRevealed": "You role is {{value}}"
+    "descriptionRevealed": "You role is {{value}}",
+    "hideRole": "Tap twice to hide your role"
   },
   "DIALOG": {
     "title": "Choose {{value}} players",

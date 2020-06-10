@@ -15,10 +15,29 @@ export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
   @Input() state: any;
   clicked: boolean;
 
+  preventSingleClick = false;
+  timer: any;
+  delay: number;
+
   constructor(store: Store<State>) {
     super(store);
-
+    this.delay = 200;
     this.clicked = false;
+  }
+
+  singleClick() {
+    this.preventSingleClick = false;
+      this.timer = setTimeout(() => {
+        if (!this.preventSingleClick) {
+           //Navigate on single click
+        }
+      }, this.delay);
+  }
+
+  doubleClick () {
+    this.preventSingleClick = true;
+    clearTimeout(this.timer);
+    this.open();
   }
 
   open() {

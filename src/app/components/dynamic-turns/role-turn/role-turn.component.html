@@ -1,4 +1,4 @@
-<div class="flex-center-column" (click)="open()">
+<div class="flex-center-column" (click)="singleClick()" (dblclick)="doubleClick()">
   <div class="flex-center-row">
     <div class="flex-center-column">
       <div class="mat-h1">
@@ -15,6 +15,9 @@
         </p>
         <p>
           {{ 'ROLE_TURN.descriptionRevealed' | translate: {value: state.role} }}
+        </p>
+        <p>
+          {{ 'ROLE_TURN.hideRole' | translate }}
         </p>
       </div>
     </div>

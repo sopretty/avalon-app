@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { Store} from '@ngrx/store';
 
@@ -15,29 +16,9 @@ export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
   @Input() state: any;
   clicked: boolean;
 
-  preventSingleClick = false;
-  timer: any;
-  delay: number;
-
-  constructor(store: Store<State>) {
+  constructor(store: Store<State>, private translateService: TranslateService) {
     super(store);
-    this.delay = 200;
-    this.clicked = false;
-  }
-
-  singleClick() {
-    this.preventSingleClick = false;
-      this.timer = setTimeout(() => {
-        if (!this.preventSingleClick) {
-           //Navigate on single click
-        }
-      }, this.delay);
-  }
-
-  doubleClick () {
-    this.preventSingleClick = true;
-    clearTimeout(this.timer);
-    this.open();
+    this.clicked = false; 
   }
 
   open() {
@@ -45,6 +26,13 @@ export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
       this.finished();
     }
     this.clicked = true;
+  }
+
+  getRole(role: string): string {
+    if(role === 'red' ||  role === 'blue') {
+      return this.translateService.instant(`ROLE_TURN.${role}`);
+    }
+    return role;
   }
 
 }

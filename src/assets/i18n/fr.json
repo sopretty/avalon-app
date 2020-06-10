@@ -38,7 +38,9 @@
     "description": "Si vous êtes {{value}} appuyez deux fois sur l'écran pour connaître votre rôle/équipe",
     "titleRevealed": "Vous êtes dans l'équipe {{value}}",
     "descriptionRevealed": "Votre rôle est {{value}}",
-    "hideRole": "Appuyez deux fois pour cacher votre rôle"
+    "hideRole": "Appuyez deux fois pour cacher votre rôle",
+    "blue": "bleu",
+    "red": "rouge"
   },
   "DIALOG": {
     "title": "Choisissez {{value}} joueurs",

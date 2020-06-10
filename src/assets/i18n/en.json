@@ -38,7 +38,9 @@
     "description": "If you are {{value}} tap twice the screen to know your team/role",
     "titleRevealed": "You are in the {{value}} team",
     "descriptionRevealed": "You role is {{value}}",
-    "hideRole": "Tap twice to hide your role"
+    "hideRole": "Tap twice to hide your role",
+    "blue": "blue",
+    "red": "red"
   },
   "DIALOG": {
     "title": "Choose {{value}} players",

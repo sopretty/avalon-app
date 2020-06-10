@@ -23,7 +23,7 @@
       </button>
 
     </div>
-    <div>{{'GAME.voteSucceed' | translate}}
+    <div>{{'GAME.voteFailed' | translate}}
       <button mat-raised-button color="warn" [disabled]="game.nb_quest_unsend === 5 || game.loadingUnsend"
               (click)="nextTurn()">
         <mat-spinner *ngIf="game.loadingUnsend" diameter="24" class="spinner-container"></mat-spinner>
@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<div *ngIf="!!game.result">
+<div *ngIf="!!game && !!game.result">
   <app-end-game></app-end-game>
 </div>
 

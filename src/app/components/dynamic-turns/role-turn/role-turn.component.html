@@ -1,22 +1,22 @@
-<div class="flex-center-column" (click)="singleClick()" (dblclick)="doubleClick()">
+<div class="flex-center-column" (dblclick)="open()">
   <div class="flex-center-row">
     <div class="flex-center-column">
       <div class="mat-h1">
-        <p>
+        <p class="noselect">
           {{ 'ROLE_TURN.title' | translate: {value: state.name} }}
         </p>
-        <p>
+        <p class="noselect">
           {{ 'ROLE_TURN.description' | translate: {value: state.name} }}
         </p>
       </div>
       <div *ngIf="clicked" class="mat-h1">
-        <p>
-          {{ 'ROLE_TURN.titleRevealed' | translate: {value: state.team} }}
+        <p class="noselect">
+          {{ 'ROLE_TURN.titleRevealed' | translate: {value: ('ROLE_TURN.' + state.team  | translate) } }}
         </p>
-        <p>
-          {{ 'ROLE_TURN.descriptionRevealed' | translate: {value: state.role} }}
+        <p class="noselect">
+          {{ 'ROLE_TURN.descriptionRevealed' | translate: {value: getRole(state.role)} }}
         </p>
-        <p>
+        <p class="noselect">
           {{ 'ROLE_TURN.hideRole' | translate }}
         </p>
       </div>

@@ -18,7 +18,7 @@
         </div>
         <div *ngIf="!form.valid">{{"DASHBOARD.invalidFormWarning" | translate}}</div>
         <div class="flex-center-column">
-          <button mat-raised-button color="primary" [disabled]="form.invalid">{{"DASHBOARD.selectCharactersButtonLabel" | translate}}</button>
+          <button mat-raised-button color="primary" [disabled]="form.invalid">{{"DASHBOARD.selectCharactersButtonLabel" | translate }}</button>
         </div>
       </form>
       <div *ngIf="loading">

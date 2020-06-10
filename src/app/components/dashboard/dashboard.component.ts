@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(newPlayerNumber => {
         if (this.playersForm.length < newPlayerNumber) {
           this.createArray(newPlayerNumber - this.playersForm.length).forEach(() => {
-              this.playersForm.push(new FormControl(`DefaultName-${this.playersForm.length + 1}`));
+              this.playersForm.push(new FormControl(`${this.defaultNameTranslation}-${this.playersForm.length + 1}`));
             }
           );
         }

@@ -2,7 +2,7 @@
   <div class="flex-center-row">
     <div class="flex-center-column mat-h1">
       {{'VOTE_TURN.title' | translate: {value: state.player.name} }}
-      <div class="flex-center-row">
+      <div class="flex-center-row" [ngClass]="buttonOrder ? 'reverse' : ''">
         <button mat-raised-button color="warn" (click)="fail()">{{'VOTE_TURN.failLabelButton' | translate}}</button>
         <button mat-raised-button color="primary" (click)="success()">{{'VOTE_TURN.successButtonLabel' | translate}}</button>
       </div>

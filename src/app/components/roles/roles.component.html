@@ -2,24 +2,24 @@
   <div class="flex-center-row">
     <div class="flex-center-column">
       <div class="mat-h1">
-        {{'ROLES_TURN.title' | translate}}
+        {{'ROLES.title' | translate}}
       </div>
       <div class="mat-h2">
-       {{'ROLES_TURN.redDescription' | translate}} {{allowed.red}}
+       {{'ROLES.redDescription' | translate}} {{allowed.red}}
       </div>
       <div class="mat-h2">
-        {{'ROLES_TURN.blueDescription' | translate}} {{allowed.blue}}
+        {{'ROLES.blueDescription' | translate}} {{allowed.blue}}
       </div>
       <form [formGroup]="form" (ngSubmit)="submit()">
         <div formArrayName="roles" *ngFor="let order of rolesForm.controls; let i = index">
           <mat-checkbox [formControlName]="i">
-            {{roles[i].description}}
+            {{roles[i].descriptionKey | translate}}
           </mat-checkbox>
         </div>
-        <div *ngIf="!form.valid">{{'ROLES_TURN.invalidFormWarning' | translate}}</div>
+        <div *ngIf="!form.valid">{{'ROLES.invalidFormWarning' | translate}}</div>
         <div class="flex-center-column button-container">
           <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
-          <button mat-raised-button color="primary" [disabled]="form.invalid || loading">{{'ROLES_TURN.startGameButtonLabel' | translate}}</button>
+          <button mat-raised-button color="primary" [disabled]="form.invalid || loading">{{'ROLES.startGameButtonLabel' | translate}}</button>
         </div>
       </form>
     </div>

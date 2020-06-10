@@ -16,8 +16,11 @@ export class VoteTurnComponent extends GenericTurnComponent implements OnInit {
 
   @Input() state: { player: Player, gameId: string, questId: number };
 
+  buttonOrder: boolean;
+
   constructor(private _store: Store<State>) {
     super(_store);
+    this.buttonOrder = !!Math.floor(Math.random() * 2);
   }
 
   fail() {

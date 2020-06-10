@@ -8,12 +8,15 @@
     "invalidFormWarning": "Vous devez choisir un nom pour chaque joueur",
     "selectCharactersButtonLabel": "Choisissez vos personnages"
   },
-  "ROLES_TURN": {
+  "ROLES": {
     "title": "Quel roles voulez vous ajouter ?",
     "redDescription": "Nombre de rôles rouge autorisé:",
     "blueDescription": "Nombre de rôles bleu autorisé:",
     "invalidFormWarning": "Vous ne pouvez pas avoir plus de personnage que de joueur rouge ou bleu",
-    "startGameButtonLabel": "Démarrer l'histoire"
+    "startGameButtonLabel": "Démarrer l'histoire",
+    "mordredDescription": "Mordred (rouge)",
+    "morganeDescription": "Morgane (rouge), Perceval (bleu)",
+    "oberonDescription": "Oberon (rouge)"
   },
   "AUDIO": {
     "title": "Débuter l'histoire et fermez vos yeux !",

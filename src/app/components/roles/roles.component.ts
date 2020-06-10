@@ -17,17 +17,17 @@ export class RolesComponent implements OnInit {
 
   selected: { red: number, blue: number };
   allowed: { red: number, blue: number };
-  roles: { description: string, characters: { name: string, team: string }[] }[] = [
+  roles: { descriptionKey: string, characters: { name: string, team: string }[] }[] = [
     {
-      description: 'Mordred (red)',
+      descriptionKey: 'ROLES.mordredDescription',
       characters: [{ name: 'mordred', team: 'red' }],
     },
     {
-      description: 'Morgane (red), Perceval (blue)',
+      descriptionKey: 'ROLES.morganeDescription',
       characters: [{ name: 'morgan', team: 'red' }, { name: 'perceval', team: 'blue' }],
     },
     {
-      description: 'Oberon (red)',
+      descriptionKey: 'ROLES.oberonDescription',
       characters: [{ name: 'oberon', team: 'red' }],
     },
   ];

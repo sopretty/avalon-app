@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store} from '@ngrx/store';
 
 import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { State } from '../../../store/reducers';
@@ -17,6 +17,7 @@ export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
 
   constructor(store: Store<State>) {
     super(store);
+
     this.clicked = false;
   }
 

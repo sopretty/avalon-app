@@ -1,4 +1,4 @@
-import { onLoadSend, onLoadUnsend, onErrorUnsend, onErrorSend, onSuccessSend } from './../actions/actions';
+import { onLoadSend, onLoadUnsend, onErrorUnsend, onErrorSend, onSuccessSend, onLoadVote, onSuccessVote, onErrorVote } from './../actions/actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
@@ -91,18 +91,24 @@ export class GameEffects {
     )
   );
 
-  setVote = createEffect(() => this.actions$.pipe(
+  setVoteLoading$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.setVote),
+    map(() => onLoadVote())
+  ));
+
+  setVote$ = createEffect(() => this.actions$.pipe(
     ofType(actions.setVote),
     switchMap(({ gameId, questId, playerId, vote }) =>
       this.gameService.setVote(gameId, questId, playerId, vote).pipe(
         mapTo({ questId, playerId }),
       )),
     switchMap(() => ([
+        onSuccessVote(),
         onSuccess(),
         consumeEvents()
       ])
     ),
-    catchError(() => of(onError(), consumeEvents()))
+    catchError(() => of(onError(), onErrorVote(), consumeEvents()))
   ));
 
   questUnsendLoading$ = createEffect(() =>

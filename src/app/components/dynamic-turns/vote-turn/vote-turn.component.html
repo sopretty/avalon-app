@@ -3,8 +3,14 @@
     <div class="flex-center-column mat-h1">
       {{'VOTE_TURN.title' | translate: {value: state.player.name} }}
       <div class="flex-center-row" [ngClass]="buttonOrder ? 'reverse' : ''">
-        <button mat-raised-button color="warn" (click)="fail()">{{'VOTE_TURN.failLabelButton' | translate}}</button>
-        <button mat-raised-button color="primary" (click)="success()">{{'VOTE_TURN.successButtonLabel' | translate}}</button>
+        <div class="flex-center-column button-container">
+          <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
+          <button mat-raised-button color="warn" (click)="fail()" [disabled]="loading">{{'VOTE_TURN.failLabelButton' | translate}}</button>
+        </div>
+        <div class="flex-center-column button-container">
+          <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
+          <button mat-raised-button color="primary" (click)="success()" [disabled]="loading">{{'VOTE_TURN.successButtonLabel' | translate}}</button>
+        </div>
       </div>
     </div>
   </div>

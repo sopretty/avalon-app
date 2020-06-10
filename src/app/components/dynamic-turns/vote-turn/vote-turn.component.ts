@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
+import * as selectors from '../../../store/reducers/selectors';
 import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { State } from '../../../store/reducers';
 import { setVote } from '../../../store/actions/actions';
@@ -18,9 +19,17 @@ export class VoteTurnComponent extends GenericTurnComponent implements OnInit {
 
   buttonOrder: boolean;
 
+  loading: boolean;
+
   constructor(private _store: Store<State>) {
     super(_store);
     this.buttonOrder = !!Math.floor(Math.random() * 2);
+    this.loading = true;
+    _store.pipe(
+      select(selectors.selectGameState),
+    ).subscribe(game => {
+        this.loading = game.loadingVote;
+    });
   }
 
   fail() {

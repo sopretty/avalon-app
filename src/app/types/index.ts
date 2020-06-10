@@ -27,6 +27,7 @@ export interface Game {
   result?: GameResult;
   loadingUnsend?: boolean;
   loadingSend?: boolean;
+  loadingVote?: boolean;
 }
 
 export interface Quest {

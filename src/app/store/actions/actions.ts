@@ -97,3 +97,7 @@ export const onErrorUnsend = createAction('[Game Page] Set error state during un
 export const onLoadSend = createAction('[Game Page] Set loading state during send');
 export const onSuccessSend = createAction('[Game Page] Set success state during send');
 export const onErrorSend = createAction('[Game Page] Set error state during send');
+
+export const onLoadVote = createAction('[Vote Turn] Set loading state during vote');
+export const onSuccessVote = createAction('[Vote Turn] Set success state during vote');
+export const onErrorVote = createAction('[Vote Turn] Set error state during vote');

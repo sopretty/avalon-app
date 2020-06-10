@@ -130,6 +130,28 @@ const gameReducer = createReducer(
       loadingSend: false,
     }
   })),
+  // Vote quest Loading
+  on(actions.onLoadVote, (state) => ({
+    ...state,
+    game: {
+      ...state.game,
+      loadingVote: true,
+    }
+  })),
+  on(actions.onSuccessVote, (state) => ({
+    ...state,
+    game: {
+      ...state.game,
+      loadingVote: false,
+    }
+  })),
+  on(actions.onErrorVote, (state) => ({
+    ...state,
+    game: {
+      ...state.game,
+      loadingVote: false,
+    }
+  })),
 );
 
 

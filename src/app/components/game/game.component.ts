@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,7 +8,7 @@ import { RoleTurnComponent } from '../dynamic-turns/role-turn/role-turn.componen
 import { GenericTurnComponent } from '../dynamic-turns/generic-turn/generic-turn.component';
 import { AudioTurnComponent } from '../dynamic-turns/audio-turn/audio-turn.component';
 import * as selectors from '../../store/reducers/selectors';
-import { createQuest, getGame, questUnsend } from '../../store/actions/actions';
+import { createQuest,  questUnsend } from '../../store/actions/actions';
 import { GameService } from '../../services/game/game.service';
 import { DialogComponent } from './dialog/dialog.component';
 import { VoteTurnComponent } from '../dynamic-turns/vote-turn/vote-turn.component';
@@ -28,7 +28,7 @@ const turns = {
   styleUrls: ['./game.component.scss'],
   host: { class: 'component-container' }
 })
-export class GameComponent implements OnInit {
+export class GameComponent  {
 
   static voteNumber = 5;
 
@@ -40,8 +40,6 @@ export class GameComponent implements OnInit {
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private viewContainerRef: ViewContainerRef,
-              private gameService: GameService,
-              private route: ActivatedRoute,
               private dialog: MatDialog,
               private store: Store<State>) {
     this.clear = false;
@@ -63,9 +61,6 @@ export class GameComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.store.dispatch(getGame({ gameId: this.route.snapshot.params.id }));
-  }
 
   handleEvent(events: Event[]) {
     if (events && events.length > 0) {

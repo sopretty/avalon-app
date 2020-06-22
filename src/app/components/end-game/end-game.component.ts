@@ -23,7 +23,10 @@ export class EndGameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.pipe(select(selectors.selectGameState)).subscribe(game => this.game = game);
+    this.store.pipe(select(selectors.selectGameState)).subscribe(game => {
+      this.game = game;
+      this.selectedPlayer = game.players.find(player => game.result && player.id === game.result.guess_merlin_id);
+    });
   }
 
   select(event) {

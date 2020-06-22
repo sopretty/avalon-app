@@ -6,7 +6,8 @@
   },
   "files": [
     "main.ts",
-    "polyfills.ts"
+    "polyfills.ts",
+    "./app/types/declarations.d.ts"
   ],
   "include": [
     "src/**/*.d.ts"

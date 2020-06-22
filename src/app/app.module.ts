@@ -31,6 +31,7 @@ import { EndTurnComponent } from './components/dynamic-turns/end-turn/end-turn.c
 import { metaReducers } from './store/reducers/meta-reducer';
 import { EndGameComponent } from './components/end-game/end-game.component';
 import { ButtonComponent } from './button/button.component';
+import { OverviewComponent } from './components/overview/overview.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -51,7 +52,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     VoteTurnComponent,
     EndTurnComponent,
     EndGameComponent,
-    ButtonComponent
+    ButtonComponent,
+    OverviewComponent
   ],
   imports: [
     HttpClientModule,

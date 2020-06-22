@@ -1,0 +1,41 @@
+<div class="overview-wrapper component-container">
+
+  <div class="overview flex" *ngIf="!loading && !!isGameOver">
+    <div class="mat-display-1 title">{{'OVERVIEW.title' | translate}}</div>
+    <div class="mat-h1" [ngClass]="game.result.status ? 'blue': 'red'">
+      {{'OVERVIEW.teamWin' | translate: {value: game.result.status ? 'bleue' : 'rouge'} }}
+    </div>
+    <div class="table-wrapper">
+      <div class="headers">
+        <div class="column column-header mat-h2">{{'OVERVIEW.playerHeader' | translate}}</div>
+        <div class="column column-header mat-h2">{{'OVERVIEW.roleHeader' | translate}}</div>
+        <div *ngFor="let quest of questsPlayed; let index = index;" class="column column-header mat-h2"
+             [ngClass]="!quest.status ? 'red': 'blue'">{{'OVERVIEW.questNumber' | translate: {value: index + 1} }}
+        </div>
+      </div>
+      <div class="row" *ngFor="let player of game.players; let playerIndex = index;"
+           [ngClass]="playerIndex%2 === 0 ? 'dark-row' : ''">
+        <div class="column mat-h3">{{player.name}}</div>
+        <div class="column mat-h3" [ngClass]="ROLES_CLASSES[player.role]">{{player.role}}</div>
+        <div class="column mat-h3" *ngFor="let quest of questsPlayed; let questIndex = index;"
+             [ngClass]="hasVoted(questIndex, player.id) && !getPlayerVote(questIndex, player.id) ? 'red' : 'blue'">
+          {{hasVoted(questIndex, player.id) ? (getPlayerVote(questIndex, player.id) ? '&#x2713;' : '&#10007;') : ''}}
+        </div>
+      </div>
+    </div>
+    <div class="description mat-h3">
+      <div *ngIf="game.result.guess_merlin_id">{{'OVERVIEW.description' | translate: {value: guessedMerlin} }}</div>
+    </div>
+    <button mat-raised-button color="primary" routerLink="/">{{'END_GAME.playAgain' | translate}}</button>
+  </div>
+
+
+  <div *ngIf="loading" class="global-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="!isGameOver && !loading">
+    {{'OVERVIEW.gameNotOver' | translate}}
+  </div>
+</div>
+

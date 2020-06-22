@@ -26,7 +26,17 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
     super(_store);
     this.loading = true;
     this.playing = false;
-    this.audioContext = new AudioContext();
+    const contextClass = (window.AudioContext ||
+      window.webkitAudioContext ||
+      window.mozAudioContext ||
+      window.oAudioContext ||
+      window.msAudioContext);
+    if (contextClass) {
+      // Web Audio API is available.
+      this.audioContext = new contextClass();
+    } else {
+      throw new Error('No audio context');
+    }
   }
 
   ngOnInit() {

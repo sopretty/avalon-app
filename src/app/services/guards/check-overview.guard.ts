@@ -1,17 +1,17 @@
-import { getGame } from './../../store/actions/actions';
 import { Injectable } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
 
 import * as selectors from '../../store/reducers/selectors';
+import { getGame } from '../../store/actions/actions';
 import { State } from '../../store/reducers';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CheckGameGuard implements CanActivate {
+export class CheckOverviewGuard implements CanActivate {
 
   constructor(private _store: Store<State>, private _router: Router) {
   }

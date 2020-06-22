@@ -42,8 +42,8 @@ export class GameService {
     return this._http.get<QuestResult>(`${environment.apiUrl}games/${gameId}/quests/${questId}`);
   }
 
-  guessMerlin(gameId: string, playerId: string, merlinId: string): Observable<GameResult> {
-    return this._http.post<GameResult>(`${environment.apiUrl}games/${gameId}/guess_merlin`, { [playerId]: merlinId });
+  guessMerlin(gameId: string, playerId: string, merlinId: string): Observable<Game> {
+    return this._http.post<Game>(`${environment.apiUrl}games/${gameId}/guess_merlin`, { [playerId]: merlinId });
   }
 
 }

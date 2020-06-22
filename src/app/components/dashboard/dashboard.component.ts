@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { selectRules } from '../../store/reducers/selectors';
 import { Rules } from '../../types';
 import { ConfigService } from '../../services/config/config.service';
+import { withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit {
   form: FormGroup;
   loading: boolean;
   rules: Rules;
-  defaultNameTranslation = "DefaultName";
+  defaultNameTranslation = 'DefaultName';
 
   constructor(
     private router: Router,
@@ -33,28 +34,30 @@ export class DashboardComponent implements OnInit {
     private translateService: TranslateService,
   ) {
     this.loading = true;
-    this.defaultNameTranslation = this.translateService.instant('DASHBOARD.defaultName');
+
   }
 
   ngOnInit() {
-    this.store.select(selectRules).subscribe(rules => {
-        if (rules) {
-          const rulesKeys = Object.keys(rules);
-          this.minNumberPlayer = Number(rulesKeys[0]);
-          this.maxNumberPlayer = Number(rulesKeys[rulesKeys.length - 1]);
-          this.loading = false;
-          this.rules = rules;
-          this.numberChoosed = this.minNumberPlayer;
-          this.players = Array.from(new Array(this.numberChoosed), (p, index) => (`${this.defaultNameTranslation}-${index + 1}`));
-          this.form = this.formBuilder.group({
-            players: new FormArray([]),
-            nbPlayers: new FormControl(this.minNumberPlayer),
-          });
-          this.addPlayerNames();
-          this.onFormChange();
+    this.store.select(selectRules).pipe(withLatestFrom(this.translateService.get('DASHBOARD.defaultName')))
+      .subscribe(([rules, translation]) => {
+        this.defaultNameTranslation = translation;
+          if (rules) {
+            const rulesKeys = Object.keys(rules);
+            this.minNumberPlayer = Number(rulesKeys[0]);
+            this.maxNumberPlayer = Number(rulesKeys[rulesKeys.length - 1]);
+            this.loading = false;
+            this.rules = rules;
+            this.numberChoosed = this.minNumberPlayer;
+            this.players = Array.from(new Array(this.numberChoosed), (p, index) => (`${translation}-${index + 1}`));
+            this.form = this.formBuilder.group({
+              players: new FormArray([]),
+              nbPlayers: new FormControl(this.minNumberPlayer),
+            });
+            this.addPlayerNames();
+            this.onFormChange();
+          }
         }
-      }
-    );
+      );
 
   }
 

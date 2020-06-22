@@ -63,6 +63,16 @@
     "playAgain": "Play again",
     "redTeamWinVote": "Red find Merlin and win the game!",
     "blueTeamWinVote": "Blue win the game!",
-    "selectLabel": "Blue players"
+    "selectLabel": "Blue players",
+    "goToOverview": "Game overview"
+  },
+  "OVERVIEW": {
+    "title": "Game details",
+    "playerHeader": "Player",
+    "roleHeader": "Role",
+    "questNumber": "Quest n°{{value}}",
+    "teamWin": "The {{value}} team won",
+    "description": "Red team decided to vote for: {{value}}",
+    "gameNotOver": "This game is not over yet"
   }
 }

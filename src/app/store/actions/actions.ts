@@ -29,10 +29,6 @@ export const setGame = createAction(
 
 // Result Actions
 
-export const setResult = createAction(
-  '[End Page] Set the end result',
-  props<{ gameResult: GameResult }>()
-);
 export const guessMerlin = createAction(
   '[End Page] Set the current game',
   props<{ gameId: string, playerId: string, merlinId: string }>()

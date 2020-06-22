@@ -2,9 +2,9 @@
   <div class="flex-center-row">
     <div class="flex-center-column">
       <div *ngIf="game.result.status && !selectedPlayer">
-        {{'END_GAME.blueTeamWin' | translate}}
+        {{'END_GAME.blueTeamWin' | translate}}
         <mat-form-field>
-          <mat-label>{{'END_GAME.selectLabel' | translate}}</mat-label>
+          <mat-label>{{'END_GAME.selectLabel' | translate}}</mat-label>
           <mat-select (selectionChange)="select($event)" name="player" [value]="">
             <mat-option *ngFor="let player of bluePlayers" [value]="player">
               {{player.name}}
@@ -13,19 +13,20 @@
         </mat-form-field>
       </div>
       <div *ngIf="!game.result.status && !selectedPlayer">
-        <p>{{'END_GAME.redTeamWin' | translate}}</p>
-        <button mat-raised-button routerLink="/">{{'END_GAME.playAgain' | translate}}</button>
+        <p>{{'END_GAME.redTeamWin' | translate}}</p>
+        <button mat-raised-button [routerLink]="'/overviews/'+game.id">{{'END_GAME.goToOverview' | translate}}</button>
+        <button mat-raised-button color="primary" routerLink="/">{{'END_GAME.playAgain' | translate}}</button>
       </div>
 
       <div *ngIf="selectedPlayer">
-        <div *ngIf="!playerRole(game.result.guess_merlin_id)"></div>
-        <div *ngIf="playerRole(game.result.guess_merlin_id) === 'merlin'">
-          {{'END_GAME.redTeamWinVote' | translate}}
+        <div *ngIf="!!game.result.guess_merlin_id && !game.result.status">
+          {{'END_GAME.redTeamWinVote' | translate}}
         </div>
-        <div *ngIf="playerRole(game.result.guess_merlin_id) !== 'merlin'">
-          {{'END_GAME.blueTeamWinVote' | translate}}
+        <div *ngIf="!!game.result.guess_merlin_id && game.result.status">
+          {{'END_GAME.blueTeamWinVote' | translate}}
         </div>
-        <button mat-raised-button color="primary" routerLink="/">{{'END_GAME.playAgain' | translate}}</button>
+        <button mat-raised-button [routerLink]="'/overviews/'+game.id">{{'END_GAME.goToOverview' | translate}}</button>
+        <button mat-raised-button color="primary" routerLink="/">{{'END_GAME.playAgain' | translate}}</button>
       </div>
     </div>
   </div>

@@ -1,4 +1,13 @@
-import { onLoadSend, onLoadUnsend, onErrorUnsend, onErrorSend, onSuccessSend, onLoadVote, onSuccessVote, onErrorVote } from './../actions/actions';
+import {
+  onLoadSend,
+  onLoadUnsend,
+  onErrorUnsend,
+  onErrorSend,
+  onSuccessSend,
+  onLoadVote,
+  onSuccessVote,
+  onErrorVote
+} from './../actions/actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
@@ -85,9 +94,12 @@ export class GameEffects {
         addEvents({
           events: players.slice().reverse().map(player => ({ type: 'app-vote-turn', state: { player, questId, gameId } }))
         }), addEvents({ events: [{ type: 'app-end-turn', state: { questId, gameId } }] })
-      ]) 
+      ])
     ),
-    catchError((err) => {console.log(err); return of(onErrorSend())})
+    catchError((err) => {
+      console.log(err);
+      return of(onErrorSend());
+    })
     )
   );
 
@@ -151,7 +163,7 @@ export class GameEffects {
       ofType(actions.guessMerlin),
       switchMap(({ gameId, playerId, merlinId }) =>
         this.gameService.guessMerlin(gameId, playerId, merlinId)),
-      map((gameResult) => actions.setResult({ gameResult }))
+      map((game) => actions.setGame(game))
     )
   );
 

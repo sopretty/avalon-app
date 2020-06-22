@@ -73,6 +73,8 @@
     "questNumber": "Quête n°{{value}}",
     "teamWin": "Victoire de l'équipe {{value}}",
     "description": "L'équipe rouge a voté pour tuer: {{value}}",
-    "gameNotOver": "Cette partie n'est pas terminée"
+    "gameNotOver": "Cette partie n'est pas terminée",
+    "blue": "bleu",
+    "red": "rouge"
   }
 }

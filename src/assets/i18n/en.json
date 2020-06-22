@@ -73,6 +73,8 @@
     "questNumber": "Quest n°{{value}}",
     "teamWin": "The {{value}} team won",
     "description": "Red team decided to vote for: {{value}}",
-    "gameNotOver": "This game is not over yet"
+    "gameNotOver": "This game is not over yet",
+    "blue": "blue",
+    "red": "red"
   }
 }

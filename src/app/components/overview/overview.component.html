@@ -3,7 +3,10 @@
   <div class="overview flex" *ngIf="!loading && !!isGameOver">
     <div class="mat-display-1 title">{{'OVERVIEW.title' | translate}}</div>
     <div class="mat-h1" [ngClass]="game.result.status ? 'blue': 'red'">
-      {{'OVERVIEW.teamWin' | translate: {value: game.result.status ? 'bleue' : 'rouge'} }}
+      {{'OVERVIEW.teamWin' | translate: {
+      value: game.result.status ? ('OVERVIEW.blue' | translate)
+        : ('OVERVIEW.red' | translate)
+    } }}
     </div>
     <div class="table-wrapper">
       <div class="headers">

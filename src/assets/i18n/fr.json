@@ -3,16 +3,16 @@
     "playButtonLabel": "Jouer"
   },
   "DASHBOARD": {
-    "selectLabel": "Choisissez un nombre de joueur",
+    "selectLabel": "Choisissez un nombre de joueurs",
     "defaultName": "défaut",
     "invalidFormWarning": "Vous devez choisir un nom pour chaque joueur",
-    "selectCharactersButtonLabel": "Choisissez vos personnages"
+    "selectCharactersButtonLabel": "Choisissez les personnages"
   },
   "ROLES": {
-    "title": "Quels rôles voulez vous ajouter ?",
-    "redDescription": "Nombre de rôles rouge autorisé:",
-    "blueDescription": "Nombre de rôles bleu autorisé:",
-    "invalidFormWarning": "Vous ne pouvez pas avoir plus de personnage que de joueur rouge ou bleu",
+    "title": "Quels rôles spéciaux voulez-vous ajouter ?",
+    "redDescription": "Nombre de rôles spéciaux rouges autorisés :",
+    "blueDescription": "Nombre de rôles spéciaux bleus autorisés :",
+    "invalidFormWarning": "Vous ne pouvez pas avoir plus de personnages que de joueurs rouges ou bleus",
     "startGameButtonLabel": "Démarrer l'histoire",
     "mordredDescription": "Mordred (rouge)",
     "morganeDescription": "Morgane (rouge), Perceval (bleu)",
@@ -27,8 +27,8 @@
   },
   "GAME": {
     "questTitle": "Quête n°",
-    "questRequired": "echec(s) requis",
-    "currentTurn": "C'est le tour de {{value}}.\n Vous devez choisir l'équipe qui partira en quête",
+    "questRequired": "échecs requis",
+    "currentTurn": "Au tour de {{value}} d'être le Meneur :\nVous devez choisir l'équipe qui partira en quête",
     "voteSucceed": "Si la majorité vote pour que l'équipe parte",
     "pickPlayer": "Choisissez l'équipe",
     "voteFailed": "Si la majorité vote contre",
@@ -38,9 +38,11 @@
     "title": "Passez le téléphone à {{value}}",
     "description": "Si vous êtes {{value}} appuyez deux fois sur l'écran pour connaître votre rôle/équipe",
     "titleRevealed": "Vous êtes dans l'équipe {{value}}",
-    "descriptionRevealed": "Votre rôle est {{value}}",
+    "descriptionRevealed": "Vous jouez le rôle de {{value}}",
+    "descriptionRevealedBlue": "Vous jouez le rôle de serviteur loyal d'Arthur",
+    "descriptionRevealedRed": "Vous jouez le rôle de laquais de Mordred",
     "hideRole": "Appuyez deux fois pour cacher votre rôle",
-    "blue": "bleu",
+    "blue": "bleue",
     "red": "rouge"
   },
   "DIALOG": {

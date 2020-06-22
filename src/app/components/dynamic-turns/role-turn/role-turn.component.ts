@@ -18,7 +18,7 @@ export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
 
   constructor(store: Store<State>, private translateService: TranslateService) {
     super(store);
-    this.clicked = false; 
+    this.clicked = false;
   }
 
   open() {
@@ -29,10 +29,7 @@ export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
   }
 
   getRole(role: string): string {
-    if(role === 'red' ||  role === 'blue') {
-      return this.translateService.instant(`ROLE_TURN.${role}`);
-    }
-    return role;
+    return role.charAt(0).toUpperCase() + role.slice(1);
   }
 
 }

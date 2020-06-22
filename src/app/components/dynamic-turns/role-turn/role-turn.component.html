@@ -1,7 +1,7 @@
 <div class="flex-center-column" (dblclick)="open()">
   <div class="flex-center-row">
     <div class="flex-center-column">
-      <div class="mat-h1">
+      <div class="mat-h1 no-zoom">
         <p class="noselect">
           {{ 'ROLE_TURN.title' | translate: {value: state.name} }}
         </p>
@@ -9,7 +9,7 @@
           {{ 'ROLE_TURN.description' | translate: {value: state.name} }}
         </p>
       </div>
-      <div *ngIf="clicked" class="mat-h1">
+      <div *ngIf="clicked" class="mat-h1 no-zoom">
         <p class="noselect">
           {{ 'ROLE_TURN.titleRevealed' | translate: {value: ('ROLE_TURN.' + state.team  | translate) } }}
         </p>

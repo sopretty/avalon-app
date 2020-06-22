@@ -4,15 +4,16 @@ import { StoreModule } from '@ngrx/store';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule} from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { metaReducers } from './store/reducers/meta-reducer';
 import { EndGameComponent } from './components/end-game/end-game.component';
 import { ButtonComponent } from './button/button.component';
 import { OverviewComponent } from './components/overview/overview.component';
+import { RoleDialogComponent } from './components/game/role-dialog/role-dialog.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -53,7 +55,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     EndTurnComponent,
     EndGameComponent,
     ButtonComponent,
-    OverviewComponent
+    OverviewComponent,
+    RoleDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -63,11 +66,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     StoreModule.forRoot({ game: reducers.reducer }, { metaReducers }),
     EffectsModule.forRoot([GameEffects]),
     TranslateModule.forRoot({
-    loader: {
-      provide: TranslateLoader,
-      useFactory: HttpLoaderFactory,
-      deps: [HttpClient]
-  }}),
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     // Material
     MatDialogModule,
     MatCheckboxModule,
@@ -76,7 +80,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

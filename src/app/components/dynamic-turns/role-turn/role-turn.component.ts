@@ -1,6 +1,6 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component, Input, OnInit } from '@angular/core';
-import { Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { State } from '../../../store/reducers';
@@ -18,7 +18,7 @@ export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
 
   constructor(store: Store<State>, private translateService: TranslateService) {
     super(store);
-    this.clicked = false; 
+    this.clicked = false;
   }
 
   open() {
@@ -29,7 +29,7 @@ export class RoleTurnComponent extends GenericTurnComponent implements OnInit {
   }
 
   getRole(role: string): string {
-    if(role === 'red' ||  role === 'blue') {
+    if (role === 'red' || role === 'blue') {
       return this.translateService.instant(`ROLE_TURN.${role}`);
     }
     return role;

@@ -2,43 +2,45 @@
 
   <div class="quests">
     <div *ngFor="let item of game.quests; let i = index" class="quest">
-      <div class="title">{{'GAME.questTitle' | translate}}{{i + 1}}</div>
+      <div class="title">{{'GAME.questTitle' | translate}}{{i + 1}}</div>
       <div
         [ngClass]="{'circle': true, 'current-round': i === game.current_quest, 'fail-circle': questFailed(i), 'success-circle': questSucceed(i)}">
         <div class="content">{{item.nb_players_to_send}}</div>
       </div>
       <div *ngIf="item.nb_votes_to_fail > 1" class="fail">
-        {{item.nb_votes_to_fail}} {{'GAME.questRequired' | translate}}
+        {{item.nb_votes_to_fail}} {{'GAME.questRequired' | translate}}
       </div>
     </div>
   </div>
 
   <div class="board-middle mat-h3" [style.margin-top.px]="18">
-    {{'GAME.currentTurn' | translate: {value: currentPlayer.name} }}
-    
-    <div>{{'GAME.voteSucceed' | translate}}
+    {{'GAME.currentTurn' | translate: {value: currentPlayer.name} }}
+
+    <div>{{'GAME.voteSucceed' | translate}}
       <button color="primary" mat-raised-button [disabled]="game.loadingSend" (click)="openPlayerDialog()">
         <mat-spinner *ngIf="game.loadingSend" diameter="24" class="spinner-container"></mat-spinner>
-        {{'GAME.pickPlayer' | translate}}
+        {{'GAME.pickPlayer' | translate}}
       </button>
 
     </div>
-    <div>{{'GAME.voteFailed' | translate}}
+    <div>{{'GAME.voteFailed' | translate}}
       <button mat-raised-button color="warn" [disabled]="game.nb_quest_unsend === 5 || game.loadingUnsend"
               (click)="nextTurn()">
         <mat-spinner *ngIf="game.loadingUnsend" diameter="24" class="spinner-container"></mat-spinner>
-        {{'GAME.nextTurn' | translate}}
+        {{'GAME.nextTurn' | translate}}
       </button>
     </div>
   </div>
 
   <div class="vote-track">
     <div *ngFor="let item of voteNumber; let i = index; let last = last">
-      <div [ngClass]="{'circle': true, 'last': last, 'current-fail': i + 1 === game.nb_quest_unsend}">
-        <div class="content">{{i + 1}}</div>
+      <div [ngClass]="{'small-circle': true, 'last': last, 'current-fail': i + 1 === game.nb_quest_unsend}">
+        <div class="small-content">{{i + 1}}</div>
       </div>
     </div>
   </div>
+
+  <button mat-raised-button (click)="openRoleDialog()">{{'GAME.roleButtonLabel' | translate}}</button>
 </div>
 
 <div *ngIf="!!game && !!game.result">

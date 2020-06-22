@@ -32,7 +32,8 @@
     "voteSucceed": "If the vote succeed",
     "pickPlayer": "pick the player",
     "voteFailed": "The vote fail",
-    "nextTurn": "next turn"
+    "nextTurn": "next turn",
+    "roleButtonLabel": "See the roles"
   },
   "ROLE_TURN": {
     "title": "Give the cellphone to {{value}}",
@@ -77,5 +78,9 @@
     "gameNotOver": "This game is not over yet",
     "blue": "blue",
     "red": "red"
+  },
+  "ROLEDIALOG": {
+    "title": "Click to reveal a role",
+    "returnButtonLabel": "Done"
   }
 }

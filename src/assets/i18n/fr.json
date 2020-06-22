@@ -32,7 +32,8 @@
     "voteSucceed": "Si la majorité vote pour que l'équipe parte",
     "pickPlayer": "Choisissez l'équipe",
     "voteFailed": "Si la majorité vote contre",
-    "nextTurn": "Passer le tour"
+    "nextTurn": "Passer le tour",
+    "roleButtonLabel": "Voir les rôles"
   },
   "ROLE_TURN": {
     "title": "Passez le téléphone à {{value}}",
@@ -77,5 +78,9 @@
     "gameNotOver": "Cette partie n'est pas terminée",
     "blue": "bleu",
     "red": "rouge"
+  },
+  "ROLEDIALOG": {
+    "title": "Cliquez pour réveler le rôle",
+    "returnButtonLabel": "Retour"
   }
 }

@@ -8,12 +8,13 @@ import { RoleTurnComponent } from '../dynamic-turns/role-turn/role-turn.componen
 import { GenericTurnComponent } from '../dynamic-turns/generic-turn/generic-turn.component';
 import { AudioTurnComponent } from '../dynamic-turns/audio-turn/audio-turn.component';
 import * as selectors from '../../store/reducers/selectors';
-import { createQuest,  questUnsend } from '../../store/actions/actions';
+import { createQuest, questUnsend } from '../../store/actions/actions';
 import { GameService } from '../../services/game/game.service';
 import { DialogComponent } from './dialog/dialog.component';
 import { VoteTurnComponent } from '../dynamic-turns/vote-turn/vote-turn.component';
 import { EndTurnComponent } from '../dynamic-turns/end-turn/end-turn.component';
 import { Game, Player } from '../../types';
+import { RoleDialogComponent } from './role-dialog/role-dialog.component';
 
 const turns = {
   'app-role-turn': RoleTurnComponent,
@@ -28,7 +29,7 @@ const turns = {
   styleUrls: ['./game.component.scss'],
   host: { class: 'component-container' }
 })
-export class GameComponent  {
+export class GameComponent {
 
   static voteNumber = 5;
 
@@ -100,6 +101,15 @@ export class GameComponent  {
         }));
       }
 
+    });
+  }
+
+  openRoleDialog() {
+    this.dialog.open(RoleDialogComponent, {
+      disableClose: true,
+      width: '300px',
+      data: { players: this.players },
+      autoFocus: false,
     });
   }
 

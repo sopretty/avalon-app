@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{'ROLEDIALOG.title' | translate }}</h1>
+<div mat-dialog-content>
+  <mat-chip-list class="chips">
+    <mat-chip *ngFor="let player of players; let index = index" [selectable]="false"
+              class="mat-body"
+              [ngClass]="revealArray[index] && player.team === 'red'? 'red': revealArray[index] && player.team === 'blue' ?'blue' : ''"
+              (click)="reveal(index)">{{revealArray[index] ? getRole(player.role): player.name}}</mat-chip>
+  </mat-chip-list>
+</div>
+<div mat-dialog-actions>
+  <div class="button-container">
+    <button mat-raised-button (click)="closeDialog()">{{'ROLEDIALOG.returnButtonLabel' | translate }}</button>
+  </div>
+</div>

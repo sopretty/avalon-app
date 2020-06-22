@@ -10,8 +10,8 @@
   },
   "ROLES": {
     "title": "What roles do you want to add ?",
-    "redDescription": "Number of red roles allowed:",
-    "blueDescription": "Number of blue roles allowed:",
+    "redDescription": "Number of red roles allowed :",
+    "blueDescription": "Number of blue roles allowed :",
     "invalidFormWarning": "You have exceeded the red or blue players limit",
     "startGameButtonLabel": "Start the story",
     "mordredDescription": "Mordred (red)",
@@ -40,6 +40,8 @@
     "description": "If you are {{value}} tap twice the screen to know your team/role",
     "titleRevealed": "You are in the {{value}} team",
     "descriptionRevealed": "You role is {{value}}",
+    "descriptionRevealedBlue": "Votre rôle est Serviteur de Merlin",
+    "descriptionRevealedRed": "Votre rôle est Mordred",
     "hideRole": "Tap twice to hide your role",
     "blue": "blue",
     "red": "red"

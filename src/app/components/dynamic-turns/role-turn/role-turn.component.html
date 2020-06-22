@@ -13,8 +13,14 @@
         <p class="noselect">
           {{ 'ROLE_TURN.titleRevealed' | translate: {value: ('ROLE_TURN.' + state.team  | translate) } }}
         </p>
-        <p class="noselect">
+        <p class="noselect" *ngIf="state.role !== 'blue' && state.role !== 'red'">
           {{ 'ROLE_TURN.descriptionRevealed' | translate: {value: getRole(state.role)} }}
+        </p>
+        <p class="noselect" *ngIf="state.role === 'blue'">
+          {{ 'ROLE_TURN.descriptionRevealedBlue' | translate }}
+        </p>
+        <p class="noselect" *ngIf="state.role === 'red'">
+          {{ 'ROLE_TURN.descriptionRevealedRed' | translate }}
         </p>
         <p class="noselect">
           {{ 'ROLE_TURN.hideRole' | translate }}

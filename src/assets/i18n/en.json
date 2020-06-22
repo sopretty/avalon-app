@@ -7,20 +7,21 @@
     "defaultName": "DefaultName",
     "invalidFormWarning": "You have to set a name for each users",
     "selectCharactersButtonLabel": "Select game's characters"
-   },
-   "ROLES": {
-     "title": "What roles do you want to add ?",
-     "redDescription": "Number of red roles allowed:",
-     "blueDescription": "Number of blue roles allowed:",
-     "invalidFormWarning": "You have exceeded the red or blue players limit",
-     "startGameButtonLabel": "Start the story",
-     "mordredDescription": "Mordred (red)",
-     "morganeDescription": "Morgane (red), Perceval (blue)",
-     "oberonDescription": "Oberon (red)"
-   },
-   "AUDIO": {
+  },
+  "ROLES": {
+    "title": "What roles do you want to add ?",
+    "redDescription": "Number of red roles allowed:",
+    "blueDescription": "Number of blue roles allowed:",
+    "invalidFormWarning": "You have exceeded the red or blue players limit",
+    "startGameButtonLabel": "Start the story",
+    "mordredDescription": "Mordred (red)",
+    "morganeDescription": "Morgane (red), Perceval (blue)",
+    "oberonDescription": "Oberon (red)"
+  },
+  "AUDIO": {
     "title": "Start the story and close your eyes !",
-    "startStoryButtonLabel": "Start or restart the story",
+    "startStoryButtonLabel": "Start the story",
+    "restartStoryButtonLabel": "Restart the story",
     "stopStoryButtonLabel": "Stop the story",
     "startGameButtonLabel": "Start the game"
   },

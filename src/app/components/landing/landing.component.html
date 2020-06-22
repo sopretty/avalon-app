@@ -1,4 +1,5 @@
 <div class="bcg">
+  <img class="bcg-image" src="../../../assets/bcg/bcg-image.jpeg"/>
   <!-- Fireflies -->
   <div *ngFor="let firefly of fireflies" class="firefly">
   </div>
@@ -7,10 +8,9 @@
     <div class="flex-center-row">
       <div class="flex-center-column">
         <div class="mat-display-4 white">Avalon</div>
-        <!-- <app-button (click)="launchGame()" [text]=""></app-button> -->
         <button mat-raised-button (click)="launchGame()">
-          {{'LANDING.playButtonLabel' | translate}}
-        </button>	  
+          {{'LANDING.playButtonLabel' | translate}}
+        </button>
       </div>
     </div>
   </div>

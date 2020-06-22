@@ -13,6 +13,10 @@ app-root {
   flex-grow: 1;
 }
 
+.no-zoom {
+  touch-action: pan-y;
+}
+
 .component-container {
   display: flex;
   flex-grow: 1;

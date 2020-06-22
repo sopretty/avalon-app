@@ -21,6 +21,7 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
   loading: boolean;
   playing: boolean;
   source: any;
+  audioPLayerOnce = false;
 
   constructor(private _store: Store<State>) {
     super(_store);
@@ -66,6 +67,7 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
 
 
   playAudio() {
+    this.audioPLayerOnce = true;
     this.stopAudio();
     this.source = this.audioContext.createBufferSource();
     this.source.buffer = this.buffer;

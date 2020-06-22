@@ -18,8 +18,8 @@ export class LandingComponent implements OnInit {
   ngOnInit() {
   }
 
-  get fireflies(): Array<number>{
-    return Array.from(Array(this.nbFireflies).keys()) ;
+  get fireflies(): Array<number> {
+    return Array.from(Array(this.nbFireflies).keys());
   }
 
   public launchGame() {

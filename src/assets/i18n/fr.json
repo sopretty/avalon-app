@@ -20,7 +20,8 @@
   },
   "AUDIO": {
     "title": "Débuter l'histoire et fermez vos yeux !",
-    "startStoryButtonLabel": "Démarrer ou relancer l'histoire",
+    "startStoryButtonLabel": "Lancer l'histoire",
+    "restartStoryButtonLabel": "Relancer l'histoire",
     "stopStoryButtonLabel": "Arrêter l'histoire",
     "startGameButtonLabel": "Commencer la partie"
   },

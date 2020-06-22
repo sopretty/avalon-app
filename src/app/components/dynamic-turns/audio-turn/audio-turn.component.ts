@@ -75,7 +75,11 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
 
   stopAudio() {
     if (this.source) {
-      this.source.stop();
+      try {
+        this.source.stop();
+      } catch (e) {
+        console.log('Error when stopping audio', e);
+      }
     }
   }
 

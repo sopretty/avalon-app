@@ -39,7 +39,7 @@ export class GameEffects {
             switchMap(game => [
                 actions.setGame(game),
                 actions.addEvents({
-                  events: game.players.reverse().map(player => ({ type: 'app-role-turn', state: player }))
+                  events: game.players.slice().reverse().map(player => ({ type: 'app-role-turn', state: player }))
                 }),
                 actions.addEvents({
                   events: [{

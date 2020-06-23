@@ -10,7 +10,7 @@
     </div>
     <div class="table-wrapper">
       <div class="headers">
-        <div class="column column-header mat-h2">{{'OVERVIEW.playerHeader' | translate}}</div>
+        <div class="column first-column column-header mat-h2">{{'OVERVIEW.playerHeader' | translate}}</div>
         <div class="column column-header mat-h2">{{'OVERVIEW.roleHeader' | translate}}</div>
         <div *ngFor="let quest of questsPlayed; let index = index;" class="column column-header mat-h2"
              [ngClass]="!quest.status ? 'red': 'blue'">{{'OVERVIEW.questNumber' | translate: {value: index + 1} }}
@@ -18,7 +18,7 @@
       </div>
       <div class="row" *ngFor="let player of game.players; let playerIndex = index;"
            [ngClass]="playerIndex%2 === 0 ? 'dark-row' : ''">
-        <div class="column mat-h3">{{player.name}}</div>
+        <div class="column mat-h3 first-column">{{player.name}}</div>
         <div class="column mat-h3" [ngClass]="player.team === 'red' ? 'red' : 'blue'">{{player.role}}</div>
         <div class="column mat-h3" *ngFor="let quest of questsPlayed; let questIndex = index;"
              [ngClass]="hasVoted(questIndex, player.id) && !getPlayerVote(questIndex, player.id) ? 'red' : 'blue'">

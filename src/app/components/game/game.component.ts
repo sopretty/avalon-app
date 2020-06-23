@@ -15,6 +15,8 @@ import { VoteTurnComponent } from '../dynamic-turns/vote-turn/vote-turn.componen
 import { EndTurnComponent } from '../dynamic-turns/end-turn/end-turn.component';
 import { Game, Player } from '../../types';
 import { RoleDialogComponent } from './role-dialog/role-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
+import { QuestDialogComponent } from './quest-dialog/quest-dialog.component';
 
 const turns = {
   'app-role-turn': RoleTurnComponent,
@@ -42,6 +44,7 @@ export class GameComponent {
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private viewContainerRef: ViewContainerRef,
               private dialog: MatDialog,
+              private translateService: TranslateService,
               private store: Store<State>) {
     this.clear = false;
 
@@ -87,7 +90,6 @@ export class GameComponent {
 
   openPlayerDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
-      disableClose: true,
       width: '250px',
       data: { players: this.players, pickNumber: this.game.quests[this.game.current_quest].nb_players_to_send }
     });
@@ -106,11 +108,25 @@ export class GameComponent {
 
   openRoleDialog() {
     this.dialog.open(RoleDialogComponent, {
-      disableClose: true,
       width: '300px',
       data: { players: this.players },
       autoFocus: false,
     });
+  }
+
+  openQuestDialog(questIndex: number): void {
+    this.dialog.open(QuestDialogComponent, {
+      data: { players: this.players, quest: this.game.quests[questIndex] },
+      autoFocus: false,
+    });
+  }
+
+  questClick(questIndex: number): void {
+    if (questIndex === this.game.current_quest) {
+      this.openPlayerDialog();
+    } else if (questIndex < this.game.current_quest) {
+      this.openQuestDialog(questIndex);
+    }
   }
 
   questFailed(index: number): boolean {
@@ -125,6 +141,13 @@ export class GameComponent {
     this.store.dispatch(questUnsend({ gameId: this.game.id }));
   }
 
+  getQuestTooltip(questIndex: number) {
+    if (questIndex === this.game.current_quest) {
+      return this.translateService.instant('GAME.startQuestTooltip');
+    } else if (questIndex < this.game.current_quest) {
+      return this.translateService.instant('GAME.questInfoTooltip');
+    }
+  }
 
   get voteNumber() {
     return Array(GameComponent.voteNumber);

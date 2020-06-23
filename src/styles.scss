@@ -48,3 +48,8 @@ app-root {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.mat-tooltip {
+  margin: 12px !important;
+  font-size: 12px !important;
+}

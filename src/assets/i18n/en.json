@@ -33,7 +33,9 @@
     "pickPlayer": "pick the player",
     "voteFailed": "The vote fail",
     "nextTurn": "next turn",
-    "roleButtonLabel": "See the roles"
+    "roleButtonLabel": "See the roles",
+    "startQuestTooltip":"Start the quest",
+    "questInfoTooltip": "Quest details"
   },
   "ROLE_TURN": {
     "title": "Give the cellphone to {{value}}",
@@ -84,5 +86,18 @@
   "ROLEDIALOG": {
     "title": "Click to reveal a role",
     "returnButtonLabel": "Done"
+  },
+  "QUESTDIALOG": {
+    "title": "Quest details",
+    "returnButtonLabel": "Done"
+  },
+  "QUESTDIALOG": {
+    "title": "Quest details",
+    "returnButtonLabel": "Done",
+    "success": "Success",
+    "fail": "Fail",
+    "resultTitle": "Result",
+    "playersTitle": "Players",
+    "votesTitle": "Votes"
   }
 }

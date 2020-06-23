@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>{{'QUESTDIALOG.title' | translate }}</h1>
+<div mat-dialog-content>
+  <mat-chip-list class="row">
+    <div class="title mat-body">
+      {{'QUESTDIALOG.playersTitle' | translate }}
+    </div>
+    <mat-chip [disableRipple]="true" class="player" *ngFor="let voter of voterPlayers">
+      {{voter.name}}
+    </mat-chip>
+  </mat-chip-list>
+
+  <mat-chip-list class="row">
+    <div class="title mat-body">
+      {{'QUESTDIALOG.votesTitle' | translate }}
+    </div>
+    <mat-chip [disableRipple]="true" class="vote" *ngFor="let vote of votes" [ngClass]="vote ? 'blue': 'red'">
+      {{vote ? ('QUESTDIALOG.success' | translate) : ('QUESTDIALOG.fail' | translate) }}
+    </mat-chip>
+  </mat-chip-list>
+
+  <mat-chip-list class="row">
+    <div class="title mat-body">
+      {{'QUESTDIALOG.resultTitle' | translate }}
+    </div>
+    <mat-chip [disableRipple]="true" class="chip-result" [ngClass]="data.quest.status ? 'blue': 'red'">
+      {{data.quest.status ? ('QUESTDIALOG.success' | translate) : ('QUESTDIALOG.fail' | translate) }}
+    </mat-chip>
+  </mat-chip-list>
+</div>
+<div mat-dialog-actions>
+  <div class="button-container">
+    <button mat-raised-button (click)="closeDialog()">{{'QUESTDIALOG.returnButtonLabel' | translate }}</button>
+  </div>
+</div>

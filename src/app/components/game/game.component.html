@@ -4,13 +4,23 @@
     <div *ngFor="let item of game.quests; let i = index" class="quest">
       <div class="title">{{'GAME.questTitle' | translate}}{{i + 1}}</div>
       <div
-        [ngClass]="{'circle': true, 'current-round': i === game.current_quest, 'fail-circle': questFailed(i), 'success-circle': questSucceed(i)}">
+        matRipple
+        [matRippleDisabled]="i > game.current_quest"
+        [matTooltip]="getQuestTooltip(i)"
+        (click)="questClick(i)"
+        [ngClass]="{'circle': true,
+        'current-round': i === game.current_quest,
+        'fail-circle': questFailed(i),
+        'success-circle': questSucceed(i),
+        'clickable': i <= game.current_quest
+        }">
         <div class="content">{{item.nb_players_to_send}}</div>
       </div>
       <div *ngIf="item.nb_votes_to_fail > 1" class="fail">
         {{item.nb_votes_to_fail}} {{'GAME.questRequired' | translate}}
       </div>
     </div>
+
   </div>
 
   <div class="board-middle mat-h3" [style.margin-top.px]="18">
@@ -40,7 +50,8 @@
     </div>
   </div>
 
-  <button mat-raised-button (click)="openRoleDialog()">{{'GAME.roleButtonLabel' | translate}}</button>
+  <button mat-raised-button class="role-button"
+          (click)="openRoleDialog()">{{'GAME.roleButtonLabel' | translate}}</button>
 </div>
 
 <div *ngIf="!!game && !!game.result">

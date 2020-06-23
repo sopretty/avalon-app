@@ -10,7 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatRippleModule} from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -34,6 +36,8 @@ import { EndGameComponent } from './components/end-game/end-game.component';
 import { ButtonComponent } from './button/button.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { RoleDialogComponent } from './components/game/role-dialog/role-dialog.component';
+import { QuestDialogComponent } from './components/game/quest-dialog/quest-dialog.component';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -56,7 +60,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     EndGameComponent,
     ButtonComponent,
     OverviewComponent,
-    RoleDialogComponent
+    RoleDialogComponent,
+    QuestDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -81,7 +86,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatInputModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatTooltipModule,
+    MatChipsModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent],

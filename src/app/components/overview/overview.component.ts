@@ -13,16 +13,6 @@ import { State } from '../../store/reducers';
 })
 export class OverviewComponent implements OnInit {
 
-  ROLES_CLASSES = {
-    merlin: 'blue',
-    perceval: 'bleu',
-    blue: 'blue',
-    morgan: 'red',
-    oberon: 'red',
-    mordred: 'red',
-    red: 'red',
-  };
-
   game: Game;
 
   loading = true;

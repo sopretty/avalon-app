@@ -19,7 +19,7 @@
       <div class="row" *ngFor="let player of game.players; let playerIndex = index;"
            [ngClass]="playerIndex%2 === 0 ? 'dark-row' : ''">
         <div class="column mat-h3">{{player.name}}</div>
-        <div class="column mat-h3" [ngClass]="ROLES_CLASSES[player.role]">{{player.role}}</div>
+        <div class="column mat-h3" [ngClass]="player.team === 'red' ? 'red' : 'blue'">{{player.role}}</div>
         <div class="column mat-h3" *ngFor="let quest of questsPlayed; let questIndex = index;"
              [ngClass]="hasVoted(questIndex, player.id) && !getPlayerVote(questIndex, player.id) ? 'red' : 'blue'">
           {{hasVoted(questIndex, player.id) ? (getPlayerVote(questIndex, player.id) ? '&#x2713;' : '&#10007;') : ''}}

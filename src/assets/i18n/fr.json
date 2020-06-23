@@ -33,7 +33,9 @@
     "pickPlayer": "Choisissez l'équipe",
     "voteFailed": "Si la majorité vote contre",
     "nextTurn": "Passer le tour",
-    "roleButtonLabel": "Voir les rôles"
+    "roleButtonLabel": "Voir les rôles",
+    "startQuestTooltip": "Commencer la quête",
+    "questInfoTooltip": "Détail de la quête"
   },
   "ROLE_TURN": {
     "title": "Passez le téléphone à {{value}}",
@@ -84,5 +86,14 @@
   "ROLEDIALOG": {
     "title": "Cliquez pour réveler le rôle",
     "returnButtonLabel": "Retour"
+  },
+  "QUESTDIALOG": {
+    "title": "Détail de la quête",
+    "returnButtonLabel": "Retour",
+    "success": "Succès",
+    "fail": "Échec",
+    "resultTitle": "Résultat",
+    "playersTitle": "Joueurs",
+    "votesTitle": "Votes"
   }
 }

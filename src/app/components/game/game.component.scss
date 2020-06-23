@@ -32,8 +32,17 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: #000
+  background: #000;
 }
+
+.clickable {
+  cursor: pointer;
+
+  :hover {
+    background-color: rgba(224, 224, 224, 0.2);
+  }
+}
+
 
 .small-circle {
   display: flex;
@@ -48,7 +57,7 @@
 }
 
 .success-circle {
-    background-color: #0D47A1;
+  background-color: #0D47A1;
 }
 
 .last {
@@ -88,7 +97,6 @@
   color: #fff;
 }
 
-
 .fail {
   color: #ff0033;
   display: flex;
@@ -109,7 +117,6 @@
   border-color: orange;
 }
 
-
 // LOADING
 
 .spinner-container {
@@ -127,10 +134,13 @@
   position: relative;
 }
 
-
 .global-spinner {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.role-button {
+  width: 140px;
 }

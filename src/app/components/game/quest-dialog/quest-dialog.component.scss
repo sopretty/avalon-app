@@ -1,0 +1,28 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.button-container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.title {
+  width: 60px;
+}
+
+.red {
+  color: white;
+  background-color: #ff0033;
+}
+
+.blue {
+  color: white;
+  background-color: #0D47A1;
+}

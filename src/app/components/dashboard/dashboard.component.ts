@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.store.select(selectRules).pipe(withLatestFrom(this.translateService.get('DASHBOARD.defaultName')))
       .subscribe(([rules, translation]) => {
-        this.defaultNameTranslation = translation;
+          this.defaultNameTranslation = translation;
           if (rules) {
             const rulesKeys = Object.keys(rules);
             this.minNumberPlayer = Number(rulesKeys[0]);
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
             this.loading = false;
             this.rules = rules;
             this.numberChoosed = this.minNumberPlayer;
-            this.players = Array.from(new Array(this.numberChoosed), (p, index) => (`${translation}-${index + 1}`));
+            this.players = this.getPlayerNames(translation);
             this.form = this.formBuilder.group({
               players: new FormArray([]),
               nbPlayers: new FormControl(this.minNumberPlayer),
@@ -69,6 +69,7 @@ export class DashboardComponent implements OnInit {
 
   submit(): void {
     this.configService.players = this.playersForm.controls.map(form => ({ name: form.value, team: null }));
+    localStorage.setItem('names', JSON.stringify(this.configService.players.map(player => player.name)));
     this.router.navigate(['roles']);
   }
 
@@ -98,5 +99,13 @@ export class DashboardComponent implements OnInit {
 
   get playersForm(): FormArray {
     return this.form.get('players') as FormArray;
+  }
+
+  getPlayerNames(translation: string): any[] {
+    if (localStorage.getItem('names')) {
+      return JSON.parse(localStorage.getItem('names'));
+    }
+
+    return Array.from(new Array(this.numberChoosed), (p, index) => (`${translation}-${index + 1}`));
   }
 }

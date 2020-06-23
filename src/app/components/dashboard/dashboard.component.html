@@ -4,7 +4,7 @@
       <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!loading">
         <mat-form-field>
           <mat-label>{{"DASHBOARD.selectLabel" | translate}}</mat-label>
-          <mat-select formControlName="nbPlayers">
+          <mat-select formControlName="nbPlayers" [(ngModel)]="numberChoosed">
             <mat-option
               *ngFor="let numberPlayer of createArray(maxNumberPlayer-minNumberPlayer +1); let i = index"
               [value]="minNumberPlayer + i">{{minNumberPlayer + i}}</mat-option>
@@ -18,7 +18,8 @@
         </div>
         <div *ngIf="!form.valid">{{"DASHBOARD.invalidFormWarning" | translate}}</div>
         <div class="flex-center-column">
-          <button mat-raised-button color="primary" [disabled]="form.invalid">{{"DASHBOARD.selectCharactersButtonLabel" | translate }}</button>
+          <button mat-raised-button color="primary"
+                  [disabled]="form.invalid">{{"DASHBOARD.selectCharactersButtonLabel" | translate }}</button>
         </div>
       </form>
       <div *ngIf="loading">

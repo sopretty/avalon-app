@@ -40,6 +40,7 @@
   "ROLE_TURN": {
     "title": "Give the cellphone to {{value}}",
     "description": "If you are {{value}} tap twice the screen to know your team/role",
+    "player": "{{value}} :",
     "titleRevealed": "You are in the {{value}} team",
     "descriptionRevealed": "You role is {{value}}",
     "descriptionRevealedBlue": "Votre rôle est Serviteur de Merlin",

@@ -1,7 +1,7 @@
 <div class="flex-center-column" (dblclick)="open()">
   <div class="flex-center-row">
     <div class="flex-center-column">
-      <div class="mat-h1">
+      <div *ngIf="!clicked" class="mat-h1">
         <p class="noselect">
           {{ 'ROLE_TURN.title' | translate: {value: state.name} }}
         </p>
@@ -10,6 +10,9 @@
         </p>
       </div>
       <div *ngIf="clicked" class="mat-h1">
+        <p class="noselect">
+          {{ 'ROLE_TURN.player' | translate: {value: state.name} }}
+        </p>
         <p class="noselect">
           {{ 'ROLE_TURN.titleRevealed' | translate: {value: ('ROLE_TURN.' + state.team  | translate) } }}
         </p>

@@ -28,7 +28,7 @@
   "GAME": {
     "questTitle": "Quête n°",
     "questRequired": "échecs requis",
-    "currentTurn": "Au tour de {{value}} d'être le Meneur :\nVous devez choisir l'équipe qui partira en quête",
+    "currentTurn": "Au tour de {{value}} d'être le Meneur : vous devez choisir l'équipe qui partira en quête",
     "voteSucceed": "Sélectionnez l'équipe qui part",
     "pickPlayer": "Choisissez l'équipe",
     "voteFailed": "Si la majorité vote contre",
@@ -43,8 +43,8 @@
     "player": "{{value}} :",
     "titleRevealed": "Vous êtes dans l'équipe {{value}}",
     "descriptionRevealed": "Vous jouez le rôle de {{value}}",
-    "descriptionRevealedBlue": "Vous jouez le rôle de fidèle vassal d'Arthur",
-    "descriptionRevealedRed": "Vous jouez le rôle de serviteur de Mordred",
+    "descriptionRevealedBlue": "Vous jouez le rôle de fidèle vassal d'Arthur (Bleu basique)",
+    "descriptionRevealedRed": "Vous jouez le rôle de serviteur de Mordred (Rouge basique)",
     "hideRole": "Appuyez deux fois pour cacher votre rôle",
     "blue": "bleue",
     "red": "rouge"
@@ -79,7 +79,7 @@
     "roleHeader": "Rôle",
     "questNumber": "Quête n°{{value}}",
     "teamWin": "Victoire de l'équipe {{value}}",
-    "description": "L'équipe rouge a voté pour tuer: {{value}}",
+    "description": "L'équipe rouge a voté pour tuer {{value}}",
     "gameNotOver": "Cette partie n'est pas terminée",
     "blue": "bleu",
     "red": "rouge"

@@ -4,8 +4,8 @@
   },
   "DASHBOARD": {
     "selectLabel": "Choose the number of players",
-    "defaultName": "DefaultName",
-    "invalidFormWarning": "You have to set a name for each users",
+    "defaultName": "Player",
+    "invalidFormWarning": "You have to set a name for each player",
     "selectCharactersButtonLabel": "Select game's characters"
   },
   "ROLES": {
@@ -26,13 +26,13 @@
     "startGameButtonLabel": "Start the game"
   },
   "GAME": {
-    "questTitle": "quest n°",
-    "questRequired": "fail(s) required",
-    "currentTurn": "It's {{value}}'s turn.\nYou need to pick who will do the quest",
-    "voteSucceed": "If the vote succeed",
-    "pickPlayer": "pick the player",
-    "voteFailed": "The vote fail",
-    "nextTurn": "next turn",
+    "questTitle": "Quest n°",
+    "questRequired": "fails required",
+    "currentTurn": "{{value}} you are the Leader : you need to pick who will do the quest",
+    "voteSucceed": "Select the players who go on quest",
+    "pickPlayer": "Pick the team",
+    "voteFailed": "If the majority votes against",
+    "nextTurn": "Next turn",
     "roleButtonLabel": "See the roles",
     "startQuestTooltip":"Start the quest",
     "questInfoTooltip": "Quest details"
@@ -42,9 +42,9 @@
     "description": "If you are {{value}} tap twice the screen to know your team/role",
     "player": "{{value}} :",
     "titleRevealed": "You are in the {{value}} team",
-    "descriptionRevealed": "You role is {{value}}",
-    "descriptionRevealedBlue": "Votre rôle est Serviteur de Merlin",
-    "descriptionRevealedRed": "Votre rôle est Mordred",
+    "descriptionRevealed": "Your role is {{value}}",
+    "descriptionRevealedBlue": "You are a loyal servant of Arthur (Basic blue)",
+    "descriptionRevealedRed": "You are a minion of Mordred (Basic red)",
     "hideRole": "Tap twice to hide your role",
     "blue": "blue",
     "red": "red"
@@ -68,8 +68,8 @@
     "blueTeamWin": "Blue team won!\nRed team has the opportunity to win the game by correctly naming which of the blue players is Merlin.",
     "redTeamWin": "Red team won",
     "playAgain": "Play again",
-    "redTeamWinVote": "Red find Merlin and win the game!",
-    "blueTeamWinVote": "Blue win the game!",
+    "redTeamWinVote": "Red team find Merlin and won the game !",
+    "blueTeamWinVote": "Red team didn't find Merlin, so Blue team won the game !",
     "selectLabel": "Blue players",
     "goToOverview": "Game overview"
   },
@@ -79,17 +79,13 @@
     "roleHeader": "Role",
     "questNumber": "Quest n°{{value}}",
     "teamWin": "The {{value}} team won",
-    "description": "Red team decided to vote for: {{value}}",
+    "description": "Red team decided to kill {{value}}",
     "gameNotOver": "This game is not over yet",
     "blue": "blue",
     "red": "red"
   },
   "ROLEDIALOG": {
     "title": "Click to reveal a role",
-    "returnButtonLabel": "Done"
-  },
-  "QUESTDIALOG": {
-    "title": "Quest details",
     "returnButtonLabel": "Done"
   },
   "QUESTDIALOG": {

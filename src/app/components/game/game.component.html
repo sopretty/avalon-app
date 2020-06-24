@@ -23,8 +23,8 @@
 
   </div>
 
-  <div class="board-middle mat-h3" [style.margin-top.px]="18">
-    {{'GAME.currentTurn' | translate: {value: currentPlayer.name} }}
+  <div class="board-middle mat-h3"
+       [style.margin-top.px]="18">{{'GAME.currentTurn' | translate: {value: currentPlayer.name} }}
 
     <div>{{'GAME.voteSucceed' | translate}}
       <button color="primary" mat-raised-button [disabled]="game.loadingSend" (click)="openPlayerDialog()">

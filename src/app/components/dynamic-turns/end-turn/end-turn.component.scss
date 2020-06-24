@@ -1,0 +1,25 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.title {
+  width: 60px;
+}
+
+.red {
+  color: white;
+  background-color: #ff0033;
+}
+
+.blue {
+  color: white;
+  background-color: #0D47A1;
+}
+
+.white {
+  background-color: white;
+}

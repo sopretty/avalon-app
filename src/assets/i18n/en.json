@@ -34,7 +34,7 @@
     "voteFailed": "The vote fail",
     "nextTurn": "next turn",
     "roleButtonLabel": "See the roles",
-    "startQuestTooltip":"Start the quest",
+    "startQuestTooltip": "Start the quest",
     "questInfoTooltip": "Quest details"
   },
   "ROLE_TURN": {
@@ -59,9 +59,13 @@
     "successButtonLabel": "SUCCESS"
   },
   "END_TURN": {
-    "result": "Result:",
-    "fail": "FAIL",
-    "success": "SUCCESS"
+    "title": "Quest details",
+    "returnButtonLabel": "Done",
+    "success": "Success",
+    "fail": "Fail",
+    "resultTitle": "Result",
+    "playersTitle": "Players",
+    "votesTitle": "Votes"
   },
   "END_GAME": {
     "blueTeamWin": "Blue team won!\nRed team has the opportunity to win the game by correctly naming which of the blue players is Merlin.",
@@ -81,14 +85,12 @@
     "description": "Red team decided to vote for: {{value}}",
     "gameNotOver": "This game is not over yet",
     "blue": "blue",
-    "red": "red"
+    "red": "red",
+    "playAgain": "Play again",
+    "questUnsendLose": "Evil wins the game because 5 teams have been rejected in a single round"
   },
   "ROLEDIALOG": {
     "title": "Click to reveal a role",
-    "returnButtonLabel": "Done"
-  },
-  "QUESTDIALOG": {
-    "title": "Quest details",
     "returnButtonLabel": "Done"
   },
   "QUESTDIALOG": {

@@ -59,9 +59,13 @@
     "successButtonLabel": "SUCCES"
   },
   "END_TURN": {
-    "result": "Résultat:",
-    "fail": "ECHEC",
-    "success": "SUCCES"
+    "title": "Détail de la quête",
+    "returnButtonLabel": "Retour",
+    "success": "Succès",
+    "fail": "Échec",
+    "resultTitle": "Résultat",
+    "playersTitle": "Joueurs",
+    "votesTitle": "Votes"
   },
   "END_GAME": {
     "blueTeamWin": "L'équipe bleue gagne!\nL'équipe rouge a l'opportunité de gagner en trouvant qui était Merlin parmi les joueurs bleus.",
@@ -81,7 +85,9 @@
     "description": "L'équipe rouge a voté pour tuer: {{value}}",
     "gameNotOver": "Cette partie n'est pas terminée",
     "blue": "bleu",
-    "red": "rouge"
+    "red": "rouge",
+    "playAgain": "Rejouer",
+    "questUnsendLose": "Le mal triomphe parce que 5 équipes consécutives ont été rejetées"
   },
   "ROLEDIALOG": {
     "title": "Cliquez pour réveler le rôle",

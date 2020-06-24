@@ -4,7 +4,7 @@
     <div class="title mat-body">
       {{'QUESTDIALOG.playersTitle' | translate }}
     </div>
-    <mat-chip [disableRipple]="true" class="player" *ngFor="let voter of voterPlayers">
+    <mat-chip [disableRipple]="true" class="player mat-body" *ngFor="let voter of voterPlayers">
       {{voter.name}}
     </mat-chip>
   </mat-chip-list>
@@ -13,7 +13,7 @@
     <div class="title mat-body">
       {{'QUESTDIALOG.votesTitle' | translate }}
     </div>
-    <mat-chip [disableRipple]="true" class="vote" *ngFor="let vote of votes" [ngClass]="vote ? 'blue': 'red'">
+    <mat-chip [disableRipple]="true" class="vote mat-body" *ngFor="let vote of votes" [ngClass]="vote ? 'blue': 'red'">
       {{vote ? ('QUESTDIALOG.success' | translate) : ('QUESTDIALOG.fail' | translate) }}
     </mat-chip>
   </mat-chip-list>
@@ -22,7 +22,7 @@
     <div class="title mat-body">
       {{'QUESTDIALOG.resultTitle' | translate }}
     </div>
-    <mat-chip [disableRipple]="true" class="chip-result" [ngClass]="data.quest.status ? 'blue': 'red'">
+    <mat-chip [disableRipple]="true" class="chip-result mat-body" [ngClass]="data.quest.status ? 'blue': 'red'">
       {{data.quest.status ? ('QUESTDIALOG.success' | translate) : ('QUESTDIALOG.fail' | translate) }}
     </mat-chip>
   </mat-chip-list>

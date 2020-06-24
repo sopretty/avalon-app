@@ -1,14 +1,35 @@
-<div class="flex-center-column" *ngIf="!!quest && votes.length > 0" (click)="endTurn()">
+<div class="flex-center-column bcg-color" *ngIf="!!quest && votes.length > 0" (click)="endTurn()">
   <div class="flex-center-row">
     <div class="flex-center-column">
-      <div class="mat-h1">
-        <p>{{quest.status ? ('END_TURN.success' | translate) : ('END_TURN.fail' | translate) }}</p>
-        <div>{{'END_TURN.result' | translate}}
-          <div *ngFor="let vote of votes">
-            <p>{{quest.votes[vote] ? ('END_TURN.success' | translate) : ('END_TURN.fail' | translate) }}</p>
+      <div>
+        <mat-chip-list class="row">
+          <div class="title mat-body">
+            {{'END_TURN.playersTitle' | translate }}
           </div>
-        </div>
+          <mat-chip [disableRipple]="true" class="player white" *ngFor="let voter of voterPlayers">
+            {{voter.name}}
+          </mat-chip>
+        </mat-chip-list>
+
+        <mat-chip-list class="row">
+          <div class="title mat-body">
+            {{'END_TURN.votesTitle' | translate }}
+          </div>
+          <mat-chip [disableRipple]="true" class="vote" *ngFor="let vote of votes" [ngClass]="vote ? 'blue': 'red'">
+            {{vote ? ('END_TURN.success' | translate) : ('END_TURN.fail' | translate) }}
+          </mat-chip>
+        </mat-chip-list>
+
+        <mat-chip-list class="row">
+          <div class="title mat-body">
+            {{'END_TURN.resultTitle' | translate }}
+          </div>
+          <mat-chip [disableRipple]="true" class="chip-result" [ngClass]="quest.status ? 'blue': 'red'">
+            {{quest.status ? ('END_TURN.success' | translate) : ('END_TURN.fail' | translate) }}
+          </mat-chip>
+        </mat-chip-list>
       </div>
+
     </div>
   </div>
 </div>

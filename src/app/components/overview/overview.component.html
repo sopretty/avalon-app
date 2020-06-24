@@ -28,8 +28,9 @@
     </div>
     <div class="description mat-h3">
       <div *ngIf="game.result.guess_merlin_id">{{'OVERVIEW.description' | translate: {value: guessedMerlin} }}</div>
+      <div *ngIf="!game.result.status && game.nb_quest_unsend === 5">{{'OVERVIEW.questUnsendLose' | translate }}</div>
     </div>
-    <button mat-raised-button color="primary" routerLink="/">{{'END_GAME.playAgain' | translate}}</button>
+    <button mat-raised-button color="primary" routerLink="/">{{'OVERVIEW.playAgain' | translate}}</button>
   </div>
 
 

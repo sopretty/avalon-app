@@ -11,6 +11,9 @@
       </div>
       <div *ngIf="clicked" class="mat-h1">
         <p class="noselect">
+          {{ 'ROLE_TURN.player' | translate: {value: state.name} }}
+        </p>
+        <p class="noselect">
           {{ 'ROLE_TURN.titleRevealed' | translate: {value: ('ROLE_TURN.' + state.team  | translate)} }}
         </p>
         <p class="noselect" *ngIf="state.role !== 'blue' && state.role !== 'red'">

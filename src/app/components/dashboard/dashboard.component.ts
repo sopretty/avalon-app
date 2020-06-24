@@ -1,13 +1,21 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { State } from '../../store/reducers';
+import { withLatestFrom } from 'rxjs/operators';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 import { Store } from '@ngrx/store';
+
+import { State } from '../../store/reducers';
 import { selectRules } from '../../store/reducers/selectors';
 import { Rules } from '../../types';
 import { ConfigService } from '../../services/config/config.service';
-import { withLatestFrom } from 'rxjs/operators';
+
+export function forbiddenNameValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    return (new Set(control.value)).size !== control.value.length ? { forbiddenName: { value: control.value } } : null;
+  };
+}
+
 
 @Component({
   selector: 'app-dashboard',
@@ -50,7 +58,7 @@ export class DashboardComponent implements OnInit {
             this.numberChoosed = this.getPlayerNames(translation).length;
             this.players = this.getPlayerNames(translation);
             this.form = this.formBuilder.group({
-              players: new FormArray([]),
+              players: new FormArray([], [forbiddenNameValidator()]),
               nbPlayers: new FormControl(this.minNumberPlayer),
             });
             this.addPlayerNames();
@@ -77,6 +85,14 @@ export class DashboardComponent implements OnInit {
     if (n) {
       return new Array(n).fill(null);
     }
+  }
+
+  get isNameTooLongOrTooShort(): boolean {
+    return !this.form.get('players').errors?.forbiddenName && this.form.invalid;
+  }
+
+  get isNameUnique(): boolean {
+    return !this.form.get('players').errors?.forbiddenName;
   }
 
   onFormChange(): void {

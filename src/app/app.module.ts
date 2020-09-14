@@ -91,8 +91,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatRippleModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [RoleTurnComponent, GenericTurnComponent, AudioTurnComponent, VoteTurnComponent, DialogComponent, EndTurnComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

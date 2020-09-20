@@ -16,7 +16,6 @@ export function forbiddenNameValidator(): ValidatorFn {
   };
 }
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -100,7 +99,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(newPlayerNumber => {
         if (this.playersForm.length < newPlayerNumber) {
           this.createArray(newPlayerNumber - this.playersForm.length).forEach(() => {
-              this.playersForm.push(new FormControl(`${this.defaultNameTranslation}-${this.playersForm.length + 1}`));
+              this.playersForm.push(new FormControl(`${this.defaultNameTranslation} ${this.playersForm.length + 1}`));
             }
           );
         }
@@ -122,6 +121,10 @@ export class DashboardComponent implements OnInit {
       return JSON.parse(localStorage.getItem('names'));
     }
 
-    return Array.from(new Array(this.minNumberPlayer), (p, index) => (`${translation}-${index + 1}`));
+    return Array.from(new Array(this.minNumberPlayer), (p, index) => (`${translation} ${index + 1}`));
+  }
+
+  generateAvatar(): string {
+    return `https://api.adorable.io/avatars/${Math.floor(Math.random() * 1000)}`;
   }
 }

@@ -1,12 +1,16 @@
 {
   "LANDING": {
-    "playButtonLabel": "Play"
+    "playButtonLabel": "LAUNCH GAME",
+    "rulesButtonLabel": "HOW TO PLAY"
   },
   "DASHBOARD": {
-    "selectLabel": "Choose the number of players",
-    "defaultName": "Player",
+    "title": "So, who’s playing?",
+    "selectLabel": "How many are you?",
+    "defaultName": "Player Name",
+    "playersLabel": "Introduce yourselves!",
     "invalidFormWarning": "You have to set a name for each player",
-    "selectCharactersButtonLabel": "Select game's characters",
+    "next": "NEXT",
+    "back": "BACK",
     "invalidUniqueNameFormWarning": "You can not use twice the same name"
   },
   "ROLES": {

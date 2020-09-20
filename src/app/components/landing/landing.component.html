@@ -1,17 +1,19 @@
 <div class="bcg">
   <img class="bcg-image" src="../../../assets/bcg/bcg-image.jpeg"/>
-  <!-- Fireflies -->
-  <div *ngFor="let firefly of fireflies" class="firefly">
+
+  <div class="flex-center-column landing-container">
+    <div class="title">AVALON</div>
+    <div class="button-container">
+      <button mat-raised-button (click)="launchGame()">
+        {{'LANDING.playButtonLabel' | translate}}
+      </button>
+      <button mat-raised-button (click)="launchGame()">
+        {{'LANDING.rulesButtonLabel' | translate}}
+      </button>
+    </div>
   </div>
 
-  <div class="flex-center-column">
-    <div class="flex-center-row">
-      <div class="flex-center-column">
-        <div class="mat-display-4 white">Avalon</div>
-        <button mat-raised-button (click)="launchGame()">
-          {{'LANDING.playButtonLabel' | translate}}
-        </button>
-      </div>
-    </div>
+  <!-- Fireflies -->
+  <div *ngFor="let firefly of fireflies" class="firefly">
   </div>
 </div>

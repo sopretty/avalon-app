@@ -41,12 +41,13 @@ app-root {
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
 .mat-tooltip {
@@ -56,4 +57,92 @@ app-root {
 
 .bcg-color {
   background-color: #F1D4AB;
+}
+
+@font-face {
+  font-family: 'Spectral SemiBold';
+  src: url('assets/fonts/Spectral-SemiBold.ttf') format('truetype') /* For Chrome and Safari */
+}
+
+@font-face {
+  font-family: 'Spectral Medium';
+  src: url('assets/fonts/Spectral-Medium.ttf') format('truetype') /* For Chrome and Safari */
+}
+
+@font-face {
+  font-family: 'Spectral Light';
+  src: url('assets/fonts/Spectral-Light.ttf') format('truetype') /* For Chrome and Safari */
+}
+
+// TOGGLE
+.mat-button-toggle-button {
+  box-sizing: border-box !important;
+  height: 48px !important;
+  width: 48px !important;
+  border: 1px solid #000000 !important;
+  border-radius: 2px !important;
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  font-family: "Spectral Medium" !important;
+  font-size: 14px !important;
+  letter-spacing: 1.5px !important;
+  line-height: 21px !important;
+  text-align: center !important;
+}
+
+.mat-button-toggle-checked {
+  .mat-button-toggle-button {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+  }
+}
+
+.mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {
+  border: unset !important;
+}
+
+// FORM FIELD
+.mat-form-field-infix {
+  width: 100% !important;
+  padding:0 !important;
+}
+
+
+// BUTTON
+.mat-button-base {
+  height: 48px !important;
+  color: black !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  border: 1px solid #000000 !important;
+  border-radius: 2px !important;
+  background-color: #FFFFFF !important;
+  letter-spacing: 1.5px !important;
+  line-height: 21px !important;
+  text-align: center !important;
+  font-family: "Spectral Medium" !important;
+}
+
+.mat-button-disabled {
+  border: 1px solid #C8C8C8 !important;
+  color: #C8C8C8 !important;
+}
+
+// INPUT
+
+input {
+  box-sizing: border-box;
+  height: 48px;
+  width: 226px;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+  outline: none;
+  padding-left: 12px;
+  letter-spacing: 0;
+  line-height: 24px;
+  color: #000000;
+  font-family: "Spectral Light";
+  font-size: 16px;
+  font-weight: 300;
 }

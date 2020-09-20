@@ -1,12 +1,16 @@
 {
   "LANDING": {
-    "playButtonLabel": "Jouer"
+    "playButtonLabel": "JOUER",
+    "rulesButtonLabel": "RÈGLE DE JEU"
   },
   "DASHBOARD": {
-    "selectLabel": "Choisissez un nombre de joueurs",
+    "title": "Alors, qui joue ?",
+    "selectLabel": "Combien êtes-vous ?",
     "defaultName": "Joueur",
+    "playersLabel": "Présentez-vous !",
     "invalidFormWarning": "Vous devez choisir un nom pour chaque joueur",
-    "selectCharactersButtonLabel": "Choisissez les personnages",
+    "next": "SUIVANT",
+    "back": "RETOUR",
     "invalidUniqueNameFormWarning": "Vous ne pouvez pas utiliser deux fois le même nom"
   },
   "ROLES": {

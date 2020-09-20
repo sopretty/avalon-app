@@ -1,31 +1,55 @@
 <div class="flex-center-column">
-  <div class="flex-center-row">
-    <div class="flex-center-column">
-      <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!loading">
-        <mat-form-field>
-          <mat-label>{{"DASHBOARD.selectLabel" | translate}}</mat-label>
-          <mat-select formControlName="nbPlayers" [(ngModel)]="numberChoosed">
-            <mat-option
-              *ngFor="let numberPlayer of createArray(maxNumberPlayer-minNumberPlayer +1); let i = index"
-              [value]="minNumberPlayer + i">{{minNumberPlayer + i}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div formArrayName="players" *ngFor="let order of playersForm.controls; let i = index">
-          <mat-form-field appearance="fill">
-            <input matInput [value]="order.value" [formControlName]="i" maxlength="20" minlength="1" required
-                   type="text">
-          </mat-form-field>
+  <form [formGroup]="form" *ngIf="!loading">
+    <div class="breadcrumb">
+      <div class="circle-breadcrumb filled-breadcrumb"></div>
+      <div class="circle-breadcrumb"></div>
+      <div class="circle-breadcrumb"></div>
+      <div class="circle-breadcrumb"></div>
+    </div>
+    <div class="title">
+      {{'DASHBOARD.title' | translate}}
+    </div>
+
+    <div class="label">
+      {{'DASHBOARD.selectLabel' | translate}}
+    </div>
+    <mat-button-toggle-group formControlName="nbPlayers" [(ngModel)]="numberChoosed" class="select-container">
+      <mat-button-toggle
+        *ngFor="let numberPlayer of createArray(maxNumberPlayer-minNumberPlayer +1); let i = index; let last = last"
+        [ngClass]="!last && 'not-last-toggle'"
+        [value]="minNumberPlayer + i">{{minNumberPlayer + i}}</mat-button-toggle>
+    </mat-button-toggle-group>
+    <div class="label">
+      {{'DASHBOARD.playersLabel' | translate}}
+    </div>
+    <div class="players-margin">
+      <div class="players-container">
+        <div formArrayName="players" *ngFor="let order of playersForm.controls; let i = index"
+             class="flex-center-row input-row">
+          <img class="avatar" [src]="generateAvatar()">
+          <input [formControlName]="i" maxlength="20" minlength="1" required
+                 type="text">
+          <!--  <img class="avatar" [src]="generateAvatar()">
+            <input type="text" [formControlName]="i">-->
+          <!--<input matInput [value]="order.value" [formControlName]="i" maxlength="20" minlength="1" required
+                 type="text">-->
         </div>
-        <div *ngIf="isNameTooLongOrTooShort">{{"DASHBOARD.invalidFormWarning" | translate}}</div>
-        <div *ngIf="!isNameUnique">{{"DASHBOARD.invalidUniqueNameFormWarning" | translate}}</div>
-        <div class="flex-center-column">
-          <button mat-raised-button color="primary"
-                  [disabled]="form.invalid">{{"DASHBOARD.selectCharactersButtonLabel" | translate }}</button>
-        </div>
-      </form>
-      <div *ngIf="loading">
-        <mat-spinner></mat-spinner>
       </div>
     </div>
+    <div class="label error" *ngIf="isNameTooLongOrTooShort">{{"DASHBOARD.invalidFormWarning" | translate}}</div>
+    <div class="label error" *ngIf="!isNameUnique">{{"DASHBOARD.invalidUniqueNameFormWarning" | translate}}</div>
+
+
+    <div class="button-container">
+      <button mat-raised-button disabled>{{"DASHBOARD.back" | translate }}</button>
+      <button mat-raised-button (click)="submit()"
+              [disabled]="form.invalid">{{"DASHBOARD.next" | translate }}</button>
+    </div>
+  </form>
+  <div *ngIf="loading" class="loader">
+    <mat-spinner></mat-spinner>
   </div>
 </div>
+
+
+

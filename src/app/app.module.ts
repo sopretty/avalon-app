@@ -11,8 +11,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatRippleModule} from '@angular/material/core';
+import { MatRippleModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -88,7 +89,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatChipsModule,
-    MatRippleModule
+    MatRippleModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

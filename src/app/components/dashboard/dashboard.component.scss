@@ -1,3 +1,140 @@
-.mat-form-field {
-  width: 93%;
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh
+}
+
+.breadcrumb {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  @media only screen and (min-width: 800px) {
+    margin-top: 80px;
+  }
+}
+
+.circle-breadcrumb {
+  box-sizing: border-box;
+  height: 8px;
+  width: 8px;
+  border: 1px solid #000000;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  margin: 4px;
+}
+
+.filled-breadcrumb {
+  background-color: #000000;
+}
+
+.title {
+  margin-top: 24px;
+  margin-bottom: 32px;
+  color: #000000;
+  font-family: "Spectral Medium";
+  font-size: 24px;
+  line-height: 36px;
+
+  @media only screen and (min-width: 800px) {
+    margin-bottom: 40px;
+  }
+}
+
+.not-last-toggle {
+  margin-right: -1px;
+}
+
+.label {
+  color: #000000;
+  font-family: "Spectral Medium";
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.select-container {
+  flex-shrink: 0;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.avatar {
+  margin-right: 7.5px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  height: 49px;
+  width: 49px;
+  border: 1px solid #000000;
+}
+
+.input-row {
+  margin-bottom: 16px;
+}
+
+.players-margin {
+  overflow: auto;
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  @media only screen and (min-width: 800px) {
+    margin-left: 16%;
+    margin-right: 16%;
+    flex-grow: 1;
+  }
+}
+
+
+.players-container {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  align-items: center;
+  margin-top: 9px;
+  @media only screen and (min-width: 800px) {
+    margin-top: 16px;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 0px 16px;
+  }
+}
+
+.mat-button-base {
+  margin: 8px;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+
+  @media only screen and (min-width: 800px) {
+    flex-grow: 0;
+    width: 160px;
+  }
+}
+
+.button-container {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #EBEBEB;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.error {
+  color: red;
 }

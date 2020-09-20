@@ -26,13 +26,9 @@
       <div class="players-container">
         <div formArrayName="players" *ngFor="let order of playersForm.controls; let i = index"
              class="flex-center-row input-row">
-          <img class="avatar" [src]="generateAvatar()">
+          <img class="avatar" [src]="getPlayerAvatarImg(i)">
           <input [formControlName]="i" maxlength="20" minlength="1" required
                  type="text">
-          <!--  <img class="avatar" [src]="generateAvatar()">
-            <input type="text" [formControlName]="i">-->
-          <!--<input matInput [value]="order.value" [formControlName]="i" maxlength="20" minlength="1" required
-                 type="text">-->
         </div>
       </div>
     </div>

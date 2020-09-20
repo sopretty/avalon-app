@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   minNumberPlayer: number;
   maxNumberPlayer: number;
   numberChoosed: number;
-  players: string[];
+  players: { name: string, avatar: number }[];
   form: FormGroup;
   loading: boolean;
   rules: Rules;
@@ -54,8 +54,8 @@ export class DashboardComponent implements OnInit {
             this.maxNumberPlayer = Number(rulesKeys[rulesKeys.length - 1]);
             this.loading = false;
             this.rules = rules;
-            this.numberChoosed = this.getPlayerNames(translation).length;
-            this.players = this.getPlayerNames(translation);
+            this.players = this.getPlayers(translation);
+            this.numberChoosed = this.players.length;
             this.form = this.formBuilder.group({
               players: new FormArray([], [forbiddenNameValidator()]),
               nbPlayers: new FormControl(this.minNumberPlayer),
@@ -69,14 +69,19 @@ export class DashboardComponent implements OnInit {
   }
 
   addPlayerNames(): void {
-    this.players.forEach((playerName) => {
-      this.playersForm.push(new FormControl(playerName));
+    console.log(this.players);
+    this.players.forEach((player) => {
+      this.playersForm.push(new FormControl(player.name));
     });
   }
 
   submit(): void {
-    this.configService.players = this.playersForm.controls.map(form => ({ name: form.value, team: null }));
-    localStorage.setItem('names', JSON.stringify(this.configService.players.map(player => player.name)));
+    this.configService.players = this.playersForm.controls.map((form, idx) => ({
+      name: form.value,
+      team: null,
+      avatar: this.players[idx].avatar
+    }));
+    localStorage.setItem('players', JSON.stringify(this.configService.players));
     this.router.navigate(['roles']);
   }
 
@@ -100,13 +105,19 @@ export class DashboardComponent implements OnInit {
         if (this.playersForm.length < newPlayerNumber) {
           this.createArray(newPlayerNumber - this.playersForm.length).forEach(() => {
               this.playersForm.push(new FormControl(`${this.defaultNameTranslation} ${this.playersForm.length + 1}`));
+              this.players.push({
+                name: `${this.defaultNameTranslation} ${this.playersForm.length + 1}`,
+                avatar: Math.floor(Math.random() * 1000) + 1
+              });
             }
           );
         }
+
         if (this.playersForm.length > newPlayerNumber) {
           const previouslength = this.playersForm.length;
           this.createArray(this.playersForm.length - newPlayerNumber).forEach((_, i) => {
             this.playersForm.removeAt(previouslength - i - 1);
+            this.players = this.players.slice(0, previouslength - i - 1);
           });
         }
       });
@@ -116,15 +127,20 @@ export class DashboardComponent implements OnInit {
     return this.form.get('players') as FormArray;
   }
 
-  getPlayerNames(translation: string): any[] {
-    if (localStorage.getItem('names')) {
-      return JSON.parse(localStorage.getItem('names'));
+  getPlayers(translation: string): any[] {
+    if (localStorage.getItem('players')) {
+      return JSON.parse(localStorage.getItem('players'));
     }
 
-    return Array.from(new Array(this.minNumberPlayer), (p, index) => (`${translation} ${index + 1}`));
+    return Array.from(new Array(this.minNumberPlayer), (p, index) => ({
+      name: `${translation} ${index + 1}`,
+      avatar: Math.floor(Math.random() * 1000) + 1
+    }));
   }
 
-  generateAvatar(): string {
-    return `https://api.adorable.io/avatars/${Math.floor(Math.random() * 1000)}`;
+  getPlayerAvatarImg(index: number): string {
+    if (!!this.players && this.players.length && !!this.players[index]) {
+      return `https://api.adorable.io/avatars/${this.players[index].avatar}`;
+    }
   }
 }

@@ -7,12 +7,22 @@ form {
   height: 100vh
 }
 
+.top-section {
+  display: flex;
+  flex-direction: column;
+}
+
 .breadcrumb {
-  margin-top: 40px;
+  justify-content: center;
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
+  @media only screen and (min-height: 650px) {
+    margin-top: 40px;
+  }
+
   @media only screen and (min-width: 800px) {
-    margin-top: 80px;
+    margin-top: 60px;
   }
 }
 
@@ -31,14 +41,21 @@ form {
 }
 
 .title {
-  margin-top: 24px;
-  margin-bottom: 32px;
+  margin-top: 12px;
+  margin-bottom: 16px;
   color: #000000;
   font-family: "Spectral Medium";
   font-size: 24px;
   line-height: 36px;
+  text-align: center;
+
+  @media only screen and (min-height: 650px) {
+    margin-top: 24px;
+    margin-bottom: 32px;
+  }
 
   @media only screen and (min-width: 800px) {
+    margin-top: 24px;
     margin-bottom: 40px;
   }
 }
@@ -58,7 +75,11 @@ form {
 .select-container {
   flex-shrink: 0;
   margin-top: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+  @media only screen and (min-height: 650px) {
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
 }
 
 .avatar {
@@ -76,7 +97,6 @@ form {
 
 .players-margin {
   overflow: auto;
-  display: flex;
   flex-grow: 1;
   width: 100%;
   @media only screen and (min-width: 800px) {
@@ -122,10 +142,13 @@ form {
   flex-grow: 0;
   flex-shrink: 0;
   width: 100%;
-  height: 80px;
-  background-color: #EBEBEB;
   align-items: center;
+  background-color: #EBEBEB;
   justify-content: center;
+  height: 60px;
+  @media screen and (min-width: 800px), screen and (min-height: 650px) {
+    height: 80px;
+  }
 }
 
 .loader {

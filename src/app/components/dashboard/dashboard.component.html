@@ -1,26 +1,28 @@
 <div class="flex-center-column">
   <form [formGroup]="form" *ngIf="!loading">
-    <div class="breadcrumb">
-      <div class="circle-breadcrumb filled-breadcrumb"></div>
-      <div class="circle-breadcrumb"></div>
-      <div class="circle-breadcrumb"></div>
-      <div class="circle-breadcrumb"></div>
-    </div>
-    <div class="title">
-      {{'DASHBOARD.title' | translate}}
-    </div>
+    <div class="top-section">
+      <div class="breadcrumb">
+        <div class="circle-breadcrumb filled-breadcrumb"></div>
+        <div class="circle-breadcrumb"></div>
+        <div class="circle-breadcrumb"></div>
+        <div class="circle-breadcrumb"></div>
+      </div>
+      <div class="title">
+        {{'DASHBOARD.title' | translate}}
+      </div>
 
-    <div class="label">
-      {{'DASHBOARD.selectLabel' | translate}}
-    </div>
-    <mat-button-toggle-group formControlName="nbPlayers" [(ngModel)]="numberChoosed" class="select-container">
-      <mat-button-toggle
-        *ngFor="let numberPlayer of createArray(maxNumberPlayer-minNumberPlayer +1); let i = index; let last = last"
-        [ngClass]="!last && 'not-last-toggle'"
-        [value]="minNumberPlayer + i">{{minNumberPlayer + i}}</mat-button-toggle>
-    </mat-button-toggle-group>
-    <div class="label">
-      {{'DASHBOARD.playersLabel' | translate}}
+      <div class="label">
+        {{'DASHBOARD.selectLabel' | translate}}
+      </div>
+      <mat-button-toggle-group formControlName="nbPlayers" [(ngModel)]="numberChoosed" class="select-container">
+        <mat-button-toggle
+          *ngFor="let numberPlayer of createArray(maxNumberPlayer-minNumberPlayer +1); let i = index; let last = last"
+          [ngClass]="!last && 'not-last-toggle'"
+          [value]="minNumberPlayer + i">{{minNumberPlayer + i}}</mat-button-toggle>
+      </mat-button-toggle-group>
+      <div class="label">
+        {{'DASHBOARD.playersLabel' | translate}}
+      </div>
     </div>
     <div class="players-margin">
       <div class="players-container">

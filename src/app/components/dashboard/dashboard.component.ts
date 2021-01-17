@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   loading: boolean;
   rules: Rules;
   defaultNameTranslation = 'DefaultName';
+  randomAvatarId: number;
 
   constructor(
     private router: Router,
@@ -54,6 +55,7 @@ export class DashboardComponent implements OnInit {
             this.maxNumberPlayer = Number(rulesKeys[rulesKeys.length - 1]);
             this.loading = false;
             this.rules = rules;
+            this.randomAvatarId = Math.floor(Math.random() * this.minNumberPlayer) + 1;
             this.players = this.getPlayers(translation);
             this.numberChoosed = this.players.length;
             this.form = this.formBuilder.group({
@@ -69,7 +71,6 @@ export class DashboardComponent implements OnInit {
   }
 
   addPlayerNames(): void {
-    console.log(this.players);
     this.players.forEach((player) => {
       this.playersForm.push(new FormControl(player.name));
     });
@@ -104,10 +105,11 @@ export class DashboardComponent implements OnInit {
       .subscribe(newPlayerNumber => {
         if (this.playersForm.length < newPlayerNumber) {
           this.createArray(newPlayerNumber - this.playersForm.length).forEach(() => {
+
               this.playersForm.push(new FormControl(`${this.defaultNameTranslation} ${this.playersForm.length + 1}`));
               this.players.push({
                 name: `${this.defaultNameTranslation} ${this.playersForm.length + 1}`,
-                avatar: Math.floor(Math.random() * 1000) + 1
+                avatar: (this.randomAvatarId + this.playersForm.length - 1) % this.maxNumberPlayer + 1
               });
             }
           );
@@ -132,15 +134,16 @@ export class DashboardComponent implements OnInit {
       return JSON.parse(localStorage.getItem('players'));
     }
 
-    return Array.from(new Array(this.minNumberPlayer), (p, index) => ({
+
+    return Array.from(new Array(this.minNumberPlayer), (_p, index) => ({
       name: `${translation} ${index + 1}`,
-      avatar: Math.floor(Math.random() * 1000) + 1
+      avatar: (this.randomAvatarId + index) % this.maxNumberPlayer + 1
     }));
   }
 
   getPlayerAvatarImg(index: number): string {
     if (!!this.players && this.players.length && !!this.players[index]) {
-      return `https://api.adorable.io/avatars/${this.players[index].avatar}`;
+      return `/assets/avatars/${this.players[index].avatar}.png`;
     }
   }
 }

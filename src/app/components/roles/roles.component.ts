@@ -19,15 +19,23 @@ export class RolesComponent implements OnInit {
   allowed: { red: number, blue: number };
   roles: { descriptionKey: string, characters: { name: string, team: string }[] }[] = [
     {
-      descriptionKey: 'ROLES.mordredDescription',
+      descriptionKey: 'ROLES.merlin',
+      characters: [{ name: 'merlin', team: 'blue' }],
+    },
+    {
+      descriptionKey: 'ROLES.mordred',
       characters: [{ name: 'mordred', team: 'red' }],
     },
     {
-      descriptionKey: 'ROLES.morganeDescription',
-      characters: [{ name: 'morgan', team: 'red' }, { name: 'perceval', team: 'blue' }],
+      descriptionKey: 'ROLES.morgan',
+      characters: [{ name: 'morgan', team: 'red' }],
     },
     {
-      descriptionKey: 'ROLES.oberonDescription',
+      descriptionKey: 'ROLES.perceval',
+      characters: [{ name: 'perceval', team: 'blue' }],
+    },
+    {
+      descriptionKey: 'ROLES.oberon',
       characters: [{ name: 'oberon', team: 'red' }],
     },
   ];
@@ -104,6 +112,10 @@ export class RolesComponent implements OnInit {
 
   get rolesForm(): FormArray {
     return this.form.get('roles') as FormArray;
+  }
+
+  goBack(): void {
+    this.router.navigate(['dashboard']);
   }
 
 }

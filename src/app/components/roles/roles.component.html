@@ -1,27 +1,42 @@
 <div class="flex-center-column">
-  <div class="flex-center-row">
-    <div class="flex-center-column">
-      <div class="mat-h1">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="top-section">
+      <div class="breadcrumb">
+        <div class="circle-breadcrumb"></div>
+        <div class="circle-breadcrumb filled-breadcrumb"></div>
+        <div class="circle-breadcrumb"></div>
+        <div class="circle-breadcrumb"></div>
+      </div>
+      <div class="title">
         {{'ROLES.title' | translate}}
       </div>
-      <div class="mat-h2">
-       {{'ROLES.redDescription' | translate}} {{allowed.red}}
+
+      <div class="description">
+        {{'ROLES.description' | translate: {redNumber: allowed.red, blueNumber: allowed.blue} }}
       </div>
-      <div class="mat-h2">
-        {{'ROLES.blueDescription' | translate}} {{allowed.blue}}
-      </div>
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <div formArrayName="roles" *ngFor="let order of rolesForm.controls; let i = index">
-          <mat-checkbox [formControlName]="i">
-            {{roles[i].descriptionKey | translate}}
-          </mat-checkbox>
-        </div>
-        <div *ngIf="!form.valid">{{'ROLES.invalidFormWarning' | translate}}</div>
-        <div class="flex-center-column button-container">
-          <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
-          <button mat-raised-button color="primary" [disabled]="form.invalid || loading">{{'ROLES.startGameButtonLabel' | translate}}</button>
-        </div>
-      </form>
     </div>
-  </div>
+    <div class="scrollbar">
+      <div class="card-container">
+
+        <div class="card" formArrayName="roles" *ngFor="let order of rolesForm.controls; let i = index">
+          <mat-checkbox class="card-checkbox" [formControlName]="i">
+          </mat-checkbox>
+          <div class="card-title">
+            {{roles[i].descriptionKey | translate}}
+          </div>
+          <div class="card-img-container">
+            <img class="card-img" src="/assets/avatars/1.png">
+          </div>
+        </div>
+        <div *ngIf="!form.valid">{{'ROLES.invalidFormWarning' | translate}}</div>
+
+      </div>
+    </div>
+    <div class="flex-center-column button-container">
+      <button mat-raised-button (click)="goBack()">{{"ROLES.back" | translate }}</button>
+      <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
+      <button mat-raised-button color="primary"
+              [disabled]="form.invalid || loading">{{'ROLES.next' | translate}}</button>
+    </div>
+  </form>
 </div>

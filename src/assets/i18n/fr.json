@@ -15,13 +15,15 @@
   },
   "ROLES": {
     "title": "Quels rôles voulez-vous ajouter ?",
-    "redDescription": "Nombre de rôles particuliers rouges autorisés :",
-    "blueDescription": "Nombre de rôles particuliers bleus autorisés :",
+    "description": "Choisissez {{blueNumber}} rôles bleus & {{redNumber}} rôles rouges maximum pour continuer",
     "invalidFormWarning": "Vous ne pouvez pas avoir plus de personnages que de joueurs rouges ou bleus",
-    "startGameButtonLabel": "Démarrer l'histoire",
-    "mordredDescription": "Mordred (rouge)",
-    "morganeDescription": "Morgane (rouge), Perceval (bleu)",
-    "oberonDescription": "Oberon (rouge)"
+    "merlin": "MERLIN",
+    "mordred": "MORDRED",
+    "morgan": "MORGANE",
+    "perceval": "PERCEVAL",
+    "oberon": "OBERON",
+    "back": "RETOUR",
+    "next": "SUIVANT"
   },
   "AUDIO": {
     "title": "Débutez l'histoire et fermez vos yeux !",

@@ -100,11 +100,6 @@ form {
   overflow: auto;
   flex-grow: 1;
   width: 100%;
-  @media only screen and (min-width: 800px) {
-    margin-left: 16%;
-    margin-right: 16%;
-    flex-grow: 1;
-  }
 }
 
 
@@ -116,6 +111,9 @@ form {
   width: 100%;
   align-items: center;
   margin-top: 9px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
   @media only screen and (min-width: 800px) {
     margin-top: 16px;
     display: grid;

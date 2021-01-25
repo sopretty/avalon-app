@@ -14,14 +14,16 @@
     "invalidUniqueNameFormWarning": "You can not use twice the same name"
   },
   "ROLES": {
-    "title": "What roles do you want to add ?",
-    "redDescription": "Number of red roles allowed :",
-    "blueDescription": "Number of blue roles allowed :",
+    "title": "Ready to role?",
+    "description": "Choose {{blueNumber}} Blue Roles & {{redNumber}} Red Roles to continue",
     "invalidFormWarning": "You have exceeded the red or blue players limit",
-    "startGameButtonLabel": "Start the story",
-    "mordredDescription": "Mordred (red)",
-    "morganeDescription": "Morgane (red), Perceval (blue)",
-    "oberonDescription": "Oberon (red)"
+    "merlin": "MERLIN",
+    "mordred": "MORDRED",
+    "morgan": "MORGANE",
+    "perceval": "PERCEVAL",
+    "oberon": "OBERON",
+    "back": "RETOUR",
+    "next": "SUIVANT"
   },
   "AUDIO": {
     "title": "Start the story and close your eyes !",

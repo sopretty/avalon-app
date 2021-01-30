@@ -17,26 +17,29 @@ export class RolesComponent implements OnInit {
 
   selected: { red: number, blue: number };
   allowed: { red: number, blue: number };
-  roles: { descriptionKey: string, characters: { name: string, team: string }[] }[] = [
+  roles: { descriptionKey: string, characters: { asset: string, name: string, team: string, description: string }[] }[] = [
     {
+
       descriptionKey: 'ROLES.merlin',
-      characters: [{ name: 'merlin', team: 'blue' }],
+      characters: [{ asset: '/assets/characters/merlin.png', name: 'merlin', team: 'blue', description: 'ROLES.merlinDescription' }],
     },
     {
       descriptionKey: 'ROLES.mordred',
-      characters: [{ name: 'mordred', team: 'red' }],
+      characters: [{ asset: '/assets/characters/mordred.png', name: 'mordred', team: 'red', description: 'ROLES.mordredDescription' }],
     },
     {
-      descriptionKey: 'ROLES.morgan',
-      characters: [{ name: 'morgan', team: 'red' }],
-    },
-    {
-      descriptionKey: 'ROLES.perceval',
-      characters: [{ name: 'perceval', team: 'blue' }],
+
+      descriptionKey: 'ROLES.morganaAndPerceval',
+      characters: [{ asset: '/assets/characters/morgana.png', name: 'morgan', team: 'red', description: 'ROLES.morganaDescription' }, {
+        asset: '/assets/characters/perceval.png',
+        name: 'perceval',
+        team: 'blue', description: 'ROLES.percevalDescription'
+      }
+      ],
     },
     {
       descriptionKey: 'ROLES.oberon',
-      characters: [{ name: 'oberon', team: 'red' }],
+      characters: [{ asset: '/assets/characters/oberon.png', name: 'oberon', team: 'red', description: 'ROLES.oberonDescription' }],
     },
   ];
   form: FormGroup;

@@ -25,7 +25,14 @@
             {{roles[i].descriptionKey | translate}}
           </div>
           <div class="card-img-container">
-            <img class="card-img" src="/assets/avatars/1.png">
+            <div *ngFor="let character of roles[i].characters">
+              <img class="card-img" [src]="character.asset">
+            </div>
+          </div>
+          <div class="card-description-container">
+            <div *ngFor="let character of roles[i].characters" [ngClass]="roles[i].characters.length > 1 ? 'card-half-description' : 'card-description'">
+              {{character.description | translate}}
+            </div>
           </div>
         </div>
         <div *ngIf="!form.valid">{{'ROLES.invalidFormWarning' | translate}}</div>

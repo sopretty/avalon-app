@@ -146,7 +146,7 @@ form {
   .card-title {
     display: flex;
     justify-content: center;
-    font-family: Spectral;
+    font-family: "Spectral Medium";
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 0;
@@ -184,10 +184,12 @@ form {
 
 
     .card-description {
+      font-family: "Spectral Medium";
       width: 100%;
     }
 
     .card-half-description {
+      font-family: "Spectral Medium";
       width: 50%;
     }
   }

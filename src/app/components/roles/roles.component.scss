@@ -196,4 +196,29 @@ form {
 }
 
 
+.card.morgan_perceval {
+  background: rgba(255, 0, 51, .6); /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, rgba(255, 0, 51, .6), rgba(13, 71, 161, .6)); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, rgba(255, 0, 51, .6), rgba(13, 71, 161, .6));
+}
 
+.card.merlin {
+  background: rgba(13, 71, 161, .6); /* fallback for old browsers */
+}
+
+.card.mordred {
+  background: rgba(255, 0, 51, .6);
+}
+
+.card.oberon {
+  background: rgba(255, 0, 51, .6);
+}
+
+.card:hover {
+  transform: translate3d(-4px, -4px, 0);
+  transition: transform 0.3s;
+}
+
+.card-title.blue {
+  color: rgba(13, 71, 161)
+}

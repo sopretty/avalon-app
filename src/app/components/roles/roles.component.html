@@ -18,9 +18,12 @@
     <div class="scrollbar">
       <div class="card-container">
 
-        <div class="card" formArrayName="roles" *ngFor="let order of rolesForm.controls; let i = index">
+        <div class="card" [ngClass]="getCardClasses(i)" formArrayName="roles"
+             *ngFor="let order of rolesForm.controls; let i = index">
           <mat-checkbox
-            [matTooltip]="!form.valid ? ('ROLES.invalidFormWarning' | translate) : ''"
+            [matTooltip]="i === 0 ?
+            ('ROLES.merlinCeckboxTooltip' | translate) :
+             (!form.valid && !order.value) ? ('ROLES.invalidFormWarning' | translate) : ''"
             class="card-checkbox"
             (change)="onCheckChange()"
             [formControlName]="i">

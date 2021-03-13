@@ -17,6 +17,7 @@
     "title": "Quels rôles voulez-vous ajouter ?",
     "description": "Choisissez {{blueNumber}} rôles bleus & {{redNumber}} rôles rouges maximum pour continuer",
     "invalidFormWarning": "Vous avez atteint la limite de joueurs bleus ou rouges",
+    "merlinCeckboxTooltip": "Merlin est un personage ajouté par défaut",
     "merlin": "MERLIN",
     "merlinDescription": "Connaît qui joueurs du Mal",
     "mordred": "MORDRED",

@@ -17,6 +17,7 @@
     "title": "Ready to role?",
     "description": "Choose {{blueNumber}} Blue Roles & {{redNumber}} Red Roles to continue",
     "invalidFormWarning": "You have reached the red or blue players limit",
+    "merlinCeckboxTooltip": "Merlin is a character added by default",
     "merlin": "MERLIN",
     "merlinDescription": "Knows all Evil players",
     "mordred": "MORDRED",

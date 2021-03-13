@@ -127,7 +127,7 @@ export class RolesComponent implements OnInit {
   }
 
   addCheckRoles(): void {
-    this.roles.forEach((_value, index) => {
+    this.roles.forEach((role, index) => {
       this.rolesForm.push(
         new FormControl({value: index === 0, disabled: index === 0})
       );
@@ -161,6 +161,10 @@ export class RolesComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['dashboard']);
+  }
+
+  getCardClasses(idx: number): string {
+    return this.roles[idx].characters.map(char => char.name).join('_');
   }
 
 }

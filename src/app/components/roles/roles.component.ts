@@ -18,11 +18,12 @@ export class RolesComponent implements OnInit {
   selected: { red: number, blue: number };
   allowed: { red: number, blue: number };
   roles: {
-    descriptionKey: string, characters: { asset: string, name: string, team: string, description: string }[]
+    descriptionKey: string, disabled?: boolean, characters: { asset: string, name: string, team: string, description: string }[]
   }[] = [
     {
 
       descriptionKey: 'ROLES.merlin',
+      disabled: true,
       characters: [{
         asset: '/assets/characters/merlin.png',
         name: 'merlin',

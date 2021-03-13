@@ -16,7 +16,7 @@
   "ROLES": {
     "title": "Quels rôles voulez-vous ajouter ?",
     "description": "Choisissez {{blueNumber}} rôles bleus & {{redNumber}} rôles rouges maximum pour continuer",
-    "invalidFormWarning": "Vous ne pouvez pas avoir plus de personnages que de joueurs rouges ou bleus",
+    "invalidFormWarning": "Vous avez atteint la limite de joueurs bleus ou rouges",
     "merlin": "MERLIN",
     "merlinDescription": "Connaît qui joueurs du Mal",
     "mordred": "MORDRED",

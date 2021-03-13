@@ -19,7 +19,11 @@
       <div class="card-container">
 
         <div class="card" formArrayName="roles" *ngFor="let order of rolesForm.controls; let i = index">
-          <mat-checkbox class="card-checkbox" [formControlName]="i">
+          <mat-checkbox
+            [matTooltip]="!form.valid ? ('ROLES.invalidFormWarning' | translate) : ''"
+            class="card-checkbox"
+            (change)="onCheckChange()"
+            [formControlName]="i">
           </mat-checkbox>
           <div class="card-title">
             {{roles[i].descriptionKey | translate}}
@@ -30,20 +34,19 @@
             </div>
           </div>
           <div class="card-description-container">
-            <div *ngFor="let character of roles[i].characters" [ngClass]="roles[i].characters.length > 1 ? 'card-half-description' : 'card-description'">
+            <div *ngFor="let character of roles[i].characters"
+                 [ngClass]="roles[i].characters.length > 1 ? 'card-half-description' : 'card-description'">
               {{character.description | translate}}
             </div>
           </div>
         </div>
-        <div *ngIf="!form.valid">{{'ROLES.invalidFormWarning' | translate}}</div>
-
       </div>
     </div>
     <div class="flex-center-column button-container">
       <button mat-raised-button (click)="goBack()">{{"ROLES.back" | translate }}</button>
       <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
       <button mat-raised-button color="primary"
-              [disabled]="form.invalid || loading">{{'ROLES.next' | translate}}</button>
+              [disabled]="loading">{{'ROLES.next' | translate}}</button>
     </div>
   </form>
 </div>

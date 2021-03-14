@@ -30,6 +30,12 @@
     "back": "RETOUR",
     "next": "SUIVANT"
   },
+  "REVEAL": {
+    "title": "Quel est dans ton équipe ?",
+    "description": "Trouve ton nom pour voir ton rôle et ton équipe",
+    "back": "RETOUR",
+    "next": "SUIVANT"
+  },
   "AUDIO": {
     "title": "Débutez l'histoire et fermez vos yeux !",
     "startStoryButtonLabel": "Lancer l'histoire",

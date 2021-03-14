@@ -38,6 +38,7 @@ import { ButtonComponent } from './button/button.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { RoleDialogComponent } from './components/game/role-dialog/role-dialog.component';
 import { QuestDialogComponent } from './components/game/quest-dialog/quest-dialog.component';
+import { RevealComponent } from './components/reveal/reveal.component';
 
 
 // AoT requires an exported function for factories
@@ -62,7 +63,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ButtonComponent,
     OverviewComponent,
     RoleDialogComponent,
-    QuestDialogComponent
+    QuestDialogComponent,
+    RevealComponent
   ],
   imports: [
     HttpClientModule,

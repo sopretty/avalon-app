@@ -33,19 +33,19 @@ export class GameEffects {
           .pipe(
             tap((game: any) => {
               if (game.id) {
-                this.router.navigate(['/games', game.id]);
+                this.router.navigate(['/reveal', game.id]);
               }
             }),
             switchMap(game => [
                 actions.setGame(game),
-                actions.addEvents({
+                /*actions.addEvents({
                   events: game.players.slice().reverse().map(player => ({ type: 'app-role-turn', state: player }))
-                }),
-                actions.addEvents({
+                }),*/
+              /*  actions.addEvents({
                   events: [{
                     type: 'app-audio-turn',
                   }]
-                })
+                })*/
               ]
             ),
           )

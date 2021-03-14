@@ -1,0 +1,49 @@
+.top-section {
+  display: flex;
+  flex-direction: column;
+}
+.breadcrumb {
+  justify-content: center;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  @media only screen and (min-height: 650px) {
+    margin-top: 40px;
+  }
+
+  @media only screen and (min-width: 800px) {
+    margin-top: 60px;
+  }
+}
+
+.circle-breadcrumb {
+  box-sizing: border-box;
+  height: 8px;
+  width: 8px;
+  border: 1px solid #000000;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  margin: 4px;
+}
+
+.filled-breadcrumb {
+  background-color: #000000;
+}
+
+.title {
+  color: #000000;
+  font-family: "Spectral Medium";
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.description {
+  color: #000000;
+  font-family: "Spectral Medium";
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}

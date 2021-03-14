@@ -27,8 +27,14 @@
     "percevalDescription": "Knows that 2 players are Morgana or Merlin",
     "oberon": "OBERON",
     "oberonDescription": "His identity is not revealed to the other Evil players",
-    "back": "RETOUR",
-    "next": "SUIVANT"
+    "next": "NEXT",
+    "back": "BACK"
+  },
+  "REVEAL": {
+    "title": "Whose side are you on?",
+    "description": "Find your name to see your team and role",
+    "next": "NEXT",
+    "back": "BACK"
   },
   "AUDIO": {
     "title": "Start the story and close your eyes !",

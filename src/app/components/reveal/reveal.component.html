@@ -1,0 +1,23 @@
+<div class="flex-center-column">
+  <div class="top-section">
+    <div class="breadcrumb">
+      <div class="circle-breadcrumb"></div>
+      <div class="circle-breadcrumb"></div>
+      <div class="circle-breadcrumb filled-breadcrumb"></div>
+      <div class="circle-breadcrumb"></div>
+    </div>
+    <div class="title">
+      {{'REVEAL.title' | translate}}
+    </div>
+
+    <div class="description">
+      {{'REVEAL.description' | translate}}
+    </div>
+  </div>
+  <div class="flex-center-column button-container">
+    <button mat-raised-button (click)="goBack()">{{"ROLES.back" | translate }}</button>
+    <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
+    <button mat-raised-button color="primary" (click)="goNext()"
+            [disabled]="loading">{{'ROLES.next' | translate}}</button>
+  </div>
+</div>

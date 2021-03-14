@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
-import {Store} from '@ngrx/store';
-import {createGame} from '../../store/actions/actions';
-import {State} from '../../store/reducers';
-import {ConfigService} from '../../services/config/config.service';
-import {selectRules} from '../../store/reducers/selectors';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { createGame } from '../../store/actions/actions';
+import { State } from '../../store/reducers';
+import { ConfigService } from '../../services/config/config.service';
+import { selectRules } from '../../store/reducers/selectors';
 
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss'],
-  host: {class: 'component-container'}
+  host: { class: 'component-container' }
 })
 export class RolesComponent implements OnInit {
 
@@ -81,12 +81,12 @@ export class RolesComponent implements OnInit {
       if (rules) {
         const ruleKey = Object.keys(rules).find((nbPlayer) => Number(nbPlayer) === this.configService.players.length);
         if (ruleKey) {
-          this.allowed = {blue: rules[ruleKey].blue, red: rules[ruleKey].red};
+          this.allowed = { blue: rules[ruleKey].blue, red: rules[ruleKey].red };
         }
 
       }
     });
-    this.selected = {red: 0, blue: 0};
+    this.selected = { red: 0, blue: 0 };
     this.form = this.formBuilder.group({
       roles: new FormArray([], this.redBlueValidator()),
     });
@@ -96,7 +96,7 @@ export class RolesComponent implements OnInit {
   redBlueValidator() {
     const validator: ValidatorFn = (formArray: FormArray) => {
       const totalTeam = this.characterValidator(formArray);
-      return (totalTeam.blue === this.allowed.blue || totalTeam.red === this.allowed.red) ? {required: true} : null;
+      return (totalTeam.blue === this.allowed.blue || totalTeam.red === this.allowed.red) ? { required: true } : null;
     };
 
     return validator;
@@ -123,15 +123,17 @@ export class RolesComponent implements OnInit {
           blue: accRole.blue + (currRole.team === 'blue' ? 1 : 0),
           red: accRole.red + (currRole.team === 'red' ? 1 : 0)
         })
-      , {blue: 0, red: 0});
+      , { blue: 0, red: 0 });
   }
 
   addCheckRoles(): void {
-    this.roles.forEach((role, index) => {
+    const storedRoles = JSON.parse(localStorage.getItem('roles')) || [true, false, false, false];
+    this.roles.forEach((role, idx) => {
       this.rolesForm.push(
-        new FormControl({value: index === 0, disabled: index === 0})
+        new FormControl({ value: storedRoles[idx], disabled: idx === 0 })
       );
     });
+    this.onCheckChange();
   }
 
   characterValidator(formArray: FormArray): { blue: number, red: number } {
@@ -140,10 +142,10 @@ export class RolesComponent implements OnInit {
       .reduce((acc, curr, index) => {
         if (!!curr) {
           const charTeam = this.getCharacterTeam(index);
-          return {blue: acc.blue + charTeam.blue, red: acc.red + charTeam.red};
+          return { blue: acc.blue + charTeam.blue, red: acc.red + charTeam.red };
         }
         return acc;
-      }, {blue: 0, red: 0});
+      }, { blue: 0, red: 0 });
   }
 
   submit(): void {
@@ -152,6 +154,7 @@ export class RolesComponent implements OnInit {
       (acc, curr, index) =>
         acc.concat((!!curr.value && !this.roles[index].disabled ? this.roles[index].characters : []))
       , []);
+    localStorage.setItem('roles', JSON.stringify(this.rolesForm.controls.map(control => control.value)));
     this.store.dispatch(createGame());
   }
 

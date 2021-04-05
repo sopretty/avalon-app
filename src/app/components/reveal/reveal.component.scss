@@ -1,7 +1,16 @@
+.center-loader {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .top-section {
   display: flex;
   flex-direction: column;
 }
+
 .breadcrumb {
   justify-content: center;
   margin-top: 20px;
@@ -47,3 +56,114 @@
   line-height: 24px;
   text-align: center;
 }
+
+
+/** Carousel **/
+.arrow {
+  font-size: 51px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 50px;
+  height: 65px;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.arrow:hover {
+  color: #121212;
+  background: white;
+  cursor: pointer;
+}
+
+.carousel {
+  overflow: hidden;
+  height: 100%;
+  width: 600px;
+  display: flex;
+}
+
+.arrow-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-left: 5px;
+  transform: translateY(-50%);
+}
+
+.arrow-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-right: 5px;
+  transform: translateY(-50%);
+}
+
+.cards-container {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.cards {
+  display: flex;
+  width: 100%;
+}
+
+.card {
+  user-select: none;
+  cursor: grab;
+  float: left;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  align-self: center;
+  height: 281px;
+  width: 180px;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+}
+
+.card.previous {
+  border-right: unset;
+}
+
+.card.after {
+  border-left: unset;
+}
+
+.card.selected {
+  z-index: 3;
+  height: 336px;
+  width: 240px;
+}
+
+.button-container {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100%;
+  align-items: center;
+  background-color: #EBEBEB;
+  justify-content: center;
+  flex-direction: row;
+  height: 60px;
+  @media screen and (min-width: 800px), screen and (min-height: 650px) {
+    height: 80px;
+  }
+}
+
+.mat-button-base {
+  margin: 8px;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+
+  @media only screen and (min-width: 800px) {
+    flex-grow: 0;
+    width: 160px;
+  }
+}
+

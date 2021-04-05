@@ -1,4 +1,7 @@
-<div class="flex-center-column">
+<div class="center-loader" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="flex-center-column" *ngIf="!loading">
   <div class="top-section">
     <div class="breadcrumb">
       <div class="circle-breadcrumb"></div>
@@ -12,6 +15,22 @@
 
     <div class="description">
       {{'REVEAL.description' | translate}}
+    </div>
+  </div>
+  <div  class="carousel">
+    <div class="arrow-left" (click)="carouselPrevious()">
+      <span class="arrow">&#x2039;</span>
+    </div>
+    <div #cards class="cards"
+         [style.transform]="transform">
+      <div (mousedown)="onDragStart($event)"
+           (mousemove)="onDragMoving($event)"
+           (mouseleave)="onDragEnd($event)"
+           (mouseup)="onDragEnd($event)" *ngFor="let player of players; let i = index;" class="card"
+           [ngClass]="carouselClasses(i)"></div>
+    </div>
+    <div class="arrow-right" (click)="carouselNext()">
+      <span class="arrow">&#x203A;</span>
     </div>
   </div>
   <div class="flex-center-column button-container">

@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
 import { Event, GameState, State } from '.';
-import { Game, Rules } from '../../types';
+import { Game, Player, Rules } from '../../types';
 
 export const selectGame = (state: State) => state.game;
 
@@ -34,4 +34,3 @@ export const selectLoading = createSelector<State, GameState, boolean>(
   selectGame,
   (state: GameState) => state.loading
 );
-

@@ -31,7 +31,7 @@ export interface Game {
 }
 
 export interface Quest {
-  id:string;
+  id: string;
   nb_votes_to_fail: number;
   nb_players_to_send: number;
   votes?: { [playerId: string]: boolean }[];

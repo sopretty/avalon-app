@@ -33,6 +33,17 @@
   "REVEAL": {
     "title": "Quel est ton équipe ?",
     "description": "Trouve ton nom pour voir ton rôle et ton équipe",
+    "blueTeam": "Equipe bleue",
+    "redTeam": "Equipe rouge",
+    "oberon": "Oberon",
+    "mordred": "Mordred",
+    "merlin": "Merlin",
+    "morgana": "Morgane",
+    "perceval": "Perceval",
+    "red": "Serviteur de Mordred",
+    "blue": "Fidèle d'Arthur",
+    "reveal": "Révèle le role",
+    "stopRevealing": "Cache le role",
     "back": "RETOUR",
     "next": "SUIVANT"
   },

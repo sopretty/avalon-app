@@ -17,26 +17,47 @@
       {{'REVEAL.description' | translate}}
     </div>
   </div>
-  <div  class="carousel">
-    <div class="arrow-left" (click)="carouselPrevious()">
-      <span class="arrow">&#x2039;</span>
+  <div class="reveal-content">
+    <div class="carousel-container">
+      <div class="arrow-left">
+        <button mat-icon-button [disabled]="carouselIdx === 0" (click)="carouselPrevious()">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+      </div>
+      <div class="carousel">
+        <div #cards class="cards"
+             [style.transform]="transform">
+          <div *ngFor="let player of players; let i = index;" class="card" (click)="selectPlayer(i)"
+               [ngClass]="carouselClasses(i)">
+            <img class="player-avatar" [ngClass]="carouselClasses(i)" [src]="getPlayerAvatarImg(i)">
+            <div class="player-name">{{player.name}}</div>
+            <div class="player-desc" [ngClass]="carouselClasses(i) + revealClasses(i)">
+              <div class="player-team" [ngClass]="carouselClasses(i)">
+                <mat-icon class="player-icon" [ngClass]="carouselClasses(i) + iconClasses(i, player.team)">flag
+                </mat-icon>
+                {{carouselIdx === i && reveal ? ((player.team === 'blue' ? 'REVEAL.blueTeam' : 'REVEAL.redTeam') | translate) : 'you cant read'}}
+              </div>
+              <div class="player-role" [ngClass]="carouselClasses(i)">
+                <mat-icon class="player-icon" [ngClass]="carouselClasses(i)">person</mat-icon>
+                {{carouselIdx === i && reveal ? ('REVEAL.' + player.role | translate) : 'you cant read'}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow-right">
+        <button mat-icon-button [disabled]="carouselIdx === (players.length -1)" (click)="carouselNext()">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
     </div>
-    <div #cards class="cards"
-         [style.transform]="transform">
-      <div (mousedown)="onDragStart($event)"
-           (mousemove)="onDragMoving($event)"
-           (mouseleave)="onDragEnd($event)"
-           (mouseup)="onDragEnd($event)" *ngFor="let player of players; let i = index;" class="card"
-           [ngClass]="carouselClasses(i)"></div>
-    </div>
-    <div class="arrow-right" (click)="carouselNext()">
-      <span class="arrow">&#x203A;</span>
-    </div>
+    <button mat-raised-button
+            (click)="onReveal()">{{(reveal ? 'REVEAL.stopRevealing' : 'REVEAL.reveal') | translate}}</button>
   </div>
   <div class="flex-center-column button-container">
-    <button mat-raised-button (click)="goBack()">{{"ROLES.back" | translate }}</button>
+    <button mat-raised-button (click)="goBack()">{{"REVEAL.back" | translate }}</button>
     <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
     <button mat-raised-button color="primary" (click)="goNext()"
-            [disabled]="loading">{{'ROLES.next' | translate}}</button>
+            [disabled]="loading">{{'REVEAL.next' | translate}}</button>
   </div>
 </div>

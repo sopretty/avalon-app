@@ -17,6 +17,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {MatIconModule} from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -87,6 +88,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatSelectModule,
     MatButtonModule,
     MatInputModule,
+    MatIconModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
     MatTooltipModule,

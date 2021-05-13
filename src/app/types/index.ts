@@ -9,6 +9,7 @@ export interface Player {
   name: string;
   role: string;
   team: string;
+  avatar: number;
   assassin?: boolean;
 }
 

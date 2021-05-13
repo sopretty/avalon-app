@@ -19,6 +19,7 @@ import * as actions from '../actions/actions';
 import { addEvents, onError, onLoad, onSuccess } from '../actions/actions';
 import { consumeEvents } from '../actions/actions';
 import { ConfigService } from '../../services/config/config.service';
+import { Game } from '../../types';
 
 @Injectable()
 export class GameEffects {
@@ -36,17 +37,20 @@ export class GameEffects {
                 this.router.navigate(['/reveal', game.id]);
               }
             }),
-            switchMap(game => [
-                actions.setGame(game),
-                /*actions.addEvents({
-                  events: game.players.slice().reverse().map(player => ({ type: 'app-role-turn', state: player }))
-                }),*/
-              /*  actions.addEvents({
-                  events: [{
-                    type: 'app-audio-turn',
-                  }]
-                })*/
-              ]
+            switchMap((game: Game) => {
+                console.log('---->', this.configService.players);
+                return [
+                  actions.setGame(this.setGameWithAvatar(game)),
+                  /*actions.addEvents({
+                    events: game.players.slice().reverse().map(player => ({ type: 'app-role-turn', state: player }))
+                  }),*/
+                  /*  actions.addEvents({
+                      events: [{
+                        type: 'app-audio-turn',
+                      }]
+                    })*/
+                ];
+              }
             ),
           )
       ))
@@ -73,7 +77,7 @@ export class GameEffects {
       this.actions$.pipe(
         ofType(actions.getGame),
         switchMap(({ gameId }) => this.gameService.getGame(gameId)),
-        switchMap(game => [actions.setGame(game), actions.onSuccess()]),
+        switchMap(game => [actions.setGame(this.setGameWithAvatar(game)), actions.onSuccess()]),
         catchError(() => of(actions.onError()))
       )
   );
@@ -133,7 +137,7 @@ export class GameEffects {
     this.actions$.pipe(
       ofType(actions.questUnsend),
       switchMap(({ gameId }) => this.gameService.questUnsend(gameId)),
-      switchMap(game => [actions.setGame(game), actions.onSuccessUnsend()]),
+      switchMap(game => [actions.setGame(this.setGameWithAvatar(game)), actions.onSuccessUnsend()]),
       catchError(() => of(onErrorUnsend())),
     ));
 
@@ -163,9 +167,22 @@ export class GameEffects {
       ofType(actions.guessMerlin),
       switchMap(({ gameId, playerId, merlinId }) =>
         this.gameService.guessMerlin(gameId, playerId, merlinId)),
-      map((game) => actions.setGame(game))
+      map((game) => actions.setGame(this.setGameWithAvatar(game)))
     )
   );
+
+  // TODO should be store in the db
+  setGameWithAvatar(game: Game): Game {
+    const players = JSON.parse(localStorage.getItem('players'));
+    return {
+      ...game,
+      players: game.players.map((player, idx) => ({
+        ...player,
+        avatar: (players || this.configService.players).find(p => p.name === player.name)?.avatar ||
+          idx + 1
+      }))
+    };
+  }
 
   constructor(
     private actions$: Actions,

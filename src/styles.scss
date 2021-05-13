@@ -123,7 +123,7 @@ app-root {
 
 
 // BUTTON
-.mat-button-base {
+.mat-button-base:not([mat-icon-button]) {
   height: 36px !important;
   color: black !important;
   padding: 0 !important;
@@ -141,7 +141,7 @@ app-root {
   }
 }
 
-.mat-button-disabled {
+.mat-button-disabled:not([mat-icon-button]) {
   border: 1px solid #C8C8C8 !important;
   color: #C8C8C8 !important;
 }

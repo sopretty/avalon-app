@@ -28,18 +28,20 @@
         <div #cards class="cards"
              [style.transform]="transform">
           <div *ngFor="let player of players; let i = index;" class="card" (click)="selectPlayer(i)"
-               [ngClass]="carouselClasses(i)">
-            <img class="player-avatar" [ngClass]="carouselClasses(i)" [src]="getPlayerAvatarImg(i)">
-            <div class="player-name">{{player.name}}</div>
-            <div class="player-desc" [ngClass]="carouselClasses(i) + revealClasses(i)">
-              <div class="player-team" [ngClass]="carouselClasses(i)">
-                <mat-icon class="player-icon" [ngClass]="carouselClasses(i) + iconClasses(i, player.team)">flag
-                </mat-icon>
-                {{carouselIdx === i && reveal ? ((player.team === 'blue' ? 'REVEAL.blueTeam' : 'REVEAL.redTeam') | translate) : 'you cant read'}}
-              </div>
-              <div class="player-role" [ngClass]="carouselClasses(i)">
-                <mat-icon class="player-icon" [ngClass]="carouselClasses(i)">person</mat-icon>
-                {{carouselIdx === i && reveal ? ('REVEAL.' + player.role | translate) : 'you cant read'}}
+               [ngClass]="carouselClasses(i)" >
+            <div class="card-content" [ngClass]="carouselClasses(i)">
+              <img class="player-avatar" [ngClass]="carouselClasses(i)" [src]="getPlayerAvatarImg(i)">
+              <div class="player-name">{{player.name}}</div>
+              <div class="player-desc" [ngClass]="carouselClasses(i) + revealClasses(i)">
+                <div class="player-team" [ngClass]="carouselClasses(i)">
+                  <mat-icon class="player-icon" [ngClass]="carouselClasses(i) + iconClasses(i, player.team)">flag
+                  </mat-icon>
+                  {{carouselIdx === i && reveal ? ((player.team === 'blue' ? 'REVEAL.blueTeam' : 'REVEAL.redTeam') | translate) : 'you cant read'}}
+                </div>
+                <div class="player-role" [ngClass]="carouselClasses(i)">
+                  <mat-icon class="player-icon" [ngClass]="carouselClasses(i)">person</mat-icon>
+                  {{carouselIdx === i && reveal ? ('REVEAL.' + player.role | translate) : 'you cant read'}}
+                </div>
               </div>
             </div>
           </div>
@@ -51,7 +53,7 @@
         </button>
       </div>
     </div>
-    <button mat-raised-button
+    <button mat-raised-button class="reveal-button"
             (click)="onReveal()">{{(reveal ? 'REVEAL.stopRevealing' : 'REVEAL.reveal') | translate}}</button>
   </div>
   <div class="flex-center-column button-container">

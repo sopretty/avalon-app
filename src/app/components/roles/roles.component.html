@@ -47,9 +47,10 @@
     </div>
     <div class="flex-center-column button-container">
       <button mat-raised-button (click)="goBack()">{{"ROLES.back" | translate }}</button>
-      <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
       <button mat-raised-button color="primary"
-              [disabled]="loading">{{'ROLES.next' | translate}}</button>
+              [disabled]="loading">{{'ROLES.next' | translate}}
+        <mat-spinner *ngIf="loading" diameter="24" class="spinner-container"></mat-spinner>
+      </button>
     </div>
   </form>
 </div>

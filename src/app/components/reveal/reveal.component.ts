@@ -6,6 +6,7 @@ import { selectGameState } from '../../store/reducers/selectors';
 import { Player } from '../../types';
 
 const CARD_DEFAULT_WIDTH = 180;
+const SMALL_CARD_DEFAULT_WIDTH = 60;
 
 @Component({
   selector: 'app-reveal',
@@ -13,7 +14,7 @@ const CARD_DEFAULT_WIDTH = 180;
   styleUrls: ['./reveal.component.scss'],
   host: { class: 'component-container' }
 })
-export class RevealComponent implements OnInit, AfterViewInit {
+export class RevealComponent implements OnInit {
 
   // Data
   players: Player[];
@@ -22,12 +23,12 @@ export class RevealComponent implements OnInit, AfterViewInit {
   // Carousel
   carouselIdx: number;
   transform: string;
-  dragXPosition: number;
-  xPosition: number;
-  isDown: boolean;
-  centerScreenX: number;
-  xLimit: number;
   reveal: boolean;
+/*  dragXPosition: number;*/
+/*  xPosition: number;*/
+/*  isDown: boolean;*/
+/*  centerScreenX: number;*/
+/*  xLimit: number;*/
 
 
   @ViewChild('cards') cardsRef: ElementRef<HTMLInputElement>;
@@ -39,30 +40,32 @@ export class RevealComponent implements OnInit, AfterViewInit {
 
     // Carousel
     this.carouselIdx = 0;
-    this.dragXPosition = 0;
-    this.isDown = false;
-    this.xPosition = 0;
-    this.transform = `translateX(${CARD_DEFAULT_WIDTH}px)`;
+/*    this.dragXPosition = 0;*/
+/*    this.isDown = false;*/
+/*    this.xPosition = 0;*/
+
   }
 
   ngOnInit(): void {
+    this.transform = `translateX(${this.getWindowSize()}px)`;
+
     this.store.select(selectGameState).subscribe(game => {
       if (!!game && !!game.players) {
         this.loading = false;
         this.players = game.players;
-        this.xLimit = (this.players.length - 1) * CARD_DEFAULT_WIDTH;
+/*        this.xLimit = (this.players.length - 1) * this.getWindowSize();*/
       }
     });
   }
 
-  ngAfterViewInit(): void {
+/*  ngAfterViewInit(): void {
     this.centerScreenX = window.innerWidth / 2;
-  }
+  }*/
 
   carouselNext(): void {
     if (this.carouselIdx < this.players.length - 1) {
       this.carouselIdx++;
-      this.transform = `translateX(${CARD_DEFAULT_WIDTH - this.carouselIdx * CARD_DEFAULT_WIDTH}px)`;
+      this.transform = `translateX(${this.getWindowSize() - this.carouselIdx * this.getWindowSize()}px)`;
       this.reveal = false;
     }
   }
@@ -70,7 +73,7 @@ export class RevealComponent implements OnInit, AfterViewInit {
   carouselPrevious(): void {
     if (this.carouselIdx > 0) {
       this.carouselIdx--;
-      this.transform = `translateX(${CARD_DEFAULT_WIDTH - this.carouselIdx * CARD_DEFAULT_WIDTH}px)`;
+      this.transform = `translateX(${this.getWindowSize() - this.carouselIdx * this.getWindowSize()}px)`;
       this.reveal = false;
     }
   }
@@ -86,7 +89,7 @@ export class RevealComponent implements OnInit, AfterViewInit {
 
   selectPlayer(idx: number) {
     this.carouselIdx = idx;
-    this.transform = `translateX(${CARD_DEFAULT_WIDTH - this.carouselIdx * CARD_DEFAULT_WIDTH}px)`;
+    this.transform = `translateX(${this.getWindowSize() - this.carouselIdx * this.getWindowSize()}px)`;
     this.reveal = false;
   }
 
@@ -103,7 +106,6 @@ export class RevealComponent implements OnInit, AfterViewInit {
   // Classes
 
   iconClasses(idx: number, team: string): string {
-    console.log('test', idx !== this.carouselIdx, !this.reveal);
     if (idx !== this.carouselIdx || !this.reveal) {
       return '';
     }
@@ -131,6 +133,15 @@ export class RevealComponent implements OnInit, AfterViewInit {
       return ' reveal';
     }
     return '';
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.selectPlayer(this.carouselIdx);
+  }
+
+  getWindowSize() {
+    return window.innerWidth > 800 ? CARD_DEFAULT_WIDTH : SMALL_CARD_DEFAULT_WIDTH;
   }
 
   /*  onDragMoving(event): void {

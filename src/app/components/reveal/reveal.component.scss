@@ -65,6 +65,11 @@
   align-items: center;
 }
 
+.reveal-button {
+  width: 240px !important;
+  flex-grow: 0 !important;
+}
+
 /** Carousel **/
 .carousel-container {
   position: relative;
@@ -73,24 +78,35 @@
 .carousel {
   overflow: hidden;
   height: 100%;
-  width: 600px;
+  width: 360px;
   display: flex;
+  @media only screen and (min-width: 800px) {
+    width: 600px;
+  }
 }
 
 .arrow-left {
   position: absolute;
   left: 0;
   top: 50%;
-  margin-left: -60px;
+  z-index: 1;
   transform: translateY(-50%);
+  margin-left: 5px;
+  @media only screen and (min-width: 800px) {
+    margin-left: -60px;
+  }
 }
 
 .arrow-right {
   position: absolute;
   right: 0;
+  z-index: 1;
   top: 50%;
-  margin-right: -60px;
   transform: translateY(-50%);
+  margin-right: 5px;
+  @media only screen and (min-width: 800px) {
+    margin-right: -60px;
+  }
 }
 
 .cards-container {
@@ -104,6 +120,20 @@
   -webkit-transition: 0.3s ease-in-out;
   display: flex;
   width: 100%;
+}
+
+.card-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content.previous {
+  display: none;
+}
+
+.card-content.next {
+  display: none;
 }
 
 .card {
@@ -127,15 +157,25 @@
 }
 
 .card.previous {
-  padding: 16px;
   border-right: unset;
   opacity: .3;
+  width: 60px !important;
+  padding: 0px;
+  @media only screen and (min-width: 800px) {
+    width: 180px !important;
+    padding: 16px;
+  }
 }
 
 .card.next {
-  padding: 16px;
   border-left: unset;
   opacity: .3;
+  width: 60px !important;
+  padding: 0px;
+  @media only screen and (min-width: 800px) {
+    width: 180px !important;
+    padding: 16px;
+  }
 }
 
 .card.selected {

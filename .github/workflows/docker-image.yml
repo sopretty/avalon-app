@@ -19,6 +19,6 @@ jobs:
     - name: Tag the Docker image
       run: docker tag avalon-front ${{ secrets.$DOCKER_USERNAME }}/avalon-front:master
     - name: login docker
-      run: echo ${{ secrets.$DOCKER_PASSWORD }} | docker  login -u "${{ secrets.$DOCKER_USERNAME }}" --password-stdin
+      run: echo ${{ secrets.$DOCKER_PASSWORD }} | docker  login -u ${{ secrets.$DOCKER_USERNAME }} --password-stdin
     - name: push to docker hum
       run: docker push sopretty/avalon-front

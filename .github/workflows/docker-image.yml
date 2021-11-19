@@ -13,12 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -t avalon-front .
-    - name: Tag the Docker image
-      run: docker tag avalon-front ${{ secrets.$DOCKER_USERNAME }}/avalon-front:master
-    - name: login docker
-      run: echo ${{ secrets.$DOCKER_PASSWORD }} | docker  login -u ${{ secrets.$DOCKER_USERNAME }} --password-stdin
-    - name: push to docker hum
-      run: docker push sopretty/avalon-front
+     -  name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+     -  name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+     -  name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.$DOCKER_USERNAME }}
+          password: ${{ secrets.$DOCKER_PASSWORD }}
+     -  name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: user/app:latest
+    
+   

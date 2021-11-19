@@ -24,6 +24,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: sopretty/avalon-front:latest
+          tags: sopretty/avalon-front:master
     
    

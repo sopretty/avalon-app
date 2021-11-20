@@ -69,6 +69,9 @@ export const setRules = createAction(
 
 // Audio Actions
 
+export const startAudioTurn = createAction(
+  '[Game Page] Start audio turn',
+);
 export const getAudio = createAction(
   '[Game Page] Get audio file',
   props<{ gameId: string }>(),

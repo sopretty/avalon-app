@@ -28,7 +28,6 @@ import { GameComponent } from './components/game/game.component';
 import { AudioTurnComponent } from './components/dynamic-turns/audio-turn/audio-turn.component';
 import * as reducers from './store/reducers';
 import { GenericTurnComponent } from './components/dynamic-turns/generic-turn/generic-turn.component';
-import { RoleTurnComponent } from './components/dynamic-turns/role-turn/role-turn.component';
 import { GameEffects } from './store/effects/game.effects';
 import { DialogComponent } from './components/game/dialog/dialog.component';
 import { VoteTurnComponent } from './components/dynamic-turns/vote-turn/vote-turn.component';
@@ -55,7 +54,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     RolesComponent,
     GameComponent,
     AudioTurnComponent,
-    RoleTurnComponent,
     GenericTurnComponent,
     DialogComponent,
     VoteTurnComponent,

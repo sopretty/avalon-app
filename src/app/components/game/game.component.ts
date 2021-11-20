@@ -4,13 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Event, State } from '../../store/reducers';
-import { RoleTurnComponent } from '../dynamic-turns/role-turn/role-turn.component';
 import { GenericTurnComponent } from '../dynamic-turns/generic-turn/generic-turn.component';
 import { AudioTurnComponent } from '../dynamic-turns/audio-turn/audio-turn.component';
 import * as selectors from '../../store/reducers/selectors';
 import { createQuest, questUnsend } from '../../store/actions/actions';
-import { GameService } from '../../services/game/game.service';
-import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponent   } from './dialog/dialog.component';
 import { VoteTurnComponent } from '../dynamic-turns/vote-turn/vote-turn.component';
 import { EndTurnComponent } from '../dynamic-turns/end-turn/end-turn.component';
 import { Game, Player } from '../../types';
@@ -19,7 +17,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { QuestDialogComponent } from './quest-dialog/quest-dialog.component';
 
 const turns = {
-  'app-role-turn': RoleTurnComponent,
   'app-audio-turn': AudioTurnComponent,
   'app-vote-turn': VoteTurnComponent,
   'app-end-turn': EndTurnComponent

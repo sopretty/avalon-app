@@ -43,7 +43,7 @@
     "red": "Serviteur de Mordred",
     "blue": "Fidèle d'Arthur",
     "reveal": "Révèle le role",
-    "stopRevealing": "Cache le role",
+    "stopRevealing": "Cache et Continue",
     "back": "RETOUR",
     "next": "SUIVANT"
   },

@@ -1,25 +1,16 @@
-import {
-  onLoadSend,
-  onLoadUnsend,
-  onErrorUnsend,
-  onErrorSend,
-  onSuccessSend,
-  onLoadVote,
-  onSuccessVote,
-  onErrorVote
-} from './../actions/actions';
+import { of } from 'rxjs';
+import { catchError, map, mapTo, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
-import { catchError, map, mapTo, switchMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { GameService } from '../../services/game/game.service';
-import * as actions from '../actions/actions';
-import { addEvents, onError, onLoad, onSuccess } from '../actions/actions';
-import { consumeEvents } from '../actions/actions';
 import { ConfigService } from '../../services/config/config.service';
 import { Game } from '../../types';
+import { State } from '../reducers';
+import { selectGameState } from '../reducers/selectors';
+import * as actions from '../actions/actions';
 
 @Injectable()
 export class GameEffects {
@@ -44,11 +35,7 @@ export class GameEffects {
                   /*actions.addEvents({
                     events: game.players.slice().reverse().map(player => ({ type: 'app-role-turn', state: player }))
                   }),*/
-                  /*  actions.addEvents({
-                      events: [{
-                        type: 'app-audio-turn',
-                      }]
-                    })*/
+                  /*  */
                 ];
               }
             ),
@@ -68,7 +55,7 @@ export class GameEffects {
 
   getGameLoading$ = createEffect(() => this.actions$.pipe(
     ofType(actions.getGame),
-    map(() => onLoad())
+    map(() => actions.onLoad())
   ));
 
 
@@ -84,7 +71,7 @@ export class GameEffects {
 
   createQuestLoading$ = createEffect(() => this.actions$.pipe(
     ofType(actions.createQuest),
-    map(() => onLoadSend())
+    map(() => actions.onLoadSend())
   ));
 
   createQuest$ = createEffect(() => this.actions$.pipe(
@@ -94,22 +81,22 @@ export class GameEffects {
         mapTo({ players, questId, gameId }),
       )),
     switchMap(({ players, questId, gameId }) => ([
-        onSuccessSend(),
-        addEvents({
+      actions.onSuccessSend(),
+      actions.addEvents({
           events: players.slice().reverse().map(player => ({ type: 'app-vote-turn', state: { player, questId, gameId } }))
-        }), addEvents({ events: [{ type: 'app-end-turn', state: { questId, gameId } }] })
+      }), actions.addEvents({ events: [{ type: 'app-end-turn', state: { questId, gameId } }] })
       ])
     ),
     catchError((err) => {
       console.log(err);
-      return of(onErrorSend());
+      return of(actions.onErrorSend());
     })
     )
   );
 
   setVoteLoading$ = createEffect(() => this.actions$.pipe(
     ofType(actions.setVote),
-    map(() => onLoadVote())
+    map(() => actions.onLoadVote())
   ));
 
   setVote$ = createEffect(() => this.actions$.pipe(
@@ -119,18 +106,18 @@ export class GameEffects {
         mapTo({ questId, playerId }),
       )),
     switchMap(() => ([
-        onSuccessVote(),
-        onSuccess(),
-        consumeEvents()
+      actions.onSuccessVote(),
+      actions.onSuccess(),
+      actions.consumeEvents()
       ])
     ),
-    catchError(() => of(onError(), onErrorVote(), consumeEvents()))
+    catchError(() => of(actions.onError(), actions.onErrorVote(), actions.consumeEvents()))
   ));
 
   questUnsendLoading$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.questUnsend),
-      map(() => onLoadUnsend())
+      map(() => actions.onLoadUnsend())
     ));
 
   questUnsend$ = createEffect(() =>
@@ -138,7 +125,7 @@ export class GameEffects {
       ofType(actions.questUnsend),
       switchMap(({ gameId }) => this.gameService.questUnsend(gameId)),
       switchMap(game => [actions.setGame(this.setGameWithAvatar(game)), actions.onSuccessUnsend()]),
-      catchError(() => of(onErrorUnsend())),
+      catchError(() => of(actions.onErrorUnsend())),
     ));
 
   getQuest$ = createEffect(() =>
@@ -171,6 +158,21 @@ export class GameEffects {
     )
   );
 
+  startAudioTurn$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.startAudioTurn),
+      withLatestFrom(this.store.select(selectGameState)),
+      tap(([_action, game]) => {
+        this.router.navigate(['/games', game.id]);
+      }),
+      switchMap(() => [actions.addEvents({
+        events: [{
+          type: 'app-audio-turn',
+        }]
+      })])
+    )
+  );
+
   // TODO should be store in the db
   setGameWithAvatar(game: Game): Game {
     const players = JSON.parse(localStorage.getItem('players'));
@@ -189,6 +191,7 @@ export class GameEffects {
     private gameService: GameService,
     private configService: ConfigService,
     private router: Router,
+    private store: Store<State>
   ) {
   }
 }

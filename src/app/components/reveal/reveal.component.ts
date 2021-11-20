@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../../store/reducers';
 import { selectGameState } from '../../store/reducers/selectors';
 import { Player } from '../../types';
+import { startAudioTurn } from '../../store/actions/actions';
 
 const CARD_DEFAULT_WIDTH = 180;
 const SMALL_CARD_DEFAULT_WIDTH = 60;
@@ -24,11 +25,11 @@ export class RevealComponent implements OnInit {
   carouselIdx: number;
   transform: string;
   reveal: boolean;
-/*  dragXPosition: number;*/
-/*  xPosition: number;*/
-/*  isDown: boolean;*/
-/*  centerScreenX: number;*/
-/*  xLimit: number;*/
+  /*  dragXPosition: number;*/
+  /*  xPosition: number;*/
+  /*  isDown: boolean;*/
+  /*  centerScreenX: number;*/
+  /*  xLimit: number;*/
 
 
   @ViewChild('cards') cardsRef: ElementRef<HTMLInputElement>;
@@ -40,9 +41,9 @@ export class RevealComponent implements OnInit {
 
     // Carousel
     this.carouselIdx = 0;
-/*    this.dragXPosition = 0;*/
-/*    this.isDown = false;*/
-/*    this.xPosition = 0;*/
+    /*    this.dragXPosition = 0;*/
+    /*    this.isDown = false;*/
+    /*    this.xPosition = 0;*/
 
   }
 
@@ -53,14 +54,14 @@ export class RevealComponent implements OnInit {
       if (!!game && !!game.players) {
         this.loading = false;
         this.players = game.players;
-/*        this.xLimit = (this.players.length - 1) * this.getWindowSize();*/
+        /*        this.xLimit = (this.players.length - 1) * this.getWindowSize();*/
       }
     });
   }
 
-/*  ngAfterViewInit(): void {
-    this.centerScreenX = window.innerWidth / 2;
-  }*/
+  /*  ngAfterViewInit(): void {
+      this.centerScreenX = window.innerWidth / 2;
+    }*/
 
   carouselNext(): void {
     if (this.carouselIdx < this.players.length - 1) {
@@ -83,7 +84,7 @@ export class RevealComponent implements OnInit {
   }
 
   goNext(): void {
-    this.router.navigate(['games']);
+    this.store.dispatch(startAudioTurn());
   }
 
 
@@ -101,6 +102,9 @@ export class RevealComponent implements OnInit {
 
   onReveal() {
     this.reveal = !this.reveal;
+    if (!this.reveal) {
+      this.carouselNext();
+    }
   }
 
   // Classes

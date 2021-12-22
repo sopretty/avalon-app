@@ -96,7 +96,7 @@ export class RevealComponent implements OnInit {
 
   getPlayerAvatarImg(index: number): string {
     if (!!this.players && this.players.length && !!this.players[index]) {
-      return `/assets/avatars/${this.players[index].avatar}.png`;
+      return `/assets/avatars/${this.players[index].avatar_index}.png`;
     }
   }
 

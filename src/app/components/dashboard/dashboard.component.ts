@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   minNumberPlayer: number;
   maxNumberPlayer: number;
   numberChoosed: number;
-  players: { name: string, avatar: number }[];
+  players: { name: string, avatar_index: number }[];
   form: FormGroup;
   loading: boolean;
   rules: Rules;
@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit {
   submit(): void {
     this.configService.players = this.playersForm.controls.map((form, idx) => ({
       name: form.value,
-      avatar: this.players[idx].avatar
+      avatar_index: this.players[idx].avatar_index
     }));
     localStorage.setItem('players', JSON.stringify(this.configService.players));
     this.router.navigate(['roles']);
@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit {
               this.playersForm.push(new FormControl(`${this.defaultNameTranslation} ${this.playersForm.length + 1}`));
               this.players.push({
                 name: `${this.defaultNameTranslation} ${this.playersForm.length + 1}`,
-                avatar: (this.randomAvatarId + this.playersForm.length - 1) % this.maxNumberPlayer + 1
+                avatar_index: (this.randomAvatarId + this.playersForm.length - 1) % this.maxNumberPlayer + 1
               });
             }
           );
@@ -136,13 +136,13 @@ export class DashboardComponent implements OnInit {
 
     return Array.from(new Array(this.minNumberPlayer), (_p, index) => ({
       name: `${translation} ${index + 1}`,
-      avatar: (this.randomAvatarId + index) % this.maxNumberPlayer + 1
+      avatar_index: (this.randomAvatarId + index) % this.maxNumberPlayer + 1
     }));
   }
 
   getPlayerAvatarImg(index: number): string {
     if (!!this.players && this.players.length && !!this.players[index]) {
-      return `/assets/avatars/${this.players[index].avatar}.png`;
+      return `/assets/avatars/${this.players[index].avatar_index}.png`;
     }
   }
 }

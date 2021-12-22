@@ -10,7 +10,7 @@ import { Rules } from '../../types';
 })
 export class ConfigService {
 
-  players: { name: string, avatar: number, team?: string, roles?: string }[];
+  players: { name: string, avatar_index: number, team?: string, roles?: string }[];
   roles: { name: string, team: string }[];
 
   constructor(private _http: HttpClient) {

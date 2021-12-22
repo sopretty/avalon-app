@@ -1,5 +1,5 @@
 export interface PutPlayerBody {
-  names: string[];
+  players: { name: string, avatar_index: number }[];
   roles: string[];
 }
 
@@ -9,7 +9,7 @@ export interface Player {
   name: string;
   role: string;
   team: string;
-  avatar: number;
+  avatar_index: number;
   assassin?: boolean;
 }
 

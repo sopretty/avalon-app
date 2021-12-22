@@ -39,6 +39,7 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { RoleDialogComponent } from './components/game/role-dialog/role-dialog.component';
 import { QuestDialogComponent } from './components/game/quest-dialog/quest-dialog.component';
 import { RevealComponent } from './components/reveal/reveal.component';
+import { ICONS } from '../assets/icons';
 
 
 // AoT requires an exported function for factories
@@ -63,7 +64,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     OverviewComponent,
     RoleDialogComponent,
     QuestDialogComponent,
-    RevealComponent
+    RevealComponent,
+    ...ICONS
   ],
   imports: [
     HttpClientModule,
@@ -92,7 +94,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatTooltipModule,
     MatChipsModule,
     MatRippleModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

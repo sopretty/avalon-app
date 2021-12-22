@@ -79,7 +79,6 @@ export class DashboardComponent implements OnInit {
   submit(): void {
     this.configService.players = this.playersForm.controls.map((form, idx) => ({
       name: form.value,
-      team: null,
       avatar: this.players[idx].avatar
     }));
     localStorage.setItem('players', JSON.stringify(this.configService.players));

@@ -48,11 +48,10 @@
     "back": "BACK"
   },
   "AUDIO": {
-    "title": "Start the story and close your eyes !",
-    "startStoryButtonLabel": "Start the story",
-    "restartStoryButtonLabel": "Restart the story",
-    "stopStoryButtonLabel": "Stop the story",
-    "startGameButtonLabel": "Start the game"
+    "title": "Time for a story...",
+    "pauseStoryButtonLabel": "STOP / RESTART",
+    "back": "BACK",
+    "next": "LET'S GO!"
   },
   "GAME": {
     "questTitle": "Quest n°",

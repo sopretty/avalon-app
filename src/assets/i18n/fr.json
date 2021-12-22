@@ -48,7 +48,7 @@
     "next": "SUIVANT"
   },
   "AUDIO": {
-    "title": "Débutez l'histoire et fermez vos yeux !",
+    "title": "L'histoire commence...",
     "startStoryButtonLabel": "Lancer l'histoire",
     "restartStoryButtonLabel": "Relancer l'histoire",
     "stopStoryButtonLabel": "Arrêter l'histoire",

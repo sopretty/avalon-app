@@ -5,6 +5,7 @@ import { GenericTurnComponent } from '../generic-turn/generic-turn.component';
 import { State } from '../../../store/reducers';
 import * as actions from '../../../store/actions/actions';
 import * as selectors from '../../../store/reducers/selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-audio-turn',
@@ -20,10 +21,11 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
   buffer: AudioBuffer;
   loading: boolean;
   playing: boolean;
-  source: any;
-  audioPLayerOnce = false;
+  pausedAt = 0;
+  startedAt: number;
+  source: AudioBufferSourceNode;
 
-  constructor(private _store: Store<State>) {
+  constructor(private router: Router, private _store: Store<State>) {
     super(_store);
     this.loading = true;
     this.playing = false;
@@ -66,16 +68,33 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
   }
 
 
+  pauseAudio() {
+    if (this.playing && this.source) {
+      this.stopAudio();
+    } else {
+      this.playing = true;
+      this.playAudio();
+    }
+  }
+
   playAudio() {
-    this.audioPLayerOnce = true;
-    this.stopAudio();
     this.source = this.audioContext.createBufferSource();
     this.source.buffer = this.buffer;
     this.source.connect(this.audioContext.destination);
-    this.source.start(0);
+    this.startedAt = Date.now();
+    this.source.start(0, this.pausedAt ? this.pausedAt / 1000 : 0);
+    this.source.addEventListener('ended', () => {
+      if (this.playing) {
+        this.startedAt = 0;
+        this.pausedAt = 0;
+        this.playing = false;
+      }
+    });
   }
 
   stopAudio() {
+    this.playing = false;
+    this.pausedAt += Date.now() - this.startedAt;
     if (this.source) {
       try {
         this.source.stop();
@@ -83,6 +102,10 @@ export class AudioTurnComponent extends GenericTurnComponent implements OnInit, 
         console.log('Error when stopping audio', e);
       }
     }
+  }
+
+  goBack(): void {
+    this.router.navigate(['roles']);
   }
 
   playGame() {

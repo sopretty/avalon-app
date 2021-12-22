@@ -111,14 +111,14 @@ app-root {
 }
 
 .mat-button-toggle-label-content {
- line-height: unset !important;
+  line-height: unset !important;
   padding: 0px !important;
 }
 
 // FORM FIELD
 .mat-form-field-infix {
   width: 100% !important;
-  padding:0 !important;
+  padding: 0 !important;
 }
 
 
@@ -136,7 +136,7 @@ app-root {
   text-align: center !important;
   font-family: "Spectral Medium" !important;
 
-  @media screen and (min-width: 800px) , screen and (min-height: 650px) {
+  @media screen and (min-width: 800px), screen and (min-height: 650px) {
     height: 48px !important;
   }
 }
@@ -163,4 +163,19 @@ input {
   font-family: "Spectral Light";
   font-size: 16px;
   font-weight: 300;
+}
+
+/**
+ SPINNERS
+ */
+.listener .mat-progress-spinner {
+  position: absolute;
+
+  &.bcg-spinner circle {
+    stroke: rgba(0, 0, 0, .05) !important;
+  }
+
+  &.progress-spinner circle {
+    stroke: rgba(0, 0, 0, .3) !important;
+  }
 }
